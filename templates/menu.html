@@ -1,0 +1,66 @@
+{% load static %}
+<header>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
+        <a class="navbar-brand" href="{% url 'site_info:home' %}">
+            Warwick Anime and Manga Society
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Showings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Library</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarKaraokeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Karaoke
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarKaraokeDropdown">
+                        <a class="dropdown-item" href="#">List</a>
+                        <a class="dropdown-item" href="#">Request</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarSocietyDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Society
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarSocietyDropdown">
+                        <a class="dropdown-item" href="#">History</a>
+                        <a class="dropdown-item" href="#">Archive</a>
+                        <a class="dropdown-item" href="#">GDPR</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav flex-row">
+                {% if user.is_authenicated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarMemberDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{  user.member }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarMemberDropdown">
+                            {% if user.is_staff %}
+                                <a class="dropdown-item" href="#">Admin</a>
+                            {%  endif %}
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Login</a>
+                    </li>
+                {%  endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
