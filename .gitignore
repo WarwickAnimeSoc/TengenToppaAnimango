@@ -1,0 +1,15 @@
+# Virtual Env
+venv/
+
+# IDE Files
+.idea/
+
+# Static Files
+media/
+static/
+
+# Generated Files
+*.pyc
+
+# Sensitive Files
+TengenToppaAnimango/settings.py
