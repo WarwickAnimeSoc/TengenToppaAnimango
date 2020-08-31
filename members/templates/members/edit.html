@@ -1,0 +1,56 @@
+{%  extends "base.html" %}
+
+{% block title %}
+    Edit Profile
+{%  endblock %}
+
+{% block content %}
+    <h1 class="mt-5">Edit your profile</h1>
+    <form action="{% url "members:edit" %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% comment %}
+        Changes to data in the form will always stay until the user navigates away from this page. This means that the user
+        can see what fields are causing validation issues and what data they have entered to cause these errors. This
+        is what the if-else statments in the form are for.
+        {%  endcomment %}
+        <div class="form-group">
+            <label for="nicknameInput">Nickname</label>
+            <input type="text" class="form-control {% if form.nickname.errors %}is-invalid{% endif %}" id="nicknameInput" name="nickname" aria-describedby="nicknameHelp" placeholder="Nickname"
+                   value="{% if form %}{{ form.nickname.value }}{% else %}{{ user.member.nickname }}{% endif %}">
+            {% for error in form.nickname.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+            <small id="nicknameHelp" class="form-text text-muted">Your nickname is what's visible to others on the site, unless you have chosen to show your full name instead.</small>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="fullnameCheckbox" name="show_full_name"
+                   {% if form %}
+                        {% if form.show_full_name.value %}
+                            checked="checked"
+                        {% endif %}
+                   {% elif user.member.show_full_name %}
+                       checked="checked"
+                   {% endif %}>
+            <label class="form-check-label" for="fullnameCheckbox">Show full name instead of nickname</label>
+        </div>
+        <div class="form-group">
+            <label for="discordInput">Discord Tag</label>
+            <input type="text" class="form-control {% if form.discord_tag.errors %}is-invalid{% endif %}" id="discordInput" name="discord_tag" aria-describedby="discordHelp" placeholder="Discord Tag"
+                   value="{% if form %}{{ form.discord_tag.value }}{% else %}{{ user.member.discord_tag }}{% endif %}">
+            {% for error in form.discord_tag.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+            <small id="discordHelp" class="form-text text-muted">Your discord tag, this is used to give you the member role on the society discord server.</small>
+        </div>
+        <div class="form-group">
+            <label for="avatarInput">Profile picture</label>
+            <input type="file" class="form-control-file {% if form.avatar_image.errors %}is-invalid{% endif %}" id="avatarInput" name="avatar_image" aria-describedby="avatarHelp">
+            {% for error in form.avatar_image.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+            <small id="avatarHelp" class="form-text text-muted">Must be a jpg, jpeg or png smaller than 2Mb</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a class="btn btn-danger" href="{% url "members:profile" %}">Cancel</a>
+    </form>
+{% endblock %}

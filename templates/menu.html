@@ -1,4 +1,3 @@
-{% load static %}
 <header>
     <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
         <a class="navbar-brand" href="{% url 'site_info:home' %}">
@@ -42,22 +41,22 @@
                 </li>
             </ul>
             <ul class="navbar-nav flex-row">
-                {% if user.is_authenicated %}
+                {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarMemberDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{  user.member }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarMemberDropdown">
                             {% if user.is_staff %}
-                                <a class="dropdown-item" href="#">Admin</a>
+                                <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
                             {%  endif %}
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="{% url 'members:profile' %}">Profile</a>
+                            <a class="dropdown-item" href="{% url 'members:logout' %}">Logout</a>
                         </div>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="{% url "members:login" %}">Login</a>
                     </li>
                 {%  endif %}
             </ul>

@@ -1,2 +1,4 @@
 django==3.1
 mysqlclient==1.4.6
+bleach==3.1.5
+pillow==7.2.0
