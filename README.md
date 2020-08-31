@@ -1,10 +1,11 @@
 # TengenToppaAnimango
+_(Name subject to change)_
 
-New version of the [aniMango]() site for the University of Warwick Anime and Manga Society.
+New version of the [aniMango](https://github.com/WarwickAnimeSoc/aniMango) site for the University of Warwick Anime and Manga Society.
 
 This is the code that runs [animesoc.co.uk](https://animesoc.co.uk).
 
-Built on Django 3.1 and Bootstrap using a large amount of code from the old site.
+Built on Django and Bootstrap using a large amount of code from the old site.
 
 ---
 
