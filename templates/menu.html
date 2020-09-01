@@ -9,7 +9,7 @@
         <div class="navbar-collapse collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Events</a>
+                    <a class="nav-link" href="{% url 'events:upcoming' page=1 %}">Events</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">News</a>
@@ -42,9 +42,17 @@
             </ul>
             <ul class="navbar-nav flex-row">
                 {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarMemberDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item dropdown mr-n3">
+                    {% load static %}
+                        <a class="nav-link pb-0 pt-0" href="#" id="navbarMemberDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{  user.member }}
+                            <img alt="Avatar" class="ml-1 image-navbar-avatar rounded"
+                                {% if user.member.avatar_image %}
+                                    src="{{ user.member.avatar_image.url }}"
+                                {% else %}
+                                    src="{% static "images/default_avatar.png" %}"
+                                {% endif %}
+                            >
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarMemberDropdown">
                             {% if user.is_staff %}

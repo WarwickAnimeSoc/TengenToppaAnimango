@@ -13,3 +13,35 @@
 body .container {
     padding-top: 60px;
 }
+
+/* Class used to size profile picture in the navbar */
+.image-navbar-avatar {
+    width: 40px;
+}
+
+/* Class used for sizing avatar images for event signups */
+.image-signup-avatar {
+    width: 64px;
+}
+
+/* Bootstrap breakpoint overrides */
+
+/* sm prefix */
+@media (min-width: 576px) {
+
+}
+
+/* md prefix */
+@media (min-width: 768px) {
+
+}
+
+/* lg prefix */
+@media (min-width: 992px) {
+
+}
+
+/* xl prefix */
+@media (min-width: 1200px) {
+
+}

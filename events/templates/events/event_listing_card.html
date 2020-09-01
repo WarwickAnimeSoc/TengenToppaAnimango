@@ -1,0 +1,30 @@
+<div class="card mt-3">
+    {% if event.signup_required %}
+        {% if event.signups_closed %}
+            <div class="card-header bg-danger">
+                Signups have closed
+            </div>
+        {% elif event.is_full %}
+            <div class="card-header bg-warning">
+                Event is full
+            </div>
+        {% elif event.signups_open %}
+            <div class="card-header bg-success">
+                Signups are open
+            </div>
+        {% else %}
+            <div class="card-header bg-info">
+                Signups will open on {{ event.nice_signups_date }}
+            </div>
+        {% endif %}
+    {% endif %}
+    <div class="card-body overflow-hidden">
+        <h5 class="card-title">{{ event.title }}</h5>
+        <h6 class="card-subtitle text-muted">{{ event.subtitle }}</h6>
+        <p class="card-text">{% load martortags %}{{ event.details|safe_markdown|truncatewords:20 }}</p>
+        <a href="{% url 'events:event_detail' event_id=event.id %}" class="btn btn-primary">Details</a>
+    </div>
+    <div class="card-footer text-muted">
+        {{ event.nice_eta_descriptor }}
+    </div>
+</div>

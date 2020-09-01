@@ -1,0 +1,128 @@
+{%  extends "base.html" %}
+
+{% block title %}
+    {{ events_type }} Events
+{%  endblock %}
+
+{% block content %}
+    {% if ongoing_events %}
+        <h1 class="mt-5">Ongoing Events</h1>
+        {% for event in ongoing_events %}
+             {% include "events/event_listing_card.html" %}
+        {% endfor %}
+    {% endif %}
+
+    <h1 class="mt-5">{{ events_type}} Events</h1>
+    {% if events_type == 'Upcoming' %}
+        <a class="small text-muted" href="{% url 'events:previous' page=1 %}">See previous events instead</a>
+    {% else %}
+        <a class="small text-muted" href="{% url 'events:upcoming' page=1 %}">See upcoming events instead</a>
+    {% endif %}
+
+    {% for event in events_page %}
+        {% include "events/event_listing_card.html" %}
+    {% endfor %}
+
+    {% if events_page %}
+        <nav aria-label="Events pages navigation" class="mt-3">
+            <ul class="pagination justify-content-center">
+                {% if not events_page.has_previous %}
+                    <li class="page-item disabled" tabindex="-1">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link"
+                            {% if events_type == 'Upcoming' %}
+                                href="{% url 'events:upcoming' page=events_page.previous_page_number %}"
+                            {% else %}
+                                href="{% url 'events:previous' page=events_page.previous_page_number %}"
+                            {% endif %}
+                        >
+                            Previous
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% comment %}
+                Only display up to 3 page entries in the navbar
+                {% endcomment %}
+
+                {% if events_page.paginator.num_pages > 3 %}
+                    {% if events_page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                                    {% if events_type == 'Upcoming' %}
+                                        href="{% url 'events:upcoming' page=events_page.previous_page_number %}"
+                                    {% else %}
+                                        href="{% url 'events:previous' page=events_page.previous_page_number %}"
+                                    {% endif %}
+                            >
+                                {{ events_page.previous_page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <a class="page-link"
+                                {% if events_type == 'Upcoming' %}
+                                    href="{% url 'events:upcoming' page=events_page.number %}"
+                                {% else %}
+                                    href="{% url 'events:previous' page=events_page.number %}"
+                                {% endif %}
+                        >
+                            {{ events_page.number }}
+                        </a>
+                    </li>
+
+                    {% if events_page.has_next %}
+                        <li class="page-item">
+                            <a class="page-link"
+                                    {% if events_type == 'Upcoming' %}
+                                        href="{% url 'events:upcoming' page=events_page.next_page_number %}"
+                                    {% else %}
+                                        href="{% url 'events:previous' page=events_page.next_page_number %}"
+                                    {% endif %}
+                            >
+                                {{ events_page.next_page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    {% for page in events_page.paginator.page_range %}
+                        <li class="page-item {% if forloop.counter == events_page.number %}active{% endif %}">
+                            <a class="page-link"
+                                    {% if events_type == 'Upcoming' %}
+                                        href="{% url 'events:upcoming' page=forloop.counter %}"
+                                    {% else %}
+                                        href="{% url 'events:previous' page=forloop.counter %}"
+                                    {% endif %}
+                            >
+                                {{ forloop.counter }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if not events_page.has_next %}
+                    <li class="page-item disabled" tabindex="-1">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link"
+                            {% if events_type == 'Upcoming' %}
+                                href="{% url 'events:upcoming' page=events_page.next_page_number %}"
+                            {% else %}
+                                href="{% url 'events:previous' page=events_page.next_page_number %}"
+                            {% endif %}
+                        >
+                            Next
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+
+{% endblock %}
