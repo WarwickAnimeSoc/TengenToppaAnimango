@@ -18,12 +18,31 @@ format as the one on the server.
 This repository contains all the files needed to run the site, except for the config files, which future webmasters will
 need to copy to their machine from the server.
 
-### Todo
+## Todo
 
-- Homepage
-- User Accounts
-- Events
-- Showings
-- Library
-- Karaoke
-- Theme and style the site
+#### Homepage
+__*Progress:*__  Not started.
+
+#### User Accounts
+__*Progress:*__ All the basic user functionality has been added. Need to implement the Library app to add the loans section of the profile
+
+#### Events
+__*Progress:*__  All functionality is present. Needs some improvements to the user interface.
+
+#### Showings
+__*Progress:*__  Not started.
+
+#### Library
+__*Progress:*__  Not started.
+
+#### Karaoke
+__*Progress:*__  Not started.
+
+#### History
+__*Progress:*__  Not started.
+
+#### Archive
+__*Progress:*__  Not started.
+
+#### Other
+The site needs to be styled so it doesn't look like a default bootstrap site.
