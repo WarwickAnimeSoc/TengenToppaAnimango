@@ -19,7 +19,7 @@ def avatar_image_path(instance, filename):
     # their University ID, this would expose a user's University ID to anyone who could see the filename for their
     # avatar. To fix this, the filename is now a hash of the username.
     file_name = sha256(instance.user.username.encode('utf-8')).hexdigest()
-    return Path('user_avatars', '{0!s}{1!s}'.format(file_name, '.jpg'))
+    return Path('user_avatars', '{0!s}{1!s}'.format(file_name, '.png'))
 
 
 class OverwriteStorage(FileSystemStorage):
@@ -117,7 +117,7 @@ class Member(models.Model):
                                                   avatar_width_by_half + smallest_side_by_half,
                                                   avatar_height_by_half + smallest_side_by_half)
                                                  ).resize(image_dimensions, Image.ANTIALIAS)
-                    new_avatar.save(self.avatar_image.path, quality=90, format='JPEG')
+                    new_avatar.save(self.avatar_image.path, quality=90, format='PNG')
                     super(Member, self).save(*args, **kwargs)
             except Exception as e:
                 raise

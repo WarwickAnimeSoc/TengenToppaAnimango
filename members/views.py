@@ -1,13 +1,11 @@
 from smtplib import SMTPAuthenticationError
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .forms import ProfileEditForm, OverridePasswordChangeForm, OverridePasswordRestForm, OverrideSetPasswordForm
+from .forms import ProfileEditForm, OverridePasswordChangeForm, OverridePasswordRestForm
 
 
 def login_view(request):
@@ -19,7 +17,7 @@ def login_view(request):
             if user.is_active:
                 login(request, user)
                 messages.add_message(request, messages.SUCCESS, 'You have been logged in')
-                return HttpResponseRedirect(reverse('site_info:home'))
+                return redirect('site_info:home')
             else:
                 messages.add_message(request, messages.ERROR, 'Your account has been disabled')
                 return render(request, 'members/login.html')
@@ -49,7 +47,7 @@ def profile_edit(request):
                 user_member.avatar_image = form.cleaned_data['avatar_image']
             user_member.save()
             messages.add_message(request, messages.SUCCESS, 'Your profile has been successfully updated')
-            return HttpResponseRedirect(reverse('members:profile'))
+            return redirect('members:profile')
         else:
             messages.add_message(request, messages.ERROR, 'There was a problem updating your profile')
             return render(request, 'members/edit.html', context={'form': form})
@@ -65,7 +63,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)
             messages.add_message(request, messages.SUCCESS, 'Your password was successfully updated')
-            return HttpResponseRedirect(reverse('members:profile'))
+            return redirect('members:profile')
         else:
             messages.add_message(request, messages.ERROR, 'There was a problem updating your password')
             return render(request, 'members/password_change.html', context={'form': form})
@@ -77,7 +75,7 @@ def change_password(request):
 def logout_view(request):
     logout(request)
     messages.add_message(request, messages.WARNING, 'You have been logged out')
-    return HttpResponseRedirect(reverse('site_info:home'))
+    return redirect('site_info:home')
 
 
 def forgot_password(request):
@@ -96,7 +94,7 @@ def forgot_password(request):
             except SMTPAuthenticationError:
                 messages.add_message(request, messages.ERROR,
                                      'There has been an error sending the email. Please contact the webmaster.')
-            return HttpResponseRedirect(reverse('site_info:home'))
+            return redirect('site_info:home')
         else:
             return render(request, 'members/forgot_password.html', context={'form': form})
     else:
@@ -106,4 +104,4 @@ def forgot_password(request):
 def password_reset_redirect(request):
     messages.add_message(request, messages.SUCCESS,
                          'Your password has been reset. You can now log in using your new password.')
-    return HttpResponseRedirect(reverse('site_info:home'))
+    return redirect('site_info:home')

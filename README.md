@@ -26,3 +26,4 @@ need to copy to their machine from the server.
 - Showings
 - Library
 - Karaoke
+- Theme and style the site
