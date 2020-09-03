@@ -34,7 +34,7 @@ def get_event_context(paginator_page, event_type):
     try:
         context_events_page = paginator.page(paginator_page)
     except InvalidPage:
-        context_events_page = paginator_page(1)
+        context_events_page = paginator.page(1)
 
     return {'ongoing_events': ongoing_events, 'events_page': context_events_page, 'events_type': event_type}
 
