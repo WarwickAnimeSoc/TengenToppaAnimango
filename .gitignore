@@ -6,7 +6,7 @@ venv/
 
 # Static Files
 media/
-static/
+/static/
 
 # Generated Files
 *.pyc
