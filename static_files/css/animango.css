@@ -24,6 +24,11 @@ body .container {
     width: 64px;
 }
 
+/* Class used for sizing wiki site links in the showings listing */
+.image-showings-link {
+    width: 32px;
+}
+
 /* Bootstrap breakpoint overrides */
 
 /* sm prefix */

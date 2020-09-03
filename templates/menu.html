@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="{% url 'site_info:home' %}">
             Warwick Anime and Manga Society
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="navbarCollapse">
@@ -15,49 +15,59 @@
                     <a class="nav-link" href="#">News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Showings</a>
+                    <a class="nav-link" href="{% url 'showings:showings' page=1 %}">Showings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Library</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarKaraokeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarKaraokeDropdown" data-toggle="dropdown">
                         Karaoke
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarKaraokeDropdown">
+                    <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">List</a>
                         <a class="dropdown-item" href="#">Request</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarSocietyDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarSocietyDropdown" data-toggle="dropdown">
                         Society
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarSocietyDropdown">
+                    <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">History</a>
                         <a class="dropdown-item" href="#">Archive</a>
                         <a class="dropdown-item" href="#">GDPR</a>
                     </div>
                 </li>
+                {% if user.is_staff %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarSocietyDropdown" data-toggle="dropdown">
+                            Exec Tools
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'showings:cooldown_dashboard' %}">Cooldown</a>
+                        </div>
+                    </li>
+                {% endif %}
             </ul>
             <ul class="navbar-nav flex-row">
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown mr-n3">
-                    {% load static %}
-                        <a class="nav-link pb-0 pt-0" href="#" id="navbarMemberDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{  user.member }}
+                        {% load static %}
+                        <a class="nav-link pb-0 pt-0" href="#" id="navbarMemberDropdown" data-toggle="dropdown">
+                            {{ user.member }}
                             <img alt="Avatar" class="ml-1 image-navbar-avatar rounded"
-                                {% if user.member.avatar_image %}
-                                    src="{{ user.member.avatar_image.url }}"
-                                {% else %}
-                                    src="{% static "images/default_avatar.png" %}"
-                                {% endif %}
+                                    {% if user.member.avatar_image %}
+                                 src="{{ user.member.avatar_image.url }}"
+                                    {% else %}
+                                 src="{% static "images/default_avatar.png" %}"
+                                    {% endif %}
                             >
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarMemberDropdown">
+                        <div class="dropdown-menu">
                             {% if user.is_staff %}
                                 <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
-                            {%  endif %}
+                            {% endif %}
                             <a class="dropdown-item" href="{% url 'members:profile' %}">Profile</a>
                             <a class="dropdown-item" href="{% url 'members:logout' %}">Logout</a>
                         </div>
@@ -66,7 +76,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url "members:login" %}">Login</a>
                     </li>
-                {%  endif %}
+                {% endif %}
             </ul>
         </div>
     </nav>
