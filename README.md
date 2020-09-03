@@ -28,6 +28,9 @@ __*Progress:*__ All the basic user functionality has been added. Need to impleme
 __*Progress:*__  All functionality is present. Needs some improvements to the user interface.
 
 #### Showings
+__*Progress:*__  All functionality is present. Needs some improvements to the user interface.
+
+#### News
 __*Progress:*__  Not started.
 
 #### Library
