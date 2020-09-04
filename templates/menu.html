@@ -12,7 +12,7 @@
                     <a class="nav-link" href="{% url 'events:upcoming' page=1 %}">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">News</a>
+                    <a class="nav-link" href="{% url 'news:listing' category='all' page=1 %}">News</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'showings:showings' page=1 %}">Showings</a>

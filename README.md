@@ -31,7 +31,7 @@ __*Progress:*__  All functionality is present. Needs some improvements to the us
 __*Progress:*__  All functionality is present. Needs some improvements to the user interface.
 
 #### News
-__*Progress:*__  Not started.
+__*Progress:*__  All functionality is present. Needs some improvements to the user interface.
 
 #### Library
 __*Progress:*__  Not started.

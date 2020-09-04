@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ event.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron mt-5">
+        <h1 class="display-4">{{ article.title }}</h1>
+        <p class="lead">{{ article.get_article_type_display }}</p>
+        <hr class="my-4">
+        <p class="lead">Posted on {{ article.created|date:'d/m/Y' }} by {{ article.created_by.member }}</p>
+    </div>
+    <p>{% load martortags %}{{ article.content|safe_markdown }}</p>
+{% endblock %}
