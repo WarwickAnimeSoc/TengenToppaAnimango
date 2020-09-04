@@ -15,7 +15,7 @@ def showings(request, page):
     except InvalidPage:
         context_showings_page = paginator.page(1)
 
-    return render(request, 'showings/showings.html', context={'query': query, 'showings_page': context_showings_page})
+    return render(request, 'showings/list.html', context={'query': query, 'showings_page': context_showings_page})
 
 
 def get_showings(query):
