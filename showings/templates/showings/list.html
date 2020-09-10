@@ -10,8 +10,8 @@
     <form action="{% url "showings:showings" page=1 %}" method="GET" class="mt-3 mb-3">
         <div class="input-group">
             <label for="queryInput"></label>
-            <input type="text" class="form-control {% if form.signup_comment.errors %}is-invalid{% endif %}"
-                   id="queryInput" name="query" placeholder="Show title" value="{{ query|default_if_none:'' }}">
+            <input type="text" class="form-control" id="queryInput" name="query" placeholder="Show title"
+                   value="{{ query|default_if_none:'' }}">
             <div class="input-group-append">
                 <button class="btn btn-outline-primary" type="submit">Search</button>
             </div>
