@@ -1,14 +1,13 @@
-from martor.fields import MartorFormField
+from martor.widgets import AdminMartorWidget
 
 from django import forms
+from django.db import models
 from django.contrib import admin
 
 from .models import Event, Signup
 
 
 class EventForm(forms.ModelForm):
-    details = MartorFormField()
-
     def clean(self):
         cleaned_data = super(EventForm, self).clean()
 
@@ -37,6 +36,10 @@ class EventForm(forms.ModelForm):
 
 
 class EventAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {'widget': AdminMartorWidget},
+    }
+
     form = EventForm
 
     list_display = (

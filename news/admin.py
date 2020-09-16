@@ -1,18 +1,16 @@
-from martor.fields import MartorFormField
+from martor.widgets import AdminMartorWidget
 
-from django import forms
+from django.db import models
 from django.contrib import admin
 from django.utils import timezone
 
 from .models import Article
 
 
-class ArticleForm(forms.ModelForm):
-    content = MartorFormField()
-
-
 class ArticleAdmin(admin.ModelAdmin):
-    form = ArticleForm
+    formfield_overrides = {
+        models.TextField: {'widget': AdminMartorWidget},
+    }
 
     readonly_fields = ['created', 'created_by']
     list_display = ['title', 'created', 'created_by', 'article_type']
