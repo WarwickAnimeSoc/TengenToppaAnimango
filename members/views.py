@@ -17,7 +17,7 @@ def login_view(request):
             if user.is_active:
                 login(request, user)
                 messages.add_message(request, messages.SUCCESS, 'You have been logged in')
-                return redirect('site_info:home')
+                return redirect('miscellaneous:home')
             else:
                 messages.add_message(request, messages.ERROR, 'Your account has been disabled')
                 return render(request, 'members/login.html')
@@ -75,7 +75,7 @@ def change_password(request):
 def logout_view(request):
     logout(request)
     messages.add_message(request, messages.WARNING, 'You have been logged out')
-    return redirect('site_info:home')
+    return redirect('miscellaneous:home')
 
 
 def forgot_password(request):
@@ -94,7 +94,7 @@ def forgot_password(request):
             except SMTPAuthenticationError:
                 messages.add_message(request, messages.ERROR,
                                      'There has been an error sending the email. Please contact the webmaster.')
-            return redirect('site_info:home')
+            return redirect('miscellaneous:home')
         else:
             return render(request, 'members/forgot_password.html', context={'form': form})
     else:
@@ -104,4 +104,4 @@ def forgot_password(request):
 def password_reset_redirect(request):
     messages.add_message(request, messages.SUCCESS,
                          'Your password has been reset. You can now log in using your new password.')
-    return redirect('site_info:home')
+    return redirect('miscellaneous:home')

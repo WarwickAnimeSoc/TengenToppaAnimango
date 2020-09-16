@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 
 
 def home(request):
-    return render(request, 'site_info/home.html')
+    return render(request, 'miscellaneous/home.html')
+
+def privacy(request):
+    return render(request, 'miscellaneous/privacy.html')
 
 # Redirect views, used to provide short links for other society pages
 

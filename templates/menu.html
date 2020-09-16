@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
-        <a class="navbar-brand" href="{% url 'site_info:home' %}">
+        <a class="navbar-brand" href="{% url 'miscellaneous:home' %}">
             Warwick Anime and Manga Society
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
@@ -36,7 +36,6 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">History</a>
                         <a class="dropdown-item" href="#">Archive</a>
-                        <a class="dropdown-item" href="#">GDPR</a>
                     </div>
                 </li>
                 {% if user.is_staff %}
