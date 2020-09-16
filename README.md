@@ -22,7 +22,8 @@ need to copy to their machine from the server.
 __*Progress:*__  Not started.
 
 #### User Accounts
-__*Progress:*__ All the basic user functionality has been added. Need to implement the Library app to add the loans section of the profile
+__*Progress:*__ All the basic user functionality has been added. Need to implement the Library app to add the loans section of the profile.
+Additionally, the SU API interface needs to be added.
 
 #### Events
 __*Progress:*__  All functionality is present. Needs some improvements to the user interface.
@@ -37,12 +38,15 @@ __*Progress:*__  All functionality is present. Needs some improvements to the us
 __*Progress:*__  Not started.
 
 #### Karaoke
-__*Progress:*__  Not started.
+__*Progress:*__  All functionality is present. Needs some improvements to the user interface.
 
-#### History
+#### History/Exec
 __*Progress:*__  Not started.
 
 #### Archive
+__*Progress:*__  Not started.
+
+#### Stream
 __*Progress:*__  Not started.
 
 #### Other

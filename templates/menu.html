@@ -25,8 +25,8 @@
                         Karaoke
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">List</a>
-                        <a class="dropdown-item" href="#">Request</a>
+                        <a class="dropdown-item" href="{% url 'karaoke:karaoke_list' page=1 %}">List</a>
+                        <a class="dropdown-item" href="{% url 'karaoke:request' %}">Request</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

@@ -3,3 +3,5 @@ mysqlclient==1.4.6
 bleach==3.1.5
 pillow==7.2.0
 martor==1.5.1
+gspead==3.6.0
+oauth2client==4.1.3

@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Showings
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">Karaoke Songs List</h1>
+
+    <form action="{% url "karaoke:karaoke_list" page=1 %}" method="GET" class="mt-3 mb-3">
+        <div class="input-group">
+            <label for="queryInput"></label>
+            <input type="text" class="form-control" id="queryInput" name="query"
+                   placeholder="Song artist / title or related anime" value="{{ query|default_if_none:'' }}">
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        {% for song in songs_page %}
+            <div class="col-lg-4 col-xl-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ song.title }}</h5>
+                        <h6 class="card-subtitle text-muted">{{ song.artist }}</h6>
+                        {% if song.related_series %}
+                            <p class="card-text">From:
+                                {% if song.related_series.title_english %}
+                                    {{ song.related_series.title_english }}
+                                {% else %}
+                                    {{ song.related_series.title_romaji }}
+                                {% endif %}
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if songs_page %}
+        <nav class="mt-3">
+            <ul class="pagination justify-content-center">
+                {% if not songs_page.has_previous %}
+                    <li class="page-item disabled" tabindex="-1">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{% url 'karaoke:karaoke_list' page=songs_page.previous_page_number %}">
+                            Previous
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% comment %}
+                Only display up to 3 page entries in the navbar
+                {% endcomment %}
+
+                {% if songs_page.paginator.num_pages > 3 %}
+                    {% if songs_page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url 'karaoke:karaoke_list' page=songs_page.previous_page_number %}">
+                                {{ songs_page.previous_page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <a class="page-link"
+                           href="{% url 'karaoke:karaoke_list' page=songs_page.number %}">
+                            {{ songs_page.number }}
+                        </a>
+                    </li>
+
+                    {% if songs_page.has_next %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url 'karaoke:karaoke_list' page=songs_page.next_page_number %}">
+                                {{ songs_page.next_page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    {% for page in songs_page.paginator.page_range %}
+                        <li class="page-item {% if forloop.counter == songs_page.number %}active{% endif %}">
+                            <a class="page-link" href="{% url 'karaoke:karaoke_list' page=forloop.counter %}">
+                                {{ forloop.counter }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if not songs_page.has_next %}
+                    <li class="page-item disabled" tabindex="-1">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{% url 'karaoke:karaoke_list' page=songs_page.next_page_number %}">
+                            Next
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% else %}
+        <h5 class="mt-3 text-muted">Nothing here</h5>
+    {% endif %}
+
+{% endblock %}

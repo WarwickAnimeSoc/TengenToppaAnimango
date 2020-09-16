@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Showings
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">Request a song</h1>
+
+    <div>
+        <h5>How to request songs:</h5>
+        <p>First, check that the song you want to request is not already on our
+            <a href="{% url 'karaoke:karaoke_list' page=1 %}">list</a>, or that it hasn't already been
+            <a href="#pendingRequests">requested</a>.
+        </p>
+        <p>If you can't find the song you want then follow the steps bellow to request it:</p>
+        <ol>
+            <li> Go to the <a href="https://ultrastar-es.org/en/canciones">ultastar-es</a> website.</li>
+            <li>Search the name of the song you want or the artist (Searching by anime doesn't always work).</li>
+            <li>Narrow the search to song you want and copy the URL (i.e.
+                https://ultrastar-es.org/en/canciones?cancion=Kyoumei+no+true+force).
+            </li>
+            <li>Fill out the request form bellow.</li>
+            <li>If the song has some relation to an Anime (for example if it is the OP of a show), it helps if you also
+                fill in the <a href="https://anilist.co/">anilist</a> link for the show
+                (i.e. https://anilist.co/anime/11757/Sword-Art-Online/ for the song Crossing Field).
+            </li>
+        </ol>
+        <p><i>Note: The song you want may not be karaoke-fied yet so if its not on the site then you could try mapping a
+            song yourself.
+            We have a guide on how to do this <a href="{% url 'karaoke:guide' %}">here</a></i></p>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group mb-1">
+            <label for="titleInput">Title</label>
+            <input type="text" class="form-control {% if form.title.errors %}is-invalid{% endif %}"
+                   id="titleInput" name="title" placeholder="Song title" value="{{ form.title.value }}">
+            {% for error in form.title.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+            <small id="titleInputHelp" class="form-text text-muted">The title of the song. Please include "(TV)" at the
+                end if the song is TV sized.</small>
+        </div>
+        <div class="form-group mb-1">
+            <label for="artistInput">Artist</label>
+            <input type="text" class="form-control {% if form.artist.errors %}is-invalid{% endif %}"
+                   id="artistInput" name="artist" placeholder="Song artist" value="{{ form.artist.value }}">
+            {% for error in form.title.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+            <small id="artistInputHelp" class="form-text text-muted">The artist.</small>
+        </div>
+        <div class="form-group mb-1">
+            <label for="ultrastarInput">Ultrastar link</label>
+            <input type="text" class="form-control {% if form.ultrastar_url.errors %}is-invalid{% endif %}"
+                   id="ultrastarInput" name="ultrastar_url" placeholder="Ultrastar-es.org url"
+                   value="{{ form.ultrastar_url.value }}">
+            {% for error in form.ultrastar_url.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+            <small id="ultrastarInputHelp" class="form-text text-muted">The link to the song on ultrastar-es.org</small>
+        </div>
+        <div class="form-group">
+            <label for="anilistInput">Anilist link</label>
+            <input type="text" class="form-control {% if form.anilist_url.errors %}is-invalid{% endif %}"
+                   id="anilistInput" name="anilist_url" placeholder="Anilist.co url"
+                   value="{{ form.anilist_url.value }}">
+            {% for error in form.anilist_url.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+            {% endfor %}
+            <small id="anilistInputHelp" class="form-text text-muted">If the song is in an anime, please put the anilist
+                link for that anime here.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Request Song</button>
+    </form>
+
+    <h5 class="mt-5">Pending requests</h5>
+    <div id="pendingRequests">
+        {% if requests %}
+            {% for request in requests %}
+                <div class="card mb-3">
+                    <div class="card-body overflow-hidden">
+                        <h5 class="card-title">{{ request.title }} - {{ request.artist }}</h5>
+                        <h6 class="card-subtitle text-muted">{{ request.arist }}</h6>
+                        <a class="card-link" href="{{ request.ultrastar_url }}" target="_blank">View on
+                            ultrastar-es.org</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h5 class="mt-3 text-muted">Nothing here</h5>
+        {% endif %}
+    </div>
+{% endblock %}

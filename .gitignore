@@ -13,3 +13,4 @@ media/
 
 # Sensitive Files
 TengenToppaAnimango/settings.py
+karaoke/management/commands/authdetails.json
