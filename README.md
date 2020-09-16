@@ -41,7 +41,7 @@ __*Progress:*__  Not started.
 __*Progress:*__  All functionality is present. Needs some improvements to the user interface.
 
 #### History/Exec
-__*Progress:*__  Not started.
+__*Progress:*__  All functionality is present. Needs some improvements to the user interface.
 
 #### Archive
 __*Progress:*__  Not started.
