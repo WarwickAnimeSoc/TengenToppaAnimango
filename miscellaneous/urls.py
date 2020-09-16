@@ -10,6 +10,7 @@ urlpatterns = [
     path('discord', views.discord, name='discord'),
     path('facebook', views.facebook, name='facebook'),
     path('warwicksu', views.warwicksu, name='waricksu'),
-    path('malclub', views.malclub, name='malclub')
+    path('malclub', views.malclub, name='malclub'),
+    path('github', views.github, name='github')
 ]
 
