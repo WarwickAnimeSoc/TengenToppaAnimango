@@ -9,8 +9,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <!-- Import Custom Site CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/animango.css' %}">
+    <!-- Import custom site CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ttam.css' %}">
+
+    {% comment %}
+    The head block should be used to load css libraries that are only needed on certain pages, as well as adding custom
+    meta tags to certain pages.
+    {% endcomment %}
+    {% block head %}
+    {% endblock %}
 
     <title>{% block title %}Base Template{% endblock %} | Warwick Anime and Manga Society</title>
 </head>
@@ -19,8 +26,10 @@
 
 {% include "menu.html" %}
 
-<main role="main" class="container flex-grow-1">
-    <div class="mt-5 mt-sm-5 mt-md-0 mt-lg-0 mt-xl-0">
+<main role="main" class="container flex-grow-1 ">
+    <!-- ID is needed for the messages div to add messages after the page has been rendered using javascript. This is
+    used in the archive app. See ttam.js and archive/item.html. -->
+    <div class="mt-5 mt-sm-5 mt-md-0 mt-lg-0 mt-xl-0" id="messagesDiv">
         {% if messages %}
             {% for message in messages %}
                 <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</div>
@@ -43,6 +52,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+<!-- Import custom site javascript -->
+<script src="{% static 'js/ttam.js' %}"></script>
+
+{% comment %}
+The javascript block should be used for any page specific javascript.
+{% endcomment %}
 {% block javascript %}
 {% endblock %}
 </body>

@@ -27,6 +27,7 @@ urlpatterns = [
     path('news/', include('news.urls')),
     path('karaoke/', include('karaoke.urls')),
     path('history/', include('history.urls')),
+    path('archive/', include('archive.urls')),
     path('admin/', admin.site.urls),
     path('martor/', include('martor.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

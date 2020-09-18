@@ -10,4 +10,3 @@ urlpatterns = [
     path('event/<event_id>/', views.event_detail, name='event_detail'),
     path('event/<event_id>/cancel/', views.cancel_signup, name="cancel_signup")
 ]
-

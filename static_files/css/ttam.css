@@ -48,5 +48,10 @@ body .container {
 
 /* xl prefix */
 @media (min-width: 1200px) {
-
+    /* Container size override. By default the max-width of a container in at this viewport size is 1140px, this results
+    in a lot of wasted space in the margins on large monitors. This is of particular concern in the archive app,
+    as images are very small. */
+    .container, .container-sm, .container-md, .container-lg, .container-xl {
+        max-width: 60%;
+    }
 }
