@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Showings
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">Showings</h1>
+
+    <form action="{% url "showings:showings" page=1 %}" method="GET" class="mt-3 mb-3">
+        <div class="input-group">
+            <label for="queryInput"></label>
+            <input type="text" class="form-control" id="queryInput" name="query" placeholder="Show title"
+                   value="{{ query|default_if_none:'' }}">
+            <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+
+    {% for showing in showings_page %}
+        <div class="card mb-3">
+            <div class="card-body">
+                {% if showing.title %}
+                    <h5 class="card-title">{{ showing.title }}</h5>
+                {% else %}
+                    <h5 class="card-title">{{ showing.get_showing_type_display }}</h5>
+                {% endif %}
+                <h6 class="card-subtitle text-muted mb-2">{{ showing.date|date:'d/m/Y' }}</h6>
+                <ul class="pl-0">
+                    {% for show in showing.show_set.all %}
+                        <li class="row align-items-center">
+                            <div class="col">
+                                {% comment %}
+                                English title is prefered as it's probably more recognizable
+                                {% endcomment %}
+                                <p class="mb-0">
+                                    {% if show.series.title_english %}
+                                        {{ show.series.title_english }}
+                                    {% else %}
+                                        {{ show.series.title_romaji }}
+                                    {% endif %}
+                                </p>
+                                <p class="ml-2">{{ show.details }}</p>
+                            </div>
+                            <div class="col-auto">
+                                {% load static %}
+                                {% if show.series.anilist_link %}
+                                    <a href="{{ show.series.anilist_link }}" target="_blank">
+                                        <img alt="Anilist" class="image-showings-link"
+                                             src="{% static 'images/../../static/images/anilist_icon.png' %}">
+                                    </a>
+                                {% endif %}
+                                {% if show.series.mal_link %}
+                                    <a href="{{ show.series.mal_link }}" target="_blank">
+                                        <img alt="MAL" class="image-showings-link"
+                                             src="{% static 'images/../../static/images/mal_icon.jpg' %}">
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if showings_page %}
+        <nav class="mt-3">
+            <ul class="pagination justify-content-center">
+                {% if not showings_page.has_previous %}
+                    <li class="page-item disabled" tabindex="-1">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{% url 'showings:showings' page=showings_page.previous_page_number %}">
+                            Previous
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% comment %}
+                Only display up to 3 page entries in the navbar
+                {% endcomment %}
+
+                {% if showings_page.paginator.num_pages > 3 %}
+                    {% if showings_page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url 'showings:showings' page=showings_page.previous_page_number %}">
+                                {{ showings_page.previous_page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item active">
+                        <a class="page-link"
+                           href="{% url 'showings:showings' page=showings_page.number %}">
+                            {{ showings_page.number }}
+                        </a>
+                    </li>
+
+                    {% if showings_page.has_next %}
+                        <li class="page-item">
+                            <a class="page-link"
+                               href="{% url 'showings:showings' page=showings_page.next_page_number %}">
+                                {{ showings_page.next_page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% else %}
+                    {% for page in showings_page.paginator.page_range %}
+                        <li class="page-item {% if forloop.counter == showings_page.number %}active{% endif %}">
+                            <a class="page-link" href="{% url 'showings:showings' page=forloop.counter %}">
+                                {{ forloop.counter }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+
+                {% if not showings_page.has_next %}
+                    <li class="page-item disabled" tabindex="-1">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{% url 'showings:showings' page=showings_page.next_page_number %}">
+                            Next
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% else %}
+        <h5 class="mt-3 text-muted">Nothing here</h5>
+    {% endif %}
+
+{% endblock %}

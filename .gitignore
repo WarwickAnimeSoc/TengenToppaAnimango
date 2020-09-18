@@ -12,5 +12,5 @@ media/
 *.pyc
 
 # Sensitive Files
-TengenToppaAnimango/settings.py
-karaoke/management/commands/authdetails.json
+config/settings.py
+apps/karaoke/management/commands/authdetails.json
