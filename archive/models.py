@@ -15,9 +15,7 @@ class Item(models.Model):
     )
     type = models.CharField(max_length=2, choices=TYPE_CHOICES, default='im')
     date = models.DateField(null=False, help_text='Date of creation or last known time.')
-
     file = models.FileField(null=False, blank=False, upload_to='archive/', help_text='The file that should be uploaded')
-
     details = models.TextField(null=True, blank=True, help_text='Any details about the item')
 
     def __str__(self):
