@@ -9,7 +9,7 @@ urlpatterns = [
     path('privacy/', views.privacy, name='privacy'),
     path('discord', views.discord, name='discord'),
     path('facebook', views.facebook, name='facebook'),
-    path('warwicksu', views.warwicksu, name='waricksu'),
+    path('warwicksu', views.warwicksu, name='warwicksu'),
     path('malclub', views.malclub, name='malclub'),
     path('github', views.github, name='github')
 ]

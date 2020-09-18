@@ -1,4 +1,10 @@
-<footer class="bg-light mt-5 pr-1 pl-1">
-    <span class="text-muted">&copy; University of Warwick Anime and Manga Society 2016 - {% now "Y" %}</span>
-    <span class="text-muted float-right"><a href="{% url 'miscellaneous:privacy' %}">Privacy Policy</a></span>
+<footer class="bg-light mt-5">
+    <div class="nav justify-content-around">
+        <a class="nav-link text-muted" href="{% url 'miscellaneous:discord' %}">Discord</a>
+        <a class="nav-link text-muted" href="{% url 'miscellaneous:facebook' %}">Facebook</a>
+        <a class="nav-link text-muted" href="{% url 'miscellaneous:malclub' %}">MAL Club</a>
+        <a class="nav-link text-muted" href="{% url 'miscellaneous:warwicksu' %}">Warwick SU</a>
+        <a class="nav-link text-muted" href="{% url 'miscellaneous:privacy' %}">Privacy Policy</a>
+        <a class="nav-link text-muted" href="{% url 'miscellaneous:github' %}">Github</a>
+    </div>
 </footer>
