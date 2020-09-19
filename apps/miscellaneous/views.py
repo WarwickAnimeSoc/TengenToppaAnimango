@@ -13,7 +13,7 @@ def privacy(request):
 
 def discord(request):
     # Redirects to the society Discord server
-    return redirect('https://discordapp.com/invite/GYM6ay7')
+    return redirect('https://discord.gg/JaYTGfu')
 
 
 def facebook(request):
