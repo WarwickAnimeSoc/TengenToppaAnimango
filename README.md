@@ -1,5 +1,4 @@
 # TengenToppaAnimango
-_(Name subject to change)_
 
 New version of the [aniMango](https://github.com/WarwickAnimeSoc/aniMango) site for the University of Warwick Anime and Manga Society.
 
@@ -47,7 +46,7 @@ __*Progress:*__ All functionality is present. Needs some improvements to the use
 __*Progress:*__ All functionality is present. Needs some improvements to the user interface.
 
 #### Stream
-__*Progress:*__ Not started.
+__*Progress:*__ All functionality is present. Needs some improvements to the user interface.
 
 #### Other
 The site needs to be styled so it doesn't look like a default bootstrap site.

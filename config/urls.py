@@ -28,6 +28,7 @@ urlpatterns = [
     path('karaoke/', include('apps.karaoke.urls')),
     path('history/', include('apps.history.urls')),
     path('archive/', include('apps.archive.urls')),
+    path('stream/', include('apps.stream.urls')),
     path('admin/', admin.site.urls),
     path('martor/', include('martor.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
