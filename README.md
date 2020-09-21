@@ -22,7 +22,6 @@ __*Progress:*__  Not started. However, all the other functionality needed to add
 
 #### User Accounts
 __*Progress:*__ All the basic user functionality has been added. Need to implement the Library app to add the loans section of the profile.
-Additionally, the SU API interface needs to be added.
 
 #### Events
 __*Progress:*__ All functionality is present. Needs some improvements to the user interface.
