@@ -11,6 +11,9 @@ media/
 # Generated Files
 *.pyc
 
+# Logging Files
+logs/
+
 # Sensitive Files
 config/settings.py
 apps/karaoke/management/commands/authdetails.json
