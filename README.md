@@ -17,35 +17,4 @@ need to copy to their machine from the server.
 
 ## Todo
 
-#### Homepage
-__*Progress:*__  Not started. However, all the other functionality needed to add this page is now present. Will probably add this at the end when I get around to doing styling a layout work.
-
-#### User Accounts
-__*Progress:*__ All the basic user functionality has been added. Need to implement the Library app to add the loans section of the profile.
-
-#### Events
-__*Progress:*__ All functionality is present. Needs some improvements to the user interface.
-
-#### Showings
-__*Progress:*__ All functionality is present. Needs some improvements to the user interface.
-
-#### News
-__*Progress:*__ All functionality is present. Needs some improvements to the user interface.
-
-#### Library
-__*Progress:*__ Not started. There's a chance that the library might be sorted and re-catalogued at the start of term 1 this year, so i'll probably wait until then to reimplement the import command.
-
-#### Karaoke
-__*Progress:*__ All functionality is present. Needs some improvements to the user interface.
-
-#### History/Exec
-__*Progress:*__ All functionality is present. Needs some improvements to the user interface.
-
-#### Archive
-__*Progress:*__ All functionality is present. Needs some improvements to the user interface.
-
-#### Stream
-__*Progress:*__ All functionality is present. Needs some improvements to the user interface.
-
-#### Other
-The site needs to be styled so it doesn't look like a default bootstrap site.
+- Styling and CSS need to be tweaked to look like more than just a generic bootstrap site.

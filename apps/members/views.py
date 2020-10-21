@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+from apps.library.models import Request, ArchivedRequest
 from .forms import ProfileEditForm, OverridePasswordChangeForm, OverridePasswordRestForm
 
 
@@ -30,8 +31,11 @@ def login_view(request):
 
 @login_required
 def profile(request):
-    # TODO: Add library items
-    return render(request, 'members/profile.html')
+    current_requests = Request.objects.select_related().filter(user=request.user).order_by('-return_deadline')
+    archived_requests = ArchivedRequest.objects.select_related().filter(user=request.user).order_by('-date_requested')
+
+    context = {'current_requests': current_requests, 'archived_requests': archived_requests}
+    return render(request, 'members/profile.html', context=context)
 
 
 @login_required

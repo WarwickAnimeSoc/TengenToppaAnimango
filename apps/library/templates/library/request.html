@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Request
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5 mb-3">Request Confirmation</h1>
+
+    <p>You are about to place a request for {{ item.name }} of {{ item.parent_series.nice_title }}.</p>
+
+    <p>The item will be available for you to pick up at the next society event.</p>
+
+    <p><b>A deposit of £5 must be paid ber item, this will be returned when the item is returned. The item must be returned within the allocated loan period (two weeks), you can request an extension by talking to the exec.</b></p>
+
+    <a class="btn btn-primary" href="{% url "library:request_post" item_id=item.id %}">Confirm</a>
+    <a class="btn btn-danger" href="{% url "library:series_view" series_id=item.parent_series.id %}">Cancel</a>
+
+{% endblock %}

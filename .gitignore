@@ -17,3 +17,4 @@ logs/
 # Sensitive Files
 config/settings.py
 apps/karaoke/management/commands/authdetails.json
+apps/library/management/commands/authdetails.json

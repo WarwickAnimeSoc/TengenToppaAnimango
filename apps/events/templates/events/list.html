@@ -6,13 +6,13 @@
 
 {% block content %}
     {% if ongoing_events %}
-        <h1 class="mt-5">Ongoing Events</h1>
+        <h1 class="mt-5 mb-3">Ongoing Events</h1>
         {% for event in ongoing_events %}
             {% include "events/event_listing_card.html" %}
         {% endfor %}
     {% endif %}
 
-    <h1 class="mt-5">{{ events_type }} Events</h1>
+    <h1 class="mt-5 mb-3">{{ events_type }} Events</h1>
     {% if events_type == 'Upcoming' %}
         <a class="small text-muted" href="{% url 'events:previous' page=1 %}">See previous events instead</a>
     {% else %}

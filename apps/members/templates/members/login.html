@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="mt-5">Login</h1>
+    <h1 class="mt-5 mb-3">Login</h1>
     <p>If you've just joined the society, check your Warwick Email for an email containing your password</p>
     <form action="{% url "members:login" %}" method="POST">
         {% csrf_token %}

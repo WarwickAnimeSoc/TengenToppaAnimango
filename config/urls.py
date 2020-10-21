@@ -28,6 +28,7 @@ urlpatterns = [
     path('karaoke/', include('apps.karaoke.urls')),
     path('history/', include('apps.history.urls')),
     path('archive/', include('apps.archive.urls')),
+    path('library/', include('apps.library.urls')),
     path('stream/', include('apps.stream.urls')),
     path('admin/', admin.site.urls),
     path('martor/', include('martor.urls'))

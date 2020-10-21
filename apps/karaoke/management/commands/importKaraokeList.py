@@ -30,7 +30,7 @@ def get_spreadsheet_data():
 # Updates the spreadsheet at the specified position
 def update_sheet(x, y, value):
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    credentials = ServiceAccountCredentials.from_json_keyfile_name('karaoke/management/commands/authdetails.json',
+    credentials = ServiceAccountCredentials.from_json_keyfile_name('apps/karaoke/management/commands/authdetails.json',
                                                                    scope)
     client = gspread.authorize(credentials)
 
