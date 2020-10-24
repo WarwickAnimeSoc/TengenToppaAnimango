@@ -10,7 +10,6 @@ class CreateLoanForm(ActionForm):
     university_id = forms.CharField()
 
 
-
 class ItemAdmin(admin.ModelAdmin):
     raw_id_fields = (
         'parent_series',
