@@ -25,3 +25,29 @@ function writeDivergenceMeter() {
     let divergenceNumber = Math.random();
     divergenceMeter.innerText = divergenceNumber.toString().slice(0, 8);
 }
+
+/* Multi element carousel next */
+/* Used to move items left on a multi element carousel */
+function multiCarouselNext() {
+    /* Move first child to end and hide */
+    let multiCarouselDiv = $('#multiCarousel')
+    let firstChild = multiCarouselDiv.children(':first-child')
+    firstChild.css({display: 'none'});
+    multiCarouselDiv.append(firstChild)
+
+    /* Un-hide first hidden element */
+    multiCarouselDiv.children(':hidden').first().css({display: 'block'})
+}
+
+/* Multi element carousel prev */
+/* Used to move items right on a multi element carousel */
+function multiCarouselPrev() {
+    /* Move first child to end and hide */
+    let multiCarouselDiv = $('#multiCarousel')
+    let lastChild = multiCarouselDiv.children(':last-child')
+    lastChild.css({display: 'block'})
+    multiCarouselDiv.prepend(lastChild)
+
+    /* Un-hide first hidden element */
+    multiCarouselDiv.children(':visible').last().css({display: 'none'})
+}

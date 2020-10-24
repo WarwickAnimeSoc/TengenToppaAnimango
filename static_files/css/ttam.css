@@ -52,6 +52,6 @@ body .container {
     in a lot of wasted space in the margins on large monitors. This is of particular concern in the archive app,
     as images are very small. */
     .container, .container-sm, .container-md, .container-lg, .container-xl {
-        max-width: 60%;
+        max-width: 90%;
     }
 }
