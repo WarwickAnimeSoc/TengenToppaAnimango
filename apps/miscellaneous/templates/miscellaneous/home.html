@@ -100,6 +100,8 @@
                                class="card-link">Read</a>
                         </div>
                     </div>
+                {% empty %}
+                    <h4 class="text-muted">No recent news.</h4>
                 {% endfor %}
             </div>
             <div class="col">
@@ -113,7 +115,8 @@
                                     <a href="{% url 'events:event_detail' event_id=event.id %}"
                                        class="card-link">Details</a>
                                 </div>
-                            </div>
+                        {% empty %}
+                            <h4 class="text-muted">No upcoming events.</h4>
                         {% endfor %}
                     </div>
                 </div>
