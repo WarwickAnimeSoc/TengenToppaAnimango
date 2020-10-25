@@ -20,6 +20,7 @@ from django.conf import settings
 
 
 urlpatterns = [
+    # Apps Urls
     path('', include('apps.miscellaneous.urls')),
     path('members/', include('apps.members.urls')),
     path('events/', include('apps.events.urls')),
@@ -30,6 +31,10 @@ urlpatterns = [
     path('archive/', include('apps.archive.urls')),
     path('library/', include('apps.library.urls')),
     path('stream/', include('apps.stream.urls')),
+    # API Urls
+    path('api/library/', include('apps.library.api.urls')),
+    path('api/events/', include('apps.events.api.urls')),
+    # Django Urls
     path('admin/', admin.site.urls),
     path('martor/', include('martor.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

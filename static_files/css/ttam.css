@@ -29,6 +29,17 @@ body .container {
     width: 32px;
 }
 
+/* Multi Carousels should only show 1 item on mobile */
+@media (max-width: 576px) {
+    .multi-carousel-item {
+        display: block !important;
+    }
+
+    .multi-carousel-button {
+        display: none !important;
+    }
+}
+
 /* Bootstrap breakpoint overrides */
 
 /* sm prefix */

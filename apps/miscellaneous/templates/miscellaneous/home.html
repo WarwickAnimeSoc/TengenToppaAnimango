@@ -26,7 +26,7 @@
                         href="{% url 'miscellaneous:discord' %}">here</a>.</p>
             <br>
         </div>
-        <div class="col-5 p-5">
+        <div class="col-10 col-lg-5 p-5">
             {% load static %}
             <img class="img-fluid" src="{% static 'images/logo/logo-filled-black.svg' %}" alt="Society Logo">
         </div>
@@ -40,12 +40,12 @@
 
     <div class="container-fluid">
         <div class="row align-items-center expanded-row text-center bg-primary text-white">
-            <div class="col" style="cursor: pointer;" onclick="multiCarouselPrev()">
+            <div class="col-1 multi-carousel-button" style="cursor: pointer;" onclick="multiCarouselPrev()">
                 <span class="carousel-control-prev-icon align-self-center"></span>
             </div>
-            <div class="col-10 pt-5 pb-5">
+            <div class="col-12 col-md-10 pt-5 pb-5">
                 <div id="multiCarousel" class="row">
-                    <div class="col-md-4">
+                    <div class="col-12 col-md-4 multi-carousel-item">
                         <h5>Weekly Showings</h5>
                         <p>Our regular viewings take place in <a style="color: #c0c0c0;"
                                 href="http://campus-cms.warwick.ac.uk/share/e49ddabf83dc93b7124237137fcc41a2">MS.02 (on
@@ -54,32 +54,32 @@
                         </p>
 
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-12 col-md-4 multi-carousel-item">
                         <h5>Meal Socials</h5>
                         <p>Come join us for our meal socials. We usually go to Japanese style restaurants in the
                             Coventry area.</p>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-12 col-md-4 multi-carousel-item">
                         <h5>Karaoke</h5>
                         <p>Join us for an evening Karaoke session featuring all types of music from Anime openings to
                             Western classics!</p>
                     </div>
-                    <div class="col-md-4" style="display: none;">
+                    <div class="col-12 col-md-4 multi-carousel-item" style="display: none;">
                         <h5>Movie Nights</h5>
                         <p>Come along to our Movie Nights to watch a range of anime films.</p>
                     </div>
-                    <div class="col-md-4" style="display: none;">
+                    <div class="col-12 col-md-4 multi-carousel-item" style="display: none;">
                         <h5>All-Nighters</h5>
                         <p>oin us from 8pm to 8am for our All-Nighter events where we watch a collection of movies or
                             shows throughout the entire night.</p>
                     </div>
-                    <div class="col-md-4" style="display: none;">
+                    <div class="col-12 col-md-4 multi-carousel-item" style="display: none;">
                         <h5>Manga/LN Socials</h5>
                         <p>Come along to socialise whilst reading Manga and Light Novels.</p>
                     </div>
                 </div>
             </div>
-            <div class="col" style="cursor: pointer;" onclick="multiCarouselNext()">
+            <div class="col-1 multi-carousel-button" style="cursor: pointer;" onclick="multiCarouselNext()">
                 <span class="carousel-control-next-icon align-self-center"></span>
             </div>
         </div>
