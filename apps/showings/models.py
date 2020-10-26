@@ -182,5 +182,8 @@ class Show(models.Model):
 
     def save(self, *args, **kwargs):
         # Overwrite save to apply cooldown
+        # The super save is called twice, this was needed when importing the old showings from aniMango, as the related
+        # Series object won't save if the Show is unsaved.
+        super(Show, self).save()
         self.apply_cooldown()
         super(Show, self).save()

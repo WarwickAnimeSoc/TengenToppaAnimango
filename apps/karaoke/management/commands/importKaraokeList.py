@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 
-from apps.karaoke import Song
+from apps.karaoke.models import Song
 from apps.showings.models import Series
 
 

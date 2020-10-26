@@ -21,8 +21,8 @@
     {% for showing in showings_page %}
         <div class="card mb-3">
             <div class="card-body">
-                {% if showing.title %}
-                    <h5 class="card-title">{{ showing.title }}</h5>
+                {% if showing.showing_title %}
+                    <h5 class="card-title">{{ showing.showing_title }}</h5>
                 {% else %}
                     <h5 class="card-title">{{ showing.get_showing_type_display }}</h5>
                 {% endif %}
