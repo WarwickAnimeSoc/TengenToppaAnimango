@@ -131,7 +131,6 @@ class Show(models.Model):
         return '{0!s} - {1!s}'.format(self.series.nice_title(), self.shown_at)
 
     def apply_cooldown(self):
-        print('Ran')
         # Cooldown is applied to the Series object linked to this Show object in this method.
         # The cooldown rules that are followed here are the ones set by the 2020/2021 exec.
         # These rules are laid out in the flowchart found in './static/images/cooldown_flowchart_2020-2021.png'
