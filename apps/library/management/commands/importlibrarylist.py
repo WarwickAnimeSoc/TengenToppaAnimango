@@ -74,7 +74,10 @@ class Command(BaseCommand):
             # TL;DR - volume number is not necessarily accurate for certain DVDs (and a few manga omnibuses)
             item_volume_number = sheet_data[2][i]
             # Extra details field is important for DVDs as we have marked which DVDs need a region 1 DVD player to play
-            item_extra_details = sheet_data[4][i]
+            try:
+                item_extra_details = sheet_data[4][i]
+            except IndexError:
+                item_extra_details = ""
 
             # Create the Item model instance.
             item = Item()
