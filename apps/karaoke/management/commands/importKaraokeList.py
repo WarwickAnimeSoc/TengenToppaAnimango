@@ -14,7 +14,7 @@ from apps.showings.models import Series
 def get_spreadsheet_data():
     # Load in the scope and the details of API credentials
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    credentials = ServiceAccountCredentials.from_json_keyfile_name('karaoke/management/commands/authdetails.json',
+    credentials = ServiceAccountCredentials.from_json_keyfile_name('apps/karaoke/management/commands/authdetails.json',
                                                                    scope)
     client = gspread.authorize(credentials)
 
