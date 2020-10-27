@@ -29,6 +29,12 @@ body .container {
     width: 32px;
 }
 
+/* Multi Carousel button centering */
+.multi-carousel-button {
+    display: flex !important;
+    cursor: pointer !important;
+}
+
 /* Multi Carousels should only show 1 item on mobile */
 @media (max-width: 576px) {
     .multi-carousel-item {

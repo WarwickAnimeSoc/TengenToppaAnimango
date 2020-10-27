@@ -28,8 +28,12 @@
                                 <img class="img-fluid" src="{{ series.cover_link }}" alt="cover">
                             </div>
                             <div class="col flex-column d-flex">
-                                <h5 class="card-title">{{ series.title_english }}</h5>
-                                <h6 class="card-subtitle text-muted">{{ series.title_romaji }}</h6>
+                                {% if series.title_english %}
+                                    <h5 class="card-title">{{ series.title_english }}</h5>
+                                    <h6 class="card-subtitle text-muted">{{ series.title_romaji }}</h6>
+                                {% else %}
+                                    <h5 class="card-title">{{ series.title_romaji }}</h5>
+                                {% endif %}
                                 <div class="flex-grow-1"></div>
                                 <a class="card-link"
                                    href="{% url 'library:series_view' series_id=series.id %}"><h6>Details</h6>

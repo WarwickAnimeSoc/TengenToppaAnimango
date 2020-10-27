@@ -28,7 +28,7 @@
         </div>
         <div class="col-10 col-lg-5 p-5">
             {% load static %}
-            <img class="img-fluid" src="{% static 'images/logo/logo-filled-black.svg' %}" alt="Society Logo">
+            <img class="img-fluid align-self-center" src="{% static 'images/logo/logo-filled-black.svg' %}" alt="Society Logo">
         </div>
     </div>
 
@@ -39,8 +39,8 @@
     </main>
 
     <div class="container-fluid">
-        <div class="row align-items-center expanded-row text-center bg-primary text-white">
-            <div class="col-1 multi-carousel-button" style="cursor: pointer;" onclick="multiCarouselPrev()">
+        <div class="row expanded-row text-center bg-primary text-white">
+            <div class="col-1 multi-carousel-button" onclick="multiCarouselPrev()">
                 <span class="carousel-control-prev-icon align-self-center"></span>
             </div>
             <div class="col-12 col-md-10 pt-5 pb-5">
@@ -79,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-1 multi-carousel-button" style="cursor: pointer;" onclick="multiCarouselNext()">
+            <div class="col-1 multi-carousel-button flex-row-reverse text-right" onclick="multiCarouselNext()">
                 <span class="carousel-control-next-icon align-self-center"></span>
             </div>
         </div>
