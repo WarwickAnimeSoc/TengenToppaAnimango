@@ -1,0 +1,11 @@
+// Overrides
+$theme-colors: (
+    "primary": #328CC1,
+    "secondary": #0B3C5D,
+    "success": #0C7C59,
+    "danger": #D64933,
+    "warning": #F9C846,
+);
+
+// Boostrap
+@import "bootstrap4.5.3/scss/bootstrap";

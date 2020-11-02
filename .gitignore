@@ -14,6 +14,9 @@ media/
 # Logging Files
 logs/
 
+# Bootstrap Source
+static_files/scss/bootstrap*
+
 # Sensitive Files
 config/settings.py
 apps/karaoke/management/commands/authdetails.json
