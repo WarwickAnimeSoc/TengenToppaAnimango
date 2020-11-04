@@ -7,7 +7,7 @@ from .models import Item, Request, ArchivedRequest
 
 
 class CreateLoanForm(ActionForm):
-    university_id = forms.CharField()
+    university_id = forms.CharField(required=False)
 
 
 class ItemAdmin(admin.ModelAdmin):
@@ -27,7 +27,8 @@ class ItemAdmin(admin.ModelAdmin):
     )
 
     search_fields = (
-        'parent_series',
+        'parent_series__title_english',
+        'parent_series__title_romaji'
     )
 
     action_form = CreateLoanForm
@@ -38,7 +39,6 @@ class ItemAdmin(admin.ModelAdmin):
     def manual_request(self, request, queryset):
         university_id = request.POST.get('university_id')
         if not university_id:
-            # I can't reach this error case, but i've left it in in case one of the librarians finds a way
             self.message_user(request, 'Please provide the university ID.', messages.ERROR)
         else:
             try:

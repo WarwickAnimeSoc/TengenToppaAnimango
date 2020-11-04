@@ -21,6 +21,3 @@ To build bootstrap with the overwrites used by the site, you will need to copy t
 ## Todo
 
 - Styling and CSS need to be tweaked to look like more than just a generic bootstrap site.
-- Add filtering by media type in the library
-- Add filtering by academic year in the showings
-- Improve navbar for pagination 

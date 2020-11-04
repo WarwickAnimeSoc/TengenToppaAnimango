@@ -11,6 +11,7 @@ from .models import Item
 
 def library_list(request, page):
     query = request.GET.get('query')
+    category = request.GET.get('category')
 
     if query:
         series_list = Series.objects.filter(
@@ -18,6 +19,15 @@ def library_list(request, page):
         ).distinct().order_by('title_english')
     else:
         series_list = Series.objects.filter(item__isnull=False).distinct().order_by('title_english')
+
+    if category == 'manga':
+        series_list = series_list.filter(item__media_type='Manga')
+    elif category == 'ln':
+        series_list = series_list.filter(item__media_type='Light Novel')
+    elif category == 'bd':
+        series_list = series_list.filter(item__media_type='BD')
+    elif category == 'dvd':
+        series_list = series_list.filter(item__media_type='DVD')
 
     paginator = Paginator(series_list, 24)
 
