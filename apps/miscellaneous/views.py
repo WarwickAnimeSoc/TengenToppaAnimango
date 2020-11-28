@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.contrib import messages
 
 from apps.events.models import Event
 from apps.news.models import Article
+from .models import HomeAlert
 
 
 def home(request):
@@ -12,12 +14,22 @@ def home(request):
     upcoming_events = Event.objects.filter(event_start_date__gte=timezone.now()).order_by('event_start_date')
     recent_articles = Article.objects.filter().order_by('-created')
 
+    try:
+        alert = HomeAlert.objects.last()
+    except HomeAlert.DoesNotExist:
+        alert = None
+
     # Set limits here
     ongoing_events = ongoing_events[:3]
     upcoming_events = upcoming_events[:3]
     recent_articles = recent_articles[:3]
 
-    context = {'ongoing_events': ongoing_events, 'upcoming_events': upcoming_events, 'recent_articles': recent_articles}
+    context = {
+        'ongoing_events': ongoing_events,
+        'upcoming_events': upcoming_events,
+        'recent_articles': recent_articles,
+        'alert': alert
+    }
 
     return render(request, 'miscellaneous/home.html', context=context)
 

@@ -14,7 +14,7 @@
             <input type="text" class="form-control" id="queryInput" name="query"
                    placeholder="Search" value="{{ query|default_if_none:'' }}">
             <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="submit">Search</button>
+                <button class="btn btn-primary" type="submit">Search</button>
             </div>
         </div>
     </form>
@@ -47,20 +47,20 @@
             <div class="col-lg-4 col-xl-4 mb-3">
                 <div class="card h-100">
                     <div class="card-body">
-                        <div class="row">
+                        <div class="row h-100">
                             <div class="col-5">
                                 <img class="img-fluid" src="{{ series.cover_link }}" alt="cover">
                             </div>
                             <div class="col flex-column d-flex">
                                 {% if series.title_english %}
                                     <h5 class="card-title">{{ series.title_english }}</h5>
-                                    <h6 class="card-subtitle text-muted">{{ series.title_romaji }}</h6>
                                 {% else %}
                                     <h5 class="card-title">{{ series.title_romaji }}</h5>
                                 {% endif %}
+                                <h6 class="card-subtitle text-muted">{{ series.item_set.all.0.media_type }}</h6>
                                 <div class="flex-grow-1"></div>
                                 <a class="card-link"
-                                   href="{% url 'library:series_view' series_id=series.id %}"><h6>Details</h6>
+                                   href="{% url 'library:series_view' series_id=series.id %}"><h5>Details</h5>
                                 </a>
                             </div>
                         </div>

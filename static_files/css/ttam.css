@@ -20,6 +20,24 @@ body .container {
     width: 32px;
 }
 
+/* Tint card backgrounds */
+.card {
+    background-color: #fafafa;
+}
+
+/* More padding on cards */
+.card-body {
+    padding-left: 2rem;
+}
+
+.card-header {
+    padding-left: 2rem;
+}
+
+.card-footer {
+    padding-left: 2rem;
+}
+
 /* Multi Carousel button centering */
 .multi-carousel-button {
     display: flex !important;
@@ -35,6 +53,11 @@ body .container {
     .multi-carousel-button {
         display: none !important;
     }
+}
+
+/* For the home alert */
+.alert p {
+    margin-bottom: 0;
 }
 
 /* Bootstrap breakpoint overrides */
