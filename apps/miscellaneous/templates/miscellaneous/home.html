@@ -88,37 +88,38 @@
 
     <main class="container flex-grow-1">
     <div class="row mt-5">
-    <div class="col-12 col-sm-8">
-        <h2>News and Announcements</h2>
-        {% for article in recent_articles %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ article.title }}</h5>
-                    <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
-                    <p class="card-text">
-                        {% load martortags %}{{ article.content|safe_markdown|truncatewords:20 }}</p>
-                    <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
-                       class="card-link">Read</a>
-                </div>
-            </div>
-        {% empty %}
-            <h4 class="text-muted">No recent news.</h4>
-        {% endfor %}
-    </div>
-    <div class="col">
-        <div class="row">
-            <div class="col">
-                <h2>Upcoming Events</h2>
-                {% for event in upcoming_events %}
-                    <div class="card mb-3">
-                    <div class="card-body overflow-hidden">
-                        <h5 class="card-title">{{ event.title }}</h5>
-                        <a href="{% url 'events:event_detail' event_id=event.id %}"
-                           class="card-link">Details</a>
+        <div class="col-12 col-sm-8">
+            <h2>News and Announcements</h2>
+            {% for article in recent_articles %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
+                        <p class="card-text">
+                            {% load martortags %}{{ article.content|safe_markdown|truncatewords:20 }}</p>
+                        <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
+                           class="card-link">Read</a>
                     </div>
-                {% empty %}
-                    <h4 class="text-muted">No upcoming events.</h4>
-                {% endfor %}
+                </div>
+            {% empty %}
+                <h4 class="text-muted">No recent news.</h4>
+            {% endfor %}
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    <h2>Upcoming Events</h2>
+                    {% for event in upcoming_events %}
+                        <div class="card mb-3">
+                            <div class="card-body overflow-hidden">
+                                <h5 class="card-title">{{ event.title }}</h5>
+                                <a href="{% url 'events:event_detail' event_id=event.id %}"
+                                   class="card-link">Details</a>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <h4 class="text-muted">No upcoming events.</h4>
+                    {% endfor %}
                 </div>
             </div>
             {% if ongoing_events %}
