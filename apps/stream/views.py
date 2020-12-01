@@ -23,7 +23,7 @@ def viewcount(request):
 def viewtick(request):
     view_counter = ViewCounter.objects.get(id=1)
     token = request.GET.get('token')
-    print(token)
+
     if token:
         try:
             view_object = View.objects.get(token=token)
