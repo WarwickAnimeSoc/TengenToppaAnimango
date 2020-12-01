@@ -8,7 +8,7 @@ class ViewCounter(models.Model):
     name = models.CharField(max_length=20)
 
     def prune(self):
-        cutoff_time = timezone.now() - timedelta(minutes=1)
+        cutoff_time = timezone.now() - timedelta(minutes=2)
         views_to_delete = self.view_set.filter(last_updated__lt=cutoff_time)
         for view in views_to_delete:
             view.delete()
