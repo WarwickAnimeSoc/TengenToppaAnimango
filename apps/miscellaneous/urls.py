@@ -11,6 +11,7 @@ urlpatterns = [
     path('facebook', views.facebook, name='facebook'),
     path('warwicksu', views.warwicksu, name='warwicksu'),
     path('malclub', views.malclub, name='malclub'),
-    path('github', views.github, name='github')
+    path('github', views.github, name='github'),
+    path('streamguide', views.streamguide, name='streamguide')
 ]
 
