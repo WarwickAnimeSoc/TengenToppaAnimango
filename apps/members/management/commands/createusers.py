@@ -131,5 +131,7 @@ class Command(BaseCommand):
             if new_members:
                 create_new_members(new_members, logger)
                 pass
+            print('[SUCCESS] Created {0!s} new members!'.format(len(new_members)))  # For discord bot
         except Exception as e:
+            print('[ERROR] {0!s}'.format(e))   # For discord bot
             logger.exception(e)
