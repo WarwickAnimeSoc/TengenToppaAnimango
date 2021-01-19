@@ -64,9 +64,9 @@ function addScaleImageOnClick() {
 function scaleImage(image) {
     let width = image.style.width;
 
-    if (width === '100%') {
-        image.style.width = '20%';
+    if (width === '20%') {
+        image.style.width = '';
     } else {
-        image.style.width = '100%';
+        image.style.width = '20%';
     }
 }
