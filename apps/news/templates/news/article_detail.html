@@ -11,5 +11,11 @@
         <hr class="my-4">
         <p class="lead">Posted on {{ article.created|date:'d/m/Y' }} by {{ article.created_by.member }}</p>
     </div>
-    <p>{% load martortags %}{{ article.content|safe_markdown }}</p>
+    <div id="article-content">{% load martortags %}{{ article.content|safe_markdown }}</div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(window).on('load', addScaleImageOnClick())
+    </script>
 {% endblock %}

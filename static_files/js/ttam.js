@@ -51,3 +51,22 @@ function multiCarouselPrev() {
     /* Un-hide first hidden element */
     multiCarouselDiv.children(':visible').last().css({display: 'none'})
 }
+
+/* Article image scaling setup */
+/* Adds the scaleImage function to the onclick attribute of each image in the page */
+function addScaleImageOnClick() {
+    let article = $('#article-content')
+    article.find('img').attr('onClick', 'scaleImage(this);').css({width: '20%'});
+}
+
+/* Article view image scaling */
+/* Used to toggle the width of an image when clicked */
+function scaleImage(image) {
+    let width = image.style.width;
+
+    if (width === '100%') {
+        image.style.width = '20%';
+    } else {
+        image.style.width = '100%';
+    }
+}
