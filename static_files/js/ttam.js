@@ -56,7 +56,7 @@ function multiCarouselPrev() {
 /* Adds the scaleImage function to the onclick attribute of each image in the page */
 function addScaleImageOnClick() {
     let article = $('#article-content')
-    article.find('img').attr('onClick', 'scaleImage(this);').css({width: '20%'});
+    article.find('img').attr('onClick', 'scaleImage(this);').css({'width': '20%', 'max-width': '100%', 'cursor': 'pointer'});
 }
 
 /* Article view image scaling */
