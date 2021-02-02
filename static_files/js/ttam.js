@@ -56,17 +56,17 @@ function multiCarouselPrev() {
 /* Adds the scaleImage function to the onclick attribute of each image in the page */
 function addScaleImageOnClick() {
     let article = $('#article-content')
-    article.find('img').attr('onClick', 'scaleImage(this);').css({'width': '20%', 'max-width': '100%', 'cursor': 'pointer'});
+    article.find('img').attr('onClick', 'scaleImage(this);').css({'max-width': '20%', 'cursor': 'pointer'});
 }
 
 /* Article view image scaling */
 /* Used to toggle the width of an image when clicked */
 function scaleImage(image) {
-    let width = image.style.width;
+    let maxWidth = image.style.maxWidth;
 
-    if (width === '20%') {
-        image.style.width = '';
+    if (maxWidth === '20%') {
+        image.style.maxWidth = '100%';
     } else {
-        image.style.width = '20%';
+        image.style.maxWidth = '20%';
     }
 }
