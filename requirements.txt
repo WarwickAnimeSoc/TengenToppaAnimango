@@ -1,4 +1,4 @@
-django==3.1.2
+django==3.1.6
 mysqlclient==1.4.6
 bleach==3.3.0
 pillow==8.0.1
