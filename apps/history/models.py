@@ -12,6 +12,9 @@ def get_year_choices():
 class AcademicYearEntry(models.Model):
     academic_year = models.IntegerField('Academic year starting in', choices=get_year_choices(),
                                         default=datetime.date.today().year)
+
+    title = models.CharField(max_length=110, blank=True)
+
     history = models.TextField()
 
     def __str__(self):
