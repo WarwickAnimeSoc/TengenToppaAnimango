@@ -21,6 +21,4 @@ To build bootstrap with the overwrites used by the site, you will need to copy t
 ## Todo
 
 - Styling and CSS need to be tweaked to look like more than just a generic bootstrap site.
-- Sorting in the library does not hold between pages.
-- Stream viewcounter is broken.
 - (For the live site) The history entries from the old site DB need to be copied over.

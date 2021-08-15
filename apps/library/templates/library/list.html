@@ -83,13 +83,13 @@
                 {% else %}
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'library:library_list' page=1 %}">
+                           href="{% url 'library:library_list' page=1 %}?category={{ category|default_if_none:'all' }}{% if query %}&query={{ query }}{% endif %}">
                             &laquo;
                         </a>
                     </li>
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'library:library_list' page=series_page.previous_page_number %}">
+                           href="{% url 'library:library_list' page=series_page.previous_page_number %}?category={{ category|default_if_none:'all' }}{% if query %}&query={{ query }}{% endif %}">
                             &lt;
                         </a>
                     </li>
@@ -103,7 +103,7 @@
                     {% if series_page.has_previous %}
                         <li class="page-item">
                             <a class="page-link"
-                               href="{% url 'library:library_list' page=series_page.previous_page_number %}">
+                               href="{% url 'library:library_list' page=series_page.previous_page_number %}?category={{ category|default_if_none:'all' }}{% if query %}&query={{ query }}{% endif %}">
                                 {{ series_page.previous_page_number }}
                             </a>
                         </li>
@@ -111,7 +111,7 @@
 
                     <li class="page-item active">
                         <a class="page-link"
-                           href="{% url 'library:library_list' page=series_page.number %}">
+                           href="{% url 'library:library_list' page=series_page.number %}?category={{ category|default_if_none:'all' }}{% if query %}&query={{ query }}{% endif %}">
                             {{ series_page.number }}
                         </a>
                     </li>
@@ -119,7 +119,7 @@
                     {% if series_page.has_next %}
                         <li class="page-item">
                             <a class="page-link"
-                               href="{% url 'library:library_list' page=series_page.next_page_number %}">
+                               href="{% url 'library:library_list' page=series_page.next_page_number %}?category={{ category|default_if_none:'all' }}{% if query %}&query={{ query }}{% endif %}">
                                 {{ series_page.next_page_number }}
                             </a>
                         </li>
@@ -127,7 +127,7 @@
                 {% else %}
                     {% for page in series_page.paginator.page_range %}
                         <li class="page-item {% if forloop.counter == series_page.number %}active{% endif %}">
-                            <a class="page-link" href="{% url 'library:library_list' page=forloop.counter %}">
+                            <a class="page-link" href="{% url 'library:library_list' page=forloop.counter %}?category={{ category|default_if_none:'all' }}{% if query %}&query={{ query }}{% endif %}">
                                 {{ forloop.counter }}
                             </a>
                         </li>
@@ -144,13 +144,13 @@
                 {% else %}
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'library:library_list' page=series_page.next_page_number %}">
+                           href="{% url 'library:library_list' page=series_page.next_page_number %}?category={{ category|default_if_none:'all' }}{% if query %}&query={{ query }}{% endif %}">
                             &gt;
                         </a>
                     </li>
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'library:library_list' page=series_page.paginator.num_pages %}">
+                           href="{% url 'library:library_list' page=series_page.paginator.num_pages %}?category={{ category|default_if_none:'all' }}{% if query %}&query={{ query }}{% endif %}">
                             &raquo;
                         </a>
                     </li>

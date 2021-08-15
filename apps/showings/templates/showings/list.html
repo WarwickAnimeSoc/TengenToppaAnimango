@@ -88,13 +88,13 @@
                 {% else %}
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'showings:showings' page=1 %}">
+                           href="{% url 'showings:showings' page=1 %}{% if query or academic_year %}?academic_year={{ academic_year|default_if_none:'' }}&query={{ query }}{% endif %}">
                             &laquo;
                         </a>
                     </li>
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'showings:showings' page=showings_page.previous_page_number %}">
+                           href="{% url 'showings:showings' page=showings_page.previous_page_number %}{% if query or academic_year %}?academic_year={{ academic_year|default_if_none:'' }}&query={{ query }}{% endif %}">
                             &lt;
                         </a>
                     </li>
@@ -108,7 +108,7 @@
                     {% if showings_page.has_previous %}
                         <li class="page-item">
                             <a class="page-link"
-                               href="{% url 'showings:showings' page=showings_page.previous_page_number %}">
+                               href="{% url 'showings:showings' page=showings_page.previous_page_number %}{% if query or academic_year %}?academic_year={{ academic_year|default_if_none:'' }}&query={{ query }}{% endif %}">
                                 {{ showings_page.previous_page_number }}
                             </a>
                         </li>
@@ -116,7 +116,7 @@
 
                     <li class="page-item active">
                         <a class="page-link"
-                           href="{% url 'showings:showings' page=showings_page.number %}">
+                           href="{% url 'showings:showings' page=showings_page.number %}{% if query or academic_year %}?academic_year={{ academic_year|default_if_none:'' }}&query={{ query }}{% endif %}">
                             {{ showings_page.number }}
                         </a>
                     </li>
@@ -124,7 +124,7 @@
                     {% if showings_page.has_next %}
                         <li class="page-item">
                             <a class="page-link"
-                               href="{% url 'showings:showings' page=showings_page.next_page_number %}">
+                               href="{% url 'showings:showings' page=showings_page.next_page_number %}{% if query or academic_year %}?academic_year={{ academic_year|default_if_none:'' }}&query={{ query }}{% endif %}">
                                 {{ showings_page.next_page_number }}
                             </a>
                         </li>
@@ -132,7 +132,7 @@
                 {% else %}
                     {% for page in showings_page.paginator.page_range %}
                         <li class="page-item {% if forloop.counter == showings_page.number %}active{% endif %}">
-                            <a class="page-link" href="{% url 'showings:showings' page=forloop.counter %}">
+                            <a class="page-link" href="{% url 'showings:showings' page=forloop.counter %}{% if query or academic_year %}?academic_year={{ academic_year|default_if_none:'' }}&query={{ query }}{% endif %}">
                                 {{ forloop.counter }}
                             </a>
                         </li>
@@ -149,13 +149,13 @@
                 {% else %}
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'showings:showings' page=showings_page.next_page_number %}">
+                           href="{% url 'showings:showings' page=showings_page.next_page_number %}{% if query or academic_year %}?academic_year={{ academic_year|default_if_none:'' }}&query={{ query }}{% endif %}">
                             &gt;
                         </a>
                     </li>
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'showings:showings' page=showings_page.paginator.num_pages %}">
+                           href="{% url 'showings:showings' page=showings_page.paginator.num_pages %}{% if query or academic_year %}?academic_year={{ academic_year|default_if_none:'' }}&query={{ query }}{% endif %}">
                             &raquo;
                         </a>
                     </li>

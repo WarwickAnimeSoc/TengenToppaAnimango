@@ -36,7 +36,15 @@ def library_list(request, page):
     except InvalidPage:
         context_series_page = paginator.page(1)
 
-    return render(request, 'library/list.html', context={'query': query, 'series_page': context_series_page})
+    return render(
+        request,
+        'library/list.html',
+        context={
+            'query': query,
+            'category': category,
+            'series_page': context_series_page
+        }
+    )
 
 
 def series_view(request, series_id):
