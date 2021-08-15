@@ -18,7 +18,10 @@ class AcademicYearEntry(models.Model):
     history = models.TextField()
 
     def __str__(self):
-        return 'Academic year {0}/{1}'.format(self.academic_year, self.academic_year + 1)
+        if self.title:
+            return '{0} ({1}/{2})'.format(self.title, self.academic_year, self.academic_year + 1)
+        else:
+            return 'Academic year {0}/{1}'.format(self.academic_year, self.academic_year + 1)
 
     class Meta:
         verbose_name_plural = 'Academic Year Entries'
