@@ -7,7 +7,7 @@ from .models import ViewCounter, View
 
 def stream(request):
     hls_stream_url = settings.HLS_STREAM_URL
-    return render(request, 'stream/stream.html', context={'stream_source': hls_stream_url})
+    return render(request, 'stream/templates/stream/stream.html', context={'stream_source': hls_stream_url})
 
 
 def viewcount(request):
@@ -15,7 +15,7 @@ def viewcount(request):
         view_counter = ViewCounter.objects.get(id=1)
         view_counter.prune()
         view_counter.save()
-        return render(request, 'stream/viewcount.html', context={'views': view_counter.count()})
+        return render(request, 'stream/templates/stream/viewcount.html', context={'views': view_counter.count()})
     else:
         return render(request, '403.html')
 

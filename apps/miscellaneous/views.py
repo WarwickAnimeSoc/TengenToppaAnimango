@@ -62,15 +62,9 @@ def malclub(request):
 
 def github(request):
     # Redirects to the Github repo for the site
-    return redirect('https://github.com/Danalite/TengenToppaAnimango')
+    return redirect('https://github.com/WarwickAnimeSoc/TengenToppaAnimango')
 
 
-def streamguide(request):
-    # Redirects to the discord/stream guide
-    return redirect('https://docs.google.com/document/d/1KsUpA6euakmBq09rXux_HK0TTEog45C49pByP4iVjCg/edit')
-
-
-def election(request):
-    # Redirects to the article on the elections. The URL probably shouldn't be hardcoded, but this
-    # is temporary so it should be fine.
-    return redirect('https://animesoc.co.uk/news/article/87/2021-exec-elections')
+def welcomeweek(request):
+    # Welcome Week 2021 landing page. Temporary.
+    return render(request, 'miscellaneous/welcome_week_landing.html')

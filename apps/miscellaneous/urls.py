@@ -12,7 +12,6 @@ urlpatterns = [
     path('warwicksu', views.warwicksu, name='warwicksu'),
     path('malclub', views.malclub, name='malclub'),
     path('github', views.github, name='github'),
-    path('streamguide', views.streamguide, name='streamguide'),
-    path('election', views.election, name='election')
+    path('welcomeweek2021', views.welcomeweek, name='welcomeweek2021')
 ]
 
