@@ -20,7 +20,7 @@ class Song(models.Model):
 class Request(models.Model):
     title = models.CharField(max_length=200, blank=False)
     artist = models.CharField(max_length=200, blank=False)
-    anilist_url = models.URLField()
+    anilist_url = models.URLField(blank=True)
     ultrastar_url = models.URLField(blank=False, unique=True)
 
     def __str__(self):
