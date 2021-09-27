@@ -36,14 +36,14 @@
             <label class="form-check-label" for="fullnameCheckbox">Show full name instead of nickname</label>
         </div>
         <div class="form-group">
-            <label for="discordInput">Discord Tag</label>
+            <label for="discordInput">Discord Username + Tag</label>
             <input type="text" class="form-control {% if form.discord_tag.errors %}is-invalid{% endif %}"
-                   id="discordInput" name="discord_tag" placeholder="Discord Tag"
+                   id="discordInput" name="discord_tag" placeholder="Discord Username + Tag"
                    value="{% if form %}{{ form.discord_tag.value }}{% else %}{{ user.member.discord_tag }}{% endif %}">
             {% for error in form.discord_tag.errors %}
                 <div class="invalid-feedback">{{ error }}</div>
             {% endfor %}
-            <small id="discordHelp" class="form-text text-muted">Your discord tag, this is used to give you the member
+            <small id="discordHelp" class="form-text text-muted">Your discord username and tag (e.g <code>Chiyoko#1000</code>), this is used to give you the member
                 role on the society discord server.</small>
         </div>
         <div class="form-group">
