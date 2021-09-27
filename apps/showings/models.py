@@ -10,8 +10,8 @@ from .anilist_api import populate_series_item
 # Removed the wiki_link field from the model as it's not very useful. MAL and Anilist are more than enough.
 class Series(models.Model):
     auto_populate_data = models.BooleanField(default=False, help_text='Check this to use AniList to populate fields.')
-    title_romaji = models.CharField(max_length=110, blank=True)
-    title_english = models.CharField(max_length=110, blank=True)
+    title_romaji = models.CharField(max_length=220, blank=True)
+    title_english = models.CharField(max_length=220, blank=True)
     api_id = models.IntegerField(unique=True, null=True, blank=True)
     series_type = models.CharField(max_length=10, blank=True)
     synopsis = models.TextField(blank=True)
