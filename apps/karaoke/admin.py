@@ -64,6 +64,8 @@ class SongAdmin(admin.ModelAdmin):
         'title'
     )
 
+    raw_id_fields = ['related_series']
+
 
 admin.site.register(Song, SongAdmin)
 admin.site.register(Request, RequestAdmin)
