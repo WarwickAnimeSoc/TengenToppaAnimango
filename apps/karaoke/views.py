@@ -29,7 +29,7 @@ def karaoke_list(request, page):
 
 
 def request_song(request):
-    requests_list = Request.objects.filter().distinct().order_by("title")
+    requests_list = Request.objects.filter().distinct().order_by('id')
     context = {'requests': requests_list}
 
     if request.method == 'POST':
