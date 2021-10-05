@@ -63,8 +63,3 @@ def malclub(request):
 def github(request):
     # Redirects to the Github repo for the site
     return redirect('https://github.com/WarwickAnimeSoc/TengenToppaAnimango')
-
-
-def welcomeweek(request):
-    # Welcome Week 2021 landing page. Temporary.
-    return render(request, 'miscellaneous/welcome_week_landing.html')
