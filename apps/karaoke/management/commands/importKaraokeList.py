@@ -22,8 +22,15 @@ def get_spreadsheet_data():
     sheet = client.open("Karaoke List Import").sheet1
 
     # Return the values that we need for later
-    # [0] = Name of artist, [1] = Name of song, [2] = Anilist link of related Anime (if it exists)
-    sheet_data = [sheet.col_values(1), sheet.col_values(2), sheet.col_values(3)]
+    # [0] = Name of artist, [1] = Name of song, [2] = Anilist link of related Anime (if it exists),
+    # [4] = Error date, [5] = Already imported check
+    sheet_data = [
+        sheet.col_values(1),
+        sheet.col_values(2),
+        sheet.col_values(3),
+        sheet.col_values(4),
+        sheet.col_values(5)
+    ]
     return sheet_data
 
 
@@ -50,6 +57,9 @@ class Command(BaseCommand):
 
         # Iterate through all songs
         for i in range(0, len(sheet_data[0])):
+            if sheet_data[4] == 'y':
+                continue
+
             song_artist = sheet_data[0][i]
             song_title = sheet_data[1][i]
             try:
@@ -87,6 +97,7 @@ class Command(BaseCommand):
                     song.related_series = show
                 try:
                     song.save()
+                    update_sheet(5, i + 1, 'y')
                 except IntegrityError as e:
                     print("Failed to add {0}-{1} -> Duplicate entry".format(song_artist, song_title))
             except RuntimeError as e:
