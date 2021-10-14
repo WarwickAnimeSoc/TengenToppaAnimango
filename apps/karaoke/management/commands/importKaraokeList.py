@@ -57,7 +57,7 @@ class Command(BaseCommand):
 
         # Iterate through all songs
         for i in range(0, len(sheet_data[0])):
-            if sheet_data[4] == 'y':
+            if sheet_data[4][i] == 'y':
                 continue
 
             song_artist = sheet_data[0][i]
