@@ -57,7 +57,12 @@ class Command(BaseCommand):
 
         # Iterate through all songs
         for i in range(0, len(sheet_data[0])):
-            if sheet_data[4][i] == 'y':
+            try:
+                already_imported = True if sheet_data[4][i] == 'y' else False
+            except IndexError:
+                already_imported = False
+
+            if already_imported:
                 continue
 
             song_artist = sheet_data[0][i]
