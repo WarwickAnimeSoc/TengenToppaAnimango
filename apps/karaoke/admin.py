@@ -6,10 +6,6 @@ from .models import Song, Request, ArchivedRequest
 
 
 class RequestAdmin(admin.ModelAdmin):
-    readonly_fields = (
-        'ultrastar_url',
-    )
-
     list_display = (
         'title',
         'artist',
