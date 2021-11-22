@@ -94,6 +94,9 @@ def create_new_members(members_list, logger):
                 last_name=member['last_name']
             )
             user.save()
+        except ValueError:
+            # Need this to skip past Chih's account.
+            continue
         except Exception as e:
             raise e
 
