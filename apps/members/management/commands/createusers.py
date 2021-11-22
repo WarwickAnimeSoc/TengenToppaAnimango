@@ -52,6 +52,10 @@ def validate_ids(members_list):
     for member in members_list:
         warwick_id = member['warwick_id']
         # A valid Warwick ID is a 7 digit integer
+        if warwick_id is None:
+            # Case where a non-student joins the society
+            return
+
         if len(warwick_id) != 7:
             raise ValueError('Warwick IDs should be a 7 digit integer! {0!s} is not valid'.format(warwick_id))
 
