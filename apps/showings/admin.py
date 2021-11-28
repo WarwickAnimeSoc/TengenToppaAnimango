@@ -8,7 +8,7 @@ from .models import Series, Showing, Show
 class SeriesForm(forms.ModelForm):
     anilist_link_validator = RegexValidator(r'^https:\/\/anilist\.co\/anime\/[0-9]*\/?.*$',
                                             message='Invalid anilist link.')
-    anilist_link = forms.URLField(label='Anilist link', validators=[anilist_link_validator])
+    anilist_link = forms.URLField(label='Anilist link', validators=[anilist_link_validator], required=False)
 
 
 class SeriesAdmin(admin.ModelAdmin):
