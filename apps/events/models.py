@@ -53,15 +53,9 @@ class Event(models.Model):
         # This method returns True if it is past the event signups open date. However, this does not mean that it will
         # be possible to sign up, as signups may have closed. To check if signups are possible, signups_closed() must
         # also be used.
-        if not self.signups_open_date:
-            return False
-
         return self.signups_open_date < timezone.now()
 
     def signups_closed(self):
-        if not self.signups_close_date:
-            return False
-
         return self.signups_close_date < timezone.now()
 
     def one_day_event(self):
