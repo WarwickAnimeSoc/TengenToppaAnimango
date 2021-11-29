@@ -45,6 +45,13 @@ def event_detail(request, event_id):
     # already_signed_up has to be set outside the template, as it requires a parameter to return a result.
     already_signed_up = request.user.is_authenticated and event.already_signed_up(request.user.member)
     context = {'event': event, 'signups': signups, 'already_signed_up': already_signed_up}
+
+    # Exec are allowed to sign-up before the event has opened to everyone else.
+    if not event.signups_open() and request.user.is_staff:
+        messages.add_message(request, messages.WARNING,
+                             'Signups for this event are not yet open to members, however, as Exec you can signup '
+                             'early.')
+
     if request.method == 'POST':
         form = SignupForm(request.POST)
         context['form'] = form

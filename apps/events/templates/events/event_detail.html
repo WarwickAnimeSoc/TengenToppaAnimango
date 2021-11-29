@@ -20,7 +20,7 @@
         <small class="text-muted mb-5">{{ event.signup_count }} places filled</small>
         {% if event.signups_closed %}
             <h4>Signups for this event have closed</h4>
-        {% elif not event.signups_open %}
+        {% elif not event.signups_open and not user.is_staff %}
             <h4>Signups for this event will open {{ event.nice_signups_date }}</h4>
         {% elif already_signed_up %}
             <h4>You have signed up for this event</h4>
