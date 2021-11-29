@@ -49,8 +49,8 @@ def event_detail(request, event_id):
     # Exec are allowed to sign-up before the event has opened to everyone else.
     if not event.signups_open() and request.user.is_staff:
         messages.add_message(request, messages.WARNING,
-                             'Signups for this event are not yet open to members, however, as Exec you can signup '
-                             'early.')
+                             'Signups for this event are not yet open to regular members.'
+                             ' However, as Exec you can signup early.')
 
     if request.method == 'POST':
         form = SignupForm(request.POST)
