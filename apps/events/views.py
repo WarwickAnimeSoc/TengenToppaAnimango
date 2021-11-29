@@ -47,7 +47,7 @@ def event_detail(request, event_id):
     context = {'event': event, 'signups': signups, 'already_signed_up': already_signed_up}
 
     # Exec are allowed to sign-up before the event has opened to everyone else.
-    if event.signups_open_date and event.signups_open() and request.user.is_staff:
+    if event.signups_open_date and not event.signups_open() and request.user.is_staff:
         messages.add_message(request, messages.WARNING,
                              'Signups for this event are not yet open to regular members.'
                              ' However, as Exec you can signup early.')
