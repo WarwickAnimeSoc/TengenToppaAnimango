@@ -64,7 +64,7 @@ def event_detail(request, event_id):
                 messages.add_message(request, messages.ERROR, 'You have already signed up for this event')
             elif event.signups_closed():
                 messages.add_message(request, messages.ERROR, 'Signups for this event have closed')
-            elif not event.signups_open():
+            elif not event.signups_open() and not request.user.is_staff:
                 messages.add_message(request, messages.ERROR, 'Signups for this event have not opened yet')
             elif not form.is_valid():
                 messages.add_message(request, messages.ERROR, 'Unable to sign you up, please correct the issues below')
