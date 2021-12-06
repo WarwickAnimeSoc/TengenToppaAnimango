@@ -8,7 +8,7 @@ class Article(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(blank=True, editable=False)
+    slug = models.SlugField(blank=True, editable=False, max_length=200)
 
     # Renamed "blog" category from aniMango to "other" as that's a more accurate description of the few articles that
     # will be posted there.
