@@ -57,7 +57,13 @@
                             {% endif %}
                     >
                     <div class="media-body">
-                        <h5 class="mt-0 mb-1">{{ signup.member }}</h5>
+                        <h5 class="mt-0 mb-1">
+                            {{ signup.member }}
+                            {% if user.is_staff and signup.member.discord_tag %}
+                                - ({{ signup.member.discord_tag }})
+                            {% elif user.is_staff %}
+                                - ({{ signup.member.user.username }})
+                            {% endif %}</h5>
                         {{ signup.comment }}
                     </div>
                 </li>
