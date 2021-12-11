@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.utils import timezone
 from django.contrib import messages
 
@@ -63,3 +63,8 @@ def malclub(request):
 def github(request):
     # Redirects to the Github repo for the site
     return redirect('https://github.com/WarwickAnimeSoc/TengenToppaAnimango')
+
+
+def karaoke_list(request):
+    # Redirects to the karaoke list, used as a short link for writing on the board at events
+    return redirect(reverse('karaoke:karaoke_list', args=[1]))
