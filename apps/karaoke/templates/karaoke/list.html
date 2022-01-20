@@ -13,9 +13,9 @@
                 <label for="querySort"></label>
                 <select id="querySort" name="query_sort" class="form-control">
                     <option disabled selected>Sort By</option>
-                    <option value="date">Newest</option>
-                    <option value="title">Title</option>
-                    <option value="artist">Artist</option>
+                    <option {% if query_sort == 'date' %}selected {% endif %}value="date">Newest</option>
+                    <option {% if query_sort == 'title' %}selected {% endif %}value="title">Title</option>
+                    <option {% if query_sort == 'artist' %}selected {% endif %}value="artist">Artist</option>
                 </select>
             </div>
             <label for="queryInput"></label>
