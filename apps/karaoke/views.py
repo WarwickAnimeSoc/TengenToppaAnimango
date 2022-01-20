@@ -9,14 +9,26 @@ from .forms import KaraokeRequestForm
 
 def karaoke_list(request, page):
     query = request.GET.get('query')
+    try:
+        sort = request.GET.get('query_sort', 'title')
+    except (ValueError, TypeError):
+        sort = 'title'
+
+    # Map sort to fields, raw sort value is not used to prevent users from entering their own fields to sort by.
+    if sort == 'artist':
+        mapped_sort = 'artist'
+    elif sort == 'date':
+        mapped_sort = '-id'
+    else:
+        mapped_sort = 'title'
 
     if query:
         songs_list = Song.objects.filter(
             Q(title__icontains=query) | Q(artist__icontains=query) | Q(related_series__title_english__icontains=query)
             | Q(related_series__title_romaji__icontains=query)
-        ).distinct().order_by('title')
+        ).distinct().order_by(mapped_sort)
     else:
-        songs_list = Song.objects.filter().distinct().order_by('title')
+        songs_list = Song.objects.filter().distinct().order_by(mapped_sort)
 
     paginator = Paginator(songs_list, 24)
 
@@ -25,7 +37,13 @@ def karaoke_list(request, page):
     except InvalidPage:
         context_songs_page = paginator.page(1)
 
-    return render(request, 'karaoke/list.html', context={'query': query, 'songs_page': context_songs_page})
+    context = {
+        'query': query,
+        'query_sort': sort,
+        'songs_page': context_songs_page
+    }
+
+    return render(request, 'karaoke/list.html', context=context)
 
 
 def request_song(request):
