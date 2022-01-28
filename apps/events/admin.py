@@ -13,7 +13,7 @@ class PropagateEventForm(ActionForm):
     propagate_weeks_number = forms.CharField(required=False)
 
 
-class SignupInline(admin.TabularInline):
+class SignupInline(admin.StackedInline):
     model = Signup
     fields = ['member', 'comment', 'verified']
     readonly_fields = ['member', 'comment']
