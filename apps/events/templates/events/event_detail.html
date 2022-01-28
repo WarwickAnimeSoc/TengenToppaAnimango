@@ -48,7 +48,7 @@
         <ul class="list-unstyled">
             {% load static %}
             {% for signup in signups %}
-                <li class="media mt-3">
+                <li class="media mt-3 mb-3">
                     <img alt="Avatar" class="mr-3 image-signup-avatar rounded"
                             {% if signup.member.avatar_image %}
                          src="{{ signup.member.avatar_image.url }}"
@@ -57,13 +57,10 @@
                             {% endif %}
                     >
                     <div class="media-body">
-                        <h5 class="mt-0 mb-1">
-                            {{ signup.member }}
-                            {% if user.is_staff and signup.member.discord_tag %}
-                                - ({{ signup.member.discord_tag }})
-                            {% elif user.is_staff %}
-                                - ({{ signup.member.user.username }})
-                            {% endif %}</h5>
+                        <h5 class="mt-0 mb-1 {% if signup.verified %} text-success {% else %} text-warning {% endif %}">{{ signup.member }}</h5>
+                        {% if user.is_staff %}
+                            <p class="small text-muted mb-0">{{ signup.member.user.get_full_name }} - {{ signup.member.discord_tag }} - {{ signup.member.user.email }}</p>
+                        {% endif %}
                         {{ signup.comment }}
                     </div>
                 </li>

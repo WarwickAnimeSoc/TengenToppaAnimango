@@ -46,6 +46,11 @@ def event_detail(request, event_id):
     already_signed_up = request.user.is_authenticated and event.already_signed_up(request.user.member)
     context = {'event': event, 'signups': signups, 'already_signed_up': already_signed_up}
 
+    if already_signed_up and not event.user_is_verified(request.user.member):
+        messages.add_message(request, messages.WARNING,
+                             'Your signup for this event has not been confirmed!'
+                             ' Please read the event description to find out what you need to do.')
+
     # Exec are allowed to sign-up before the event has opened to everyone else.
     if event.signups_open_date and not event.signups_open() and request.user.is_staff:
         messages.add_message(request, messages.WARNING,
@@ -72,7 +77,8 @@ def event_detail(request, event_id):
                 signup = Signup(member=request.user.member, event=event, comment=form.cleaned_data['signup_comment'],
                                 created=timezone.now())
                 signup.save()
-                messages.add_message(request, messages.SUCCESS, 'You have been signed up')
+                messages.add_message(request, messages.SUCCESS, 'You have been signed up, however you will still need'
+                                     ' to have this confirmed by the Exec.')
                 context['already_signed_up'] = True
             return render(request, 'events/event_detail.html', context=context)
         else:

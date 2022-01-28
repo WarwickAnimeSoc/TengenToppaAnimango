@@ -13,6 +13,13 @@ class PropagateEventForm(ActionForm):
     propagate_weeks_number = forms.CharField(required=False)
 
 
+class SignupInline(admin.TabularInline):
+    model = Signup
+    fields = ['member', 'comment', 'verified']
+    readonly_fields = ['member', 'comment']
+    extra = 0
+
+
 class EventForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(EventForm, self).clean()
@@ -47,6 +54,8 @@ class EventAdmin(admin.ModelAdmin):
     }
 
     form = EventForm
+
+    inlines = [SignupInline]
 
     list_display = (
         'title',

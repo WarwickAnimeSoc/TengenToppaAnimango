@@ -1,6 +1,8 @@
 from django.db import models
+from django.conf import settings
 from django.template.defaultfilters import date as django_date
 from django.utils import timezone, dateformat
+from django.core.mail import send_mail
 
 from apps.members.models import Member
 
@@ -45,6 +47,14 @@ class Event(models.Model):
 
     def already_signed_up(self, member):
         return self.signup_set.filter(member=member).exists()
+
+    def user_is_verified(self, member):
+        signups = self.signup_set.filter(member=member)
+        if signups:
+            signup = signups[0]
+            return signup.verified
+        else:
+            return False
 
     def signup_count(self):
         return str(self.signup_set.count()) + '/' + str(self.maximum_signups)
@@ -97,6 +107,24 @@ class Signup(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     comment = models.CharField(max_length=200, blank=True)
     created = models.DateTimeField()
+    verified = models.BooleanField(default=False)
+    notified = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.member) + ' signup for ' + str(self.event)
+
+    def save(self, *args, **kwargs):
+        if self.verified and not self.notified:
+            when_string = self.event.nice_when_descriptor()
+            when_string = when_string[0].lower() + when_string[1:]
+            subject = 'Signup confirmation for: {0}'.format(self.event.title)
+            message = ('Hi {0},\n\n'
+                       'Your payment has been received (if applicable) and '
+                       'your signup for the event "{1}" taking place {2} has been confirmed.\n\n'
+                       'Regards,\n' 
+                       'Warwick Anime and Manga Society\n\n').format(
+                        str(self.member), self.event.title, when_string)
+            send_mail(subject, message, settings.EMAIL_HOST_USER, [self.member.user.email], fail_silently=False)
+            self.notified = True
+
+        super(Signup, self).save(*args, **kwargs)
