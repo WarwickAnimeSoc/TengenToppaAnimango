@@ -62,13 +62,13 @@
                 {% else %}
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'karaoke:karaoke_list' page=1 %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query }}{% endif %}">
+                           href="{% url 'karaoke:karaoke_list' page=1 %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query|default_if_none:'' }}{% endif %}">
                             &laquo;
                         </a>
                     </li>
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'karaoke:karaoke_list' page=songs_page.previous_page_number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query }}{% endif %}">
+                           href="{% url 'karaoke:karaoke_list' page=songs_page.previous_page_number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query|default_if_none:'' }}{% endif %}">
                             &lt;
                         </a>
                     </li>
@@ -82,7 +82,7 @@
                     {% if songs_page.has_previous %}
                         <li class="page-item">
                             <a class="page-link"
-                               href="{% url 'karaoke:karaoke_list' page=songs_page.previous_page_number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query }}{% endif %}">
+                               href="{% url 'karaoke:karaoke_list' page=songs_page.previous_page_number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query|default_if_none:'' }}{% endif %}">
                                 {{ songs_page.previous_page_number }}
                             </a>
                         </li>
@@ -90,7 +90,7 @@
 
                     <li class="page-item active">
                         <a class="page-link"
-                           href="{% url 'karaoke:karaoke_list' page=songs_page.number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query }}{% endif %}">
+                           href="{% url 'karaoke:karaoke_list' page=songs_page.number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query|default_if_none:'' }}{% endif %}">
                             {{ songs_page.number }}
                         </a>
                     </li>
@@ -98,7 +98,7 @@
                     {% if songs_page.has_next %}
                         <li class="page-item">
                             <a class="page-link"
-                               href="{% url 'karaoke:karaoke_list' page=songs_page.next_page_number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query }}{% endif %}">
+                               href="{% url 'karaoke:karaoke_list' page=songs_page.next_page_number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query|default_if_none:'' }}{% endif %}">
                                 {{ songs_page.next_page_number }}
                             </a>
                         </li>
@@ -106,7 +106,7 @@
                 {% else %}
                     {% for page in songs_page.paginator.page_range %}
                         <li class="page-item {% if forloop.counter == songs_page.number %}active{% endif %}">
-                            <a class="page-link" href="{% url 'karaoke:karaoke_list' page=forloop.counter %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query }}{% endif %}">
+                            <a class="page-link" href="{% url 'karaoke:karaoke_list' page=forloop.counter %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query|default_if_none:'' }}{% endif %}">
                                 {{ forloop.counter }}
                             </a>
                         </li>
@@ -123,13 +123,13 @@
                 {% else %}
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'karaoke:karaoke_list' page=songs_page.next_page_number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query }}{% endif %}">
+                           href="{% url 'karaoke:karaoke_list' page=songs_page.next_page_number %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query|default_if_none:'' }}{% endif %}">
                             &gt;
                         </a>
                     </li>
                     <li class="page-item">
                         <a class="page-link"
-                           href="{% url 'karaoke:karaoke_list' page=songs_page.paginator.num_pages %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query }}{% endif %}">
+                           href="{% url 'karaoke:karaoke_list' page=songs_page.paginator.num_pages %}{% if query or query_sort %}?query_sort={{ query_sort }}&query={{ query|default_if_none:'' }}{% endif %}">
                             &raquo;
                         </a>
                     </li>
