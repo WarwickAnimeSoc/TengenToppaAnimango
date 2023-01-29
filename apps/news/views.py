@@ -11,7 +11,7 @@ def news_listing(request, category, page):
         articles = Article.objects.filter(article_type=category).order_by('-created')
 
     if not request.user.is_authenticated:
-        articles = articles.filter(members_only=False)
+        articles = articles.filter(members_only=False).order_by('-created')
 
     paginator = Paginator(articles, 12)
     try:

@@ -105,6 +105,7 @@
                 <h4 class="text-muted">No recent news.</h4>
             {% endfor %}
         </div>
+        {% if user.is_authenticated %}
         <div class="col">
             <div class="row">
                 <div class="col">
@@ -139,6 +140,7 @@
                 </div>
             {% endif %}
         </div>
+        {% endif %}
     </div>
 {% endblock %}
 

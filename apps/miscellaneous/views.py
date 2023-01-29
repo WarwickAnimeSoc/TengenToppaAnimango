@@ -19,6 +19,9 @@ def home(request):
     except HomeAlert.DoesNotExist:
         alert = None
 
+    if not request.user.is_authenticated:
+        recent_articles = recent_articles.filter(members_only=False).order_by('-created')
+
     # Set limits here
     ongoing_events = ongoing_events[:3]
     upcoming_events = upcoming_events[:3]
