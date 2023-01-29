@@ -8,10 +8,12 @@ from .models import Event, Signup
 from .forms import SignupForm
 
 
+@login_required
 def upcoming_events(request, page):
     return render(request, 'events/list.html', get_event_context(page, 'Upcoming'))
 
 
+@login_required
 def previous_events(request, page):
     return render(request, 'events/list.html', get_event_context(page, 'Previous'))
 
@@ -39,6 +41,7 @@ def get_event_context(paginator_page, event_type):
     return {'ongoing_events': ongoing_events, 'events_page': context_events_page, 'events_type': event_type}
 
 
+@login_required
 def event_detail(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     signups = Signup.objects.filter(event=event).order_by("-created")
