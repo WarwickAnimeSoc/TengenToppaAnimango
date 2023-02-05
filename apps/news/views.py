@@ -25,6 +25,6 @@ def news_listing(request, category, page):
 def article_detail(request, article_id, article_slug):
     article = get_object_or_404(Article, id=article_id)
     if article.members_only and not request.user.is_authenticated:
-        return redirect('members:login_view')
+        return redirect('members:login')
 
     return render(request, 'news/article_detail.html', context={'article': article})
