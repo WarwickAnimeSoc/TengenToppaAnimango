@@ -5,253 +5,312 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="mt-5 mb-3">How to map a song for karaoke</h1>
-    <p><i><a href="https://pastebin.com/WfZTmEnC">Original Guide</a> by Zoggoth</i></p>
+<h1>Karaoke Mapping Guide 2</h1>
+<p>
+<a href="https://pastebin.com/WfZTmEnC">Original guide </a>by Zoggoth. Updated in 2023.
+</p>
+<p>
+<hr>
+</p>
+<p>
+To be able to sing a song at karaoke it needs to have been made into a Karaoke map, specifically one in the Ultrastar format.
+</p>
+<p>
+We’ve written a guide on how to create a map to help with the process. There’s generally 2 routes that your map creation will take:
+</p>
+<ul>
 
-    <p>You'll work out you're own way of doing stuff. I've been pretty specific about how I do it since I know
-        exactly how and why I do everything but I'm sure everyone has a slightly different way that works best
-        for them.</p>
+<li>Karaluxer (Easy Mode): You can convert and tweak a map from the huge Kara.moe karaoke database.
 
-    <p>Mapping takes approximately 1 hour per minute of song you want to map (repetitive songs are probably faster,
-        you'll be slower while you're learning).</p>
+<li>Manual Mapping: For songs that aren’t already on Kara.moe, will take about 1 hour per 1 minute of song.
+</li>
+</ul>
+<p>
+<hr>
+</p>
+<h2>Required Programs :</h2>
 
-    <h5>Programs needed:</h5>
-    <ul>
-        <li><a href="https://people.umass.edu/jvight/SongEasy/">
-            SongEasy
-        </a>: It plays back the song and you tap out the rhythm to place lyrics. Easiest way to get a base to
-            work with.
-        </li>
-        <li><a href="https://usdx.eu/">
-            UltraStar Deluxe
-        </a>: Karaoke program that comes with an editor
-        </li>
-    </ul>
 
-    <h5>Optional programs:</h5>
-    <ul>
-        <li>If you're using a different karaoke program to play the song, you'll want that for testing. At the
-            society events we use <a href="https://www.vocaluxe.org/">Vocaluxe</a>.
-        </li>
-        <li>If you're using a video, something to extract the audio from it so they sync up perfectly (I use
-            <a href="https://www.audacityteam.org/">Audacity</a> and normalise the audio at the same time)
-        </li>
-    </ul>
+<p>
+There are several Ultrastar editors available however most people use <a href="https://yass-along.com/">Yass</a>. Regardless of which path you take to map (Manual or Karaluxer) you should have Yass. You should also have Vocaluxe installed to <strong>test that your maps work before sending them in to the AV</strong>.
+</p>
+<p>
+To convert songs from Kara.moe you will need <a href="https://github.com/WarwickAnimeSoc/Karaluxer">Karaluxer</a>.
+</p>
+<p>
+If you are mapping by hand then using <a href="https://sites.google.com/view/songeasy/home">SongEasy</a> to get a base for the song can help speed up the process. SongEasy lets you tap out the rhythm of the song to place lyrics.
+</p>
+<p>
+You’ll also need some way to get an audio file from a video so you can sync the song and background video perfectly, for this you can use Audacity or FFMPEG.
+</p>
+<p>
+If you struggle to set the pitches of the notes yourself you can use <a href="https://github.com/paradigmn/ultrastar_pitch">Ultrastar-Pitch</a>, which does this with AI (to mixed results).
+</p>
+<p>
+<hr>
+</p>
+<h2>Karaluxer Route:</h2>
 
-    <h5>Step 1: Making the basic file</h5>
-    <ul>
-        <li>Obtain a copy of your song (SongEasy likes mp3, ogg & wav, but others might work)</li>
-        <li>
-            Obtain a Background Image (appears during play), Cover Image (appears on song select)
-            & Background Video (appears during play, not required)
-        </li>
-        <li>
-            Obtain lyrics. I always take out all the weird letters to make sure it runs on absolutely everything
-            (copy into notepad, save as ANSI format, reopen)
-        </li>
-        <li>In SongEasy, "Pick Song" and set up the Images & Video.</li>
-        <li>
-            If you know the bpm (any number of websites let you search) then enter that. Otherwise "Play Song" and
-            tap "B" to the beat. It might be a little off, I always round it since fractional bpm is unusual. Delete
-            First Beat or leave it as it is, it doesn't make a huge difference.
-        </li>
-        <li>
-            Go to the lyrics tab, copy lyrics and "Load Lyrics from Clipboard". "Play Song" and tap "L" on each word
-            as it plays. It doesn't matter if it's a bit off, good enough is good enough and we'll fix it later. I
-            don't even bother holding notes for as long as they go, but you can if you want.
-        </li>
-        <li>
-            "Save UltraStar Song" and move the folder from your "SongEasy Songs" folder (see top right of SongEasy
-            for location) to "UltraStar Deluxe\songs".
-        </li>
-        <li>
-            I have had SongEasy throw up an error while making lyrics on some longer songs. Press continue, save
-            the file, change the song folder name, then make another file from the point it crashed onwards. Open up
-            both .txts and just replace the end of one file with the start of the other (skipping the section at the
-            start with song title & stuff)
-        </li>
-    </ul>
 
-    <h5>Step 2: Quick fixes</h5>
-    <ul>
-        <li>
-            Open the .txt in the folder. It will start something like:
-            <pre><code>
-#TITLE:Title
-#ARTIST:Title
-#LANGUAGE:English
-#MP3:Title.wav
-#COVER:Title Cover.jpg
+<p>
+This is only applicable if the song you want is on <a href="https://kara.moe/">kara.moe</a>, if it isn’t you will need to map it by hand.
+</p>
+<ul>
+
+<li>Go to kara.moe.
+
+<li>Search up the song you would like to map.
+
+<li>Once you have found the song, copy the url.
+</li>
+</ul>
+<p>
+Using Karaluxer, fill out the following dialogue boxes :
+</p>
+<ul>
+
+<li>Kara.moe url - the url of the song you want (that you just copied before)
+
+<li>Cover Image - an image (from your computer) which will serve as the “album art” when viewing in Vocaluxe. Make sure the aspect ratio is 1:1.
+</li>
+</ul>
+<p>
+Other dialogue boxes are not compulsory ; use them where you think it is necessary. Mark the song as TV Sized if it is TV Sized (duh).
+</p>
+<p>
+Karaluxer can try to help you remove any overlaps between lines (such as a chorus singing over the main artist) however (as of April 2023) this tends to be too sensitive and so using “ignore overlaps” and fixing it by hand is the preferred approach.
+</p>
+<p>
+Karaluxer will produce an Ultrastar format map for the song, however there are still some manual tweaks you <strong>must </strong>do to ensure the map is good. For instructions on how to actually do these manual edits, read the manual mapping section of this guide.
+</p>
+<p>
+You’ll probably need to edit the song by hand to remove any overlapping sections, unless you have used the Karaluxer function to do this beforehand.
+</p>
+<p>
+Karaluxer also spaces notes much closer together than a proper ultrastar map would which makes the songs harder to sing. The image below shows the difference in spacing between a Karaluxer produced map and a proper ultrastar map. The BPM karaluxer is static (1500 regardless of song) so there’s no exact number to reduce the spacing by, just shorten each note until it “feels” right and is easy to sing.
+</p>
+<p>
+<strong>Note for those mapping songs for Anisoc, the output of Karaluxer without any edits is not considered up to par for a submission, and it won’t be added by the AV or will be deleted once we see it if you have not improved the quality of the map.</strong>
+</p>
+<p>
+
+
+<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
+
+
+<img src="https://i.imgur.com/xS45a9k.jpg">
+
+</p>
+<p>
+<hr>
+</p>
+<h2>Manual Mapping Route:</h2>
+
+
+<h3>Step 0: Required data  </h3>
+
+
+<ul>
+
+<li>A MP3, OGG or WAV copy of the song.
+
+<li>A cover image for the song (appears in the song select menu).
+
+<li>A background image for the song (appears when singing if there’s no video)
+
+<li>A background video for the song (optional, to ensure it syncs with the audio you should get the video first and then separate the audio with a program to get the song).
+
+<li>Lyrics for the song (romanized if it’s Japanese).  We’re not 100% sure on what Vocaluxe does and doesn’t accept as part of the song, but if you want to be safe avoid any special character. If it does contain special characters you’ll need to add <code>#ENCODING:UTF8 </code>to the ultrastar file (more on that later).
+
+<li>Regarding romanised lyrics, the following <a href="https://docs.karaokes.moe/contrib-guide/create-karaoke/material/#find-the-real-lyrics">rules</a> are used by our friends at Kara.moe/KaraokeMugen, who we take maps from (through Karaluxer) and who take our maps. Following these rules aren’t compulsory, but will ensure consistency with Kara.moe maps, maeing it easier from them to use our maps.
+
+<li>Whatever you do, DO NOT romanise things like “sha” (しゃ) as “sya” and “ji” (じ) as “zi”. That is, use Hepburn romanisation (Read more on <a href="https://en.wikipedia.org/wiki/Romanization_of_Japanese#Modern_systems">Wikipedia</a>). Using another system will only confuse people.
+</li>
+</ul>
+<h3>Step 1: Making a base with SongEasy.</h3>
+
+
+<p>
+In SongEasy, "Pick Song" and set up the images and video.
+</p>
+<p>
+If you know the BPM (any number of websites let you calculate this) then enter that. Otherwise "Play Song" and tap <code>B</code> to the beat. Delete “First Beat” or leave it as it is, it doesn't make a huge difference.
+</p>
+<p>
+Go to the lyrics tab, copy lyrics and "Load Lyrics from Clipboard". "Play Song" and tap <code>L</code> on each word as it plays. It doesn't matter if it's a bit off, good enough is good enough and we'll fix it later. You can hold <code>L </code>to extend the length of each beat however that can be difficult to time so it’s easier to tap it and fix the duration later.
+</p>
+<p>
+If you’re confident you can follow along you can split the lyrics into syllables before running SongEasy and tap for each syllable instead of word. This can be more difficult as its easier to fall behind but it’s how some people prefer to do it as it means you won’t need to split words into syllables later. You might find you work faster in Yass but generally doing syllables in SongEasy is much faster, and you can slowdown the song significantly if you’re struggling to keep up.
+</p>
+<p>
+"Save UltraStar Song" and optionally, move the folder from your "SongEasy Songs" folder (see top right of SongEasy for location) to a folder of your choice, this should be a folder Vocaluxe and Yass are configured to search for songs.
+</p>
+<p>
+SongEasy is somewhat buggy and can throw up an error while making lyrics on some longer songs. If that happens press continue, save the file, change the song folder name, then make another file from the point it crashed onwards. Open up both .txts and just replace the end of one file with the start of the other (skipping the section at the start with song title & stuff).
+</p>
+<p>
+<hr>
+</p>
+<h3>Step 2: Quick fixes</h3>
+
+
+<p>
+Ultrastar songs are saved as .txt files. These files have 2 sections: metadata and notes. The metadata section is at the top of the file and defines the information about the song, such as the title and artist. The notes section contains all the duration, lyrics and start time of each note in the song.
+</p>
+<p>
+The metadata section will look something like:<br>
+</p>
+
+
+
+<pre class="prettyprint">#TITLE:Song Title
+#ARTIST:Song Artist
+#LANGUAGE:Japanese
+#MP3:Title.mp3
+#COVER:Title [CO].jpg
 #BACKGROUND:Title.jpg
 #VIDEO:Title.mp4
 #BPM:Double the bpm you entered (allows more precision)
 #GAP:0
-            </code></pre>
-            You'll want to update the Artist (and Language) and probably add <code>#CREATOR:</code> and save.
-        </li>
-        <li>
-            Open the song in UltraStar (hover over it and press "E") at the moment all the notes are set very high
-            by default so press "-" on the numpad to shift the whole song down to around Tone 19. If you don't have a
-            numbpad, you'll have to open the .txt again and replace " 64 " (the very high note) with " 19 "
-            (Ctrl + H in Notepad) press "R" to reload in the editor afterwards.
-        </li>
-        <li>
-            The lines breaks in the song are probably in weird places, arrow keys move you around the song,
-            Shift + "/" combines current line with next, "/" starts a new line on the selected note. Set the song
-            up with more reasonable lines, you can press "P" to play the current line to get a better idea of where
-            they should be.
-        </li>
-    </ul>
+</pre>
 
-    <h5>Step 2.5: Crash course in the Ultrastar Editor</h5>
-    <ul>
-        <li>See the Ultrastar
-            <a href="https://github.com/UltraStar-Deluxe/USDX/blob/master/README.md">documentation</a>
-            for a complete set of keybinds.
-        </li>
-        <li><b>Arrow keys:</b> Select note</li>
-        <li><b>Shift + Arrow Keys:</b> Moves selected note (pitch & timing)</li>
-        <li><b>Alt + Left/Right:</b> Moves end of note</li>
-        <li><b>Ctrl + Left/Right:</b> Moves start of note</li>
-        <li><b>Ctrl + /:</b> Split selected note into 2 notes</li>
-        <li><b>P:</b> Plays audio for selected line. + Shift plays the mapped notes instead</li>
-        <li><b>Space:</b> Plays audio for selected note. + Shift plays the mapped note instead</li>
-        <li><b>Ctrl + Delete:</b> Deletes selected note</li>
-    </ul>
 
-    <h5>Step 3: Note Timings</h5>
-    <ul>
-        <li>
-            The way we used SongEasy will have one note per word, and we want 1 note per syllable. Go through the
-            whole song and split (Ctrl + "/") notes as appropriate and move them into the correct places. Don't
-            bother with length & pitch, just put the start in the right place (move them about and press Space
-            until you here the start of the syllable).
-        </li>
-        <li>
-            The extra syllables will be "~" so correct these (F4 to toggle text entry).
-        </li>
-        <li>
-            One thing to be careful of is s/sh sounds, which will be heard much earlier than you want them, shift
-            ahead until you hear the vowel after them (tbh, do that with all notes).
-        </li>
-        <li>
-            Another way you can mess up is if the song is sung slightly inconsistently, notes may not be in the
-            "right place" musically speaking. I err on the side of having it as written rather than as sung, which
-            usually means keeping notes a multiple of 4 away from each other.
-        </li>
-        <li>
-            You'll want to correct the syllables here by clicking on the lyric in the top left and typing it in.
-            Since this is the really only useful button, I hover over it the whole time so enter selects/deselects
-            it as I need. Remember spaces on the last syllable of every word (inc. last in line in case you change
-            line breaks).
-        </li>
-        <li>If a syllable changes pitches, you can split it now or at the pitch setting stage.</li>
-    </ul>
+<p>
+           <br>You should update these tags to reflect the correct information about your song. You can also add the <code>#CREATOR </code>tag to credit yourself and the<code> #ENCODING:UTF8</code> tag to improve compatibility when using special characters.
+</p>
+<p>
+If your song is a shorter version of a song, such as an anime opening theme then append (TV) to the name of the song. Use (PV) for things that are not from an anime opening theme but are still shortened (e.g. short music videos for a short version of a song, like IOSYS flash videos such as Cirno’s Perfect Math Class), this helps us maintain an accurate database and makes it easy to know how long a song is.
+</p>
+<p>
+The notes section of the song defines when each note start, how long it lasts, it’s pitch and the lyric for that note. The format for each line will be <code>&lt;type> &lt;start beat> &lt;duration> &lt;pitch> &lt;lyric> </code>(e.g. <code>: 12 10 5 wo</code>).
+</p>
+<p>
+There are several possible note types:
+</p>
+<ul>
 
-    <h5>Step 4: Note Pitches</h5>
-    <ul>
-        <li>
-            Quite a lot of notes will be 4 ticks apart so open the .txt and replace " 1 " & " 2 " with " 3 " to
-            change those quickly now. 4s would be a bit harsh on getting between the notes in time, and 2s just
-            look bad in the player (unless the line is quite short). You want to do it now as it's easier to locate
-            pitch if your notes are longer. Remember to (R)eload.
-        </li>
-        <li>
-            Go through the whole song again. If you have a mic you can sing and the pitch will appear in the bottom
-            left, otherwise just use Space and Shift + Space and move (Shift + arrows) the note about until those 2
-            sound the same.
-        </li>
-        <li>
-            If you know the song well you can do this a bit quicker, particularly in loud sections where it's hard
-            to hear the exact note. I'd always P and Shift + P at the end of each line to check it sounds right.
-        </li>
-        <li>
-            If something is spoken or a background thing you don't want people to sing, "F" sets it to not appear as
-            a note and give no points. "F" twice sets it to give points with no pitch, but isn't supported by some
-            karaoke programs (the song will just not appear in your list).
-        </li>
-        <li>Again, splitting multi-syllable notes can be done now or later.</li>
-    </ul>
+<li><code>:</code> = Sung (regular note)
 
-    <h5>Step 5: Note Length</h5>
-    <ul>
-        <li>
-            Through the whole song again. For every note remember where it started and move (Shift + arrows) it
-            along, pressing Space until you can't hear the syllable.
-        </li>
-        <li>
-            Move the note back one, move the end back (Alt + left) so it's a 1 length note and move the start of
-            the note back to where it originally was (Ctrl + left).
-        </li>
-        <li>
-            Space once more to check for whether the note changes pitch, but it's up to you whether that's a mistake
-            or a multi-syllable note, which you should put in now.
-        </li>
-        <li>
-            Try not to count the breath at the end of notes as part of the note, you can choose how mean to be when
-            notes end midway through a timing.
-        </li>
-        <li>
-            If your screen turns around then you pressed Alt + Ctrl + Left. Alt + Ctrl + Up will fix it.
-        </li>
-    </ul>
+<li><code>*</code> = Gold note (worth 2x points)
 
-    <h5>Step 6: Fixing things up</h5>
-    <ul>
-        <li> Selecting a note and pressing Shift + "I" will set that as the preview point. Unfortunately UltraStar
-            previews starts slightly late for some reason, so it will sound rubbish, you can move the note left a
-            bit and set the preview slightly earlier if you want, but most karaoke programs will be fine without.
-        </li>
-        <li>
-            The .txt has data to indicate when the displayed lines should change. "T" will set these to be as soon
-            as the previous line finishes, which is fine (currently it might be before then) but I prefer the do it
-            as late as possible (although most programs will force it to be displayed a few seconds before it's
-            sung).
-        </li>
-        <li>
-            To do this select the first note and press (Left Arrow, Shift + "/", Right Arrow, "/") once for each
-            line in the song. This will combine and split every line, moving the line starts to the correct
-            position.
-        </li>
-        <li>
-            At this point you should probably test how it plays. I use Vocaluxe in 4 player mode, which has a habit
-            of squishing the notes a bit to fit 2 columns of people. Just split any line that looks too squished
-            (you could also extend 3 length notes by one, assuming the next note isn't too harsh of a jump).
-        </li>
-        <li>"C" will capitalise the first word of every line (but not things in brackets).</li>
-        <li>"G" will turn notes gold for double points.</li>
-    </ul>
+<li><code>F</code> = Spoken (not worth points, use for dialouge)
 
-    <br>
-    <p>The above 6 steps should be enough to map most songs.</p>
-    <br>
+<li><code>R</code> = Rap (in theory should change the scoring method for that note so that it scores timing, but not pitch, but most karaoke programs don’t implement this so it will function like <code>F</code>, although some karaoke program won’t do this and the map won’t load, so it’s safer to avoid Rap notes and just set them as Spoken
 
-    <h5>Advanced Stuff:</h5>
-    <p><b>How the file works</b></p>
-    <p> Here's a line from a file: <code>: 136 9 17 Hold</code></p>
-    <p>: means sung, the others are * (gold note), F (spoken), R (Rap), G (gold rap) but some karaoke programs
-        can't use rap.</p>
-    <p>136 is when the note starts, 9 is how long the note is, 17 is the pitch, "Hold " is the lyric.</p>
-    <p>Lines like <code>- 282</code> appear in between lines of the song, 282 is the time the next line should be
-        displayed, if there is an instrumental section you can put an extra line like:</p>
-    <pre><code>
--147
--382
-    </code></pre>
-    <p>To get rid of the previous line during the instrumental section. Some karaoke programs treat these numbers
-        as a suggestion, so don't worry if it doesn't seem to be working exactly as you say.</p>
-    <p>The file ends with the line "E" for end.</p>
+<li><code>G</code> = Golden rap
+</li>
+</ul>
+<p>
+Lines in the song are separated by line breaks. In the notes section a line break is written as <code>- &lt;break beat></code>, where <code>&lt;break beat></code> is the beat on which the program should switch to displaying the next line in the song (the one following the break).
+</p>
+<p>
+The file ends with the line <code>E</code> for end.
+</p>
+<p>
+<hr>
+</p>
+<h3>Step 3 : Editing the Map</h3>
 
-    <p><b>Duets</b></p>
-    <p>The UltraStar editor doesn't support duets, if you load a duet and then save <b>YOU LOSE HALF YOUR MAP</b>.
-        Map 2 songs, copy them and store the copies somewhere safe, then combine them into one with</p>
-    <pre><code>
-P1
-First Part (get rid of the E line at the end)
-P2
-Second Part
-E
-    </code></pre>
-    <p>The parts are named at the start of the file with <code>#DUETSINGERP1:</code></p>
 
+<p>
+Check Yass <a href="https://yass-along.com/navigation/">documentation</a> for a full list, but here is a rundown of the basic keybinds:
+</p>
+<ul>
+
+<li>Left and Right Arrow Keys - select notes
+
+<li>Up and Down Arrow Keys - navigate through pages/lines
+
+<li>Ctrl + A - Select all notes (good for moving multiple notes or changing multiple pitches at once)
+
+<li><code>Alt </code>+ <code>Left</code>/<code>Right</code> - moves end of note(s)
+
+<li><code>Ctrl</code> +<code> Left</code>/<code>Right</code> - moves start of note(s)
+
+<li><code>Shift</code> + arrow keys - moves note(s) (pitch and timing)
+
+<li>Spacebar - plays selected note(s)
+
+<li><code>P</code> - plays the whole page/line
+
+<li>Minus Sign - adds syllables to a pre existing note
+
+<li><code>F4</code> - enables access to edit lyrics
+
+<li>(After using F4) Enter at end of note - Puts following notes onto a new line
+
+<li>(After using F4) Minus Sign at end of a note which is not a syllable of the next word - Merges notes into a single word as separate syllables.
+</li>
+</ul>
+<p>
+Depending on how you fed the lyrics into SongEasy you may have one note per word or one note per syllable. If you have one note per word you will need to split each word so it is one note per syllable. Yass has a split note function that you will need to use to split each word into its syllables, it will not automatically change the lyrics on the new/old notes for you so you need to do that manually (press <code>F4 </code>and change the lyrics so each note contains one syllable.
+</p>
+<p>
+If you broke up words by syllable and used SongEasy this way, all your notes will likely be too short in duration. Rather than going through each note manually, it is often the case that there is not a long empty space between notes, and so the best thing to do is to select all notes in a line with Ctrl + A, and then Alt + Right on all the notes to extend them until the end of every note hits the start of every note (ignoring the last note of the line). If syllables were done with good timing in SongEasy and the BPM is correct, you should end up with something like a bunch of note length which are multiples of each other, such as a bunch of notes of length 4 and 8. Don’t worry at this stage of ensuring there is space between notes, Yass can correct this automatically at the end (see Step 6).
+</p>
+<p>
+For syllables that are held for a long time and change pitch as they are held, you can split them into multiple notes and use <code>~ </code>as the lyrics for the extra notes (e.g.<code> wo.~.~.~</code> where . indicates a new note)
+</p>
+<p>
+One thing to be careful of is s/sh sounds, which will be heard much earlier than you want them, shift ahead until you hear the vowel after them (This is something you could do with all notes).
+</p>
+<p>
+You should edit the length of any notes to reflect how long they should be held for, however to make songs easier to sing there should always be a gap between notes so you shouldn’t make each note exactly as long as it is actually sung for.
+</p>
+<p>
+<hr>
+</p>
+<h3>Step 4 : Editing Pitches</h3>
+
+
+<p>
+If you’re tone-deaf you can skip this step by using Ultrastar-pitch to do automatic pitching of the song using AI. This doesn’t give amazing results in most cases so if you are able to it’s best to pitch the song by hand. We’d strongly encourage you go over after Ultrastar-pitch is done and fix any clearly incorrect notes, it helps keep the quality of the maps to a decent standard and makes them more fun to sing..
+</p>
+<p>
+There’s no correct approach to pitching, some people hum the note into a microphone to figure out where to place it, you could try use a MIDI of the song to figure out the pitches or do it by ear. Th easiest way is to have Yass play the notes on a piano (Shift + P) without any of the background music, you can then adjust the notes until it sounds correct.
+</p>
+<p>
+<hr>
+</p>
+<h3>Step 6: Final Steps</h3>
+
+
+<p>
+You can add gold notes to the song. Gold notes award double points and have a fancy effect on the screen when displayed, there’s no need to add gold notes but most maps will have them. There’s no real rule to how you should place them, most people tend to place them in bits of the song that are either “fun”, “hard” or iconic.
+</p>
+<p>
+Yass has a “error” section, fifth button from the left at the top. This lists everything it thinks is wrong with the song. This generally concerns things such as short page breaks, or notes that are too close together without a spacing. It offers to automatically correct this for you, and the “correct all” does this for all errors of the same type (e.g. fixed all short page breaks). Do note that some warn that “this correction is not safe”, meaning that it will have to shorten the length of a note to provide adequate time for a page break. If you have a lot of these, it may suggest that you should merge lines.
+</p>
+<p>
+Lastly check the song works and everything is as you’d expect by playing through it a few times on Vocaluxe.
+</p>
+<p>
+This guide is by no means exhaustive but it should give you enough knowledge to get started with mapping songs. You’re likely to find your own way of doing things as you go along. It may seem somewhat intimidating but once you get the hang of mapping it’s pretty easy for most songs.
+</p>
+<p>
+If you ever need help you can ask on the Discord in the karaoke channel and someone will help you out.
+</p>
+<h2>Anisoc Specific Submission Guide:</h2>
+
+
+<p>
+Once you have a map you’ll need to submit it to the AV so that they can add it to the Karaoke system. There’s a few things you can do which will help the AV out and ensure your song is working when you go to pick it.
+</p>
+<p>
+Firstly if the song comes from an Anime please give the AV the Anilist link for that anime along with the submission, this makes it easier to add the song to the website as it saves the AV from having to search for and find out which Anime the song is from.
+</p>
+<p>
+Secondly, <strong>if you are uploading the song to Google Drive make sure there isn’t any apostrophes in the filenames as they will be replaced with underscores </strong>(e.g<strong>. <code>MINMI - Who's Theme.mp3 </code></strong>becomes <code>MINMI - Who_s Theme.mp3</code>). This will break the map as Vocaluxe won’t be able to find the files for the map. You can avoid this either by removing apostrophes (make sure you update the Ultrastar file to point to the new filenames) or by placing the song inside of a zip and then uploading that.
+</p>
+<p>
+Lastly, if the video file for your map is very big (>100-200Mb) it’s worth encoding it to a lower quality so it takes up less space (some very large videos can also lag). You’ll need to find out how to do this yourself but Handbrake and FFMPEG are free tools with lots of documentation that will let you do that easily.
+</p>
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(window).on('load', addScaleImageOnClick())
+    </script>
 {% endblock %}

@@ -3,7 +3,7 @@ import re
 from django.db import models
 
 from apps.showings.models import Series
-
+from apps.members.models import Member
 
 class Song(models.Model):
     title = models.CharField(max_length=200, blank=False)
@@ -22,6 +22,7 @@ class Request(models.Model):
     artist = models.CharField(max_length=200, blank=False)
     anilist_url = models.URLField(blank=True)
     ultrastar_url = models.URLField(blank=False, unique=True)
+    requester = models.ForeignKey(Member, on_delete=models.PROTECT, null=True, default=None)
 
     def __str__(self):
         return '{0!s} - {1!s}'.format(self.artist, self.title)

@@ -44,10 +44,11 @@ class KaraokeRequestForm(forms.Form):
 
         return cleaned_data
 
-    def submit(self):
+    def submit(self, member):
         request = Request()
         request.title = self.cleaned_data['title']
         request.artist = self.cleaned_data['artist']
         request.ultrastar_url = self.cleaned_data['ultrastar_url']
         request.anilist_url = self.cleaned_data['anilist_url']
+        request.requester = member
         request.save()
