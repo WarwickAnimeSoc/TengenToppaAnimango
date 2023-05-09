@@ -70,6 +70,8 @@ def request_song(request):
                 context['form'] = form
             else:
                 messages.add_message(request, messages.ERROR, 'You have too many pending requests.')
+        else:
+            messages.add_message(request, messages.ERROR, 'You need to login to request songs.')
     return render(request, 'karaoke/request.html', context=context)
 
 
