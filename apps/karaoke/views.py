@@ -56,7 +56,7 @@ def request_song(request):
         if request.user.is_authenticated:
             pending_requests = len(requests_list.filter(requester=request.user.member))
             REQUEST_LIMIT = 4
-            if pending_requests <= REQUEST_LIMIT and form.is_valid():
+            if pending_requests < REQUEST_LIMIT and form.is_valid():
                 form.submit(request.user.member)
                 messages.add_message(request, messages.SUCCESS, 'Your request has been submitted!')
             elif not form.is_valid():
