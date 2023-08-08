@@ -7,7 +7,7 @@ from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, Set
 class ProfileEditForm(forms.Form):
     discord_tag_validator_message = '''Invalid format. Your discord tag should be your username followed by a # and your 
     4 digit identifier, i.e LittleDemon#0713.'''
-    discord_tag_validator = RegexValidator(r'^.*#[0-9]{4}$', message=discord_tag_validator_message)
+    discord_tag_validator = RegexValidator(r'^[a-zA-Z0-9_-]{2,32}$', message=discord_tag_validator_message)
 
     nickname = forms.CharField(label="Nickname", max_length=30, required=False)
     show_full_name = forms.BooleanField(label="Show full name", required=False)
