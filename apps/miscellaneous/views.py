@@ -71,7 +71,3 @@ def github(request):
 def karaoke_list(request):
     # Redirects to the karaoke list, used as a short link for writing on the board at events
     return redirect(reverse('karaoke:karaoke_list', args=[1]))
-
-def welcomeweek(request):
-    # Temporary Welcome Week landing page
-    return render(request, 'miscellaneous/welcome_week_landing.html')
