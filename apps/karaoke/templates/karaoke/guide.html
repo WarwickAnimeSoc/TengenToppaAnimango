@@ -110,7 +110,12 @@ Karaoke Guide
     Karaluxer also spaces notes much closer together than a proper ultrastar map would which makes the songs harder
     to sing. The image below shows the difference in spacing between a Karaluxer produced map and a proper ultrastar
     map. The BPM karaluxer is static (1500 regardless of song) so there’s no exact number to reduce the spacing by,
-    just shorten each note until it “feels” right and is easy to sing.
+    just shorten each note until it “feels” right and is easy to sing. <strong>However</strong>, newer versions of
+    Karaluxer have a field called BPM which allows you to specify the "true" BPM of the song (the BPM should be a
+    multiple, usually 2x to 4x, of the BPM you would get from an online analyzer such that it is somewhere around 300).
+    Doing this makes it easier to properly map the song (e.g. you can usually just shorten each note by 1 beat from each side 
+    to get a good spacing, <em>see the manual section below</em>) but also messes up the timings slightly due to rounding, 
+    requiring adjustments.
   </p>
   <p>
     <strong>Note for those mapping songs for Anisoc, the output of Karaluxer without any edits is not considered up
@@ -252,7 +257,7 @@ Karaoke Guide
     <li><code>R</code> = Rap (in theory should change the scoring method for that note so that it scores timing, but
       not pitch, but most karaoke programs don’t implement this so it will function like <code>F</code>, although
       some karaoke program won’t do this and the map won’t load, so it’s safer to avoid Rap notes and just set
-      them as Spoken
+      them as Spoken)
 
     <li><code>G</code> = Golden rap
     </li>
@@ -344,13 +349,21 @@ Karaoke Guide
     If you’re tone-deaf you can skip this step by using Ultrastar-pitch to do automatic pitching of the song using
     AI. This doesn’t give amazing results in most cases so if you are able to it’s best to pitch the song by hand.
     We’d strongly encourage you go over after Ultrastar-pitch is done and fix any clearly incorrect notes, it helps
-    keep the quality of the maps to a decent standard and makes them more fun to sing..
+    keep the quality of the maps to a decent standard and makes them more fun to sing. 
+    <em>Generally</em>, the most important (and easiest) thing to fix is the octave; ultrastar-pitch pitches only the pitch 
+    but puts everything into the same octave, so very high pitches (C, D) can often end up at the bottom while they 
+    should be at the top, and very low pitches (A, B) can often end up at the top.
   </p>
   <p>
     There’s no correct approach to pitching, some people hum the note into a microphone to figure out where to place
-    it, you could try use a MIDI of the song to figure out the pitches or do it by ear. Th easiest way is to have
+    it, you could try use a MIDI of the song to figure out the pitches or do it by ear. The easiest way is to have
     Yass play the notes on a piano (Shift + P) without any of the background music, you can then adjust the notes
-    until it sounds correct.
+    until it sounds correct. <br> 
+    Another brilliant approach (especially for tone-deaf) is to google the sheet music for the song or find a piano
+    cover on YouTube. Usually, one set of notes will correspond to the lyrics/singing, so you can simply copy the
+    pitches. This requires some practice with reading the sheets and some notes may correspond to multiple syllables,
+    but it reliably gives accurate pitches.
+    
   </p>
   <p>
     <hr>
