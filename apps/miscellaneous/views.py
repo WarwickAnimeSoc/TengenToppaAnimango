@@ -48,9 +48,9 @@ def discord(request):
     return redirect('https://discord.gg/JaYTGfu')
 
 
-def facebook(request):
-    # Redirects to the society Facebook group
-    return redirect('https://facebook.com/groups/warwickanimesoc')
+def instagram(request):
+    # Redirects to the society Instagram Page
+    return redirect('https://www.instagram.com/warwickanimesociety/')
 
 
 def warwicksu(request):
