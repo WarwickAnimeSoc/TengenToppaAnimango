@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.core.paginator import Paginator, InvalidPage
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .models import Song, Request
 from .forms import KaraokeRequestForm
@@ -45,7 +46,7 @@ def karaoke_list(request, page):
 
     return render(request, 'karaoke/list.html', context=context)
 
-
+@login_required
 def request_song(request):
 
     requests_list = Request.objects.filter().distinct().order_by('id')
