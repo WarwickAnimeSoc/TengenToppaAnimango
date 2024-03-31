@@ -1,136 +1,139 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <meta name="robots" content="noindex">
+<meta name="robots" content="noindex">
 {% endblock %}
 
 {% block title %}
-    News
+News
 {% endblock %}
 
 {% block content %}
-    <h1 class="mt-5 mb-3">News</h1>
 
-    <ul class="nav nav-pills mb-3">
-        <li class="nav-item">
-            <a class="nav-link {% if category == 'all' %}active{% endif %}"
-               href="{% url 'news:listing' category='all' page=1 %}">All</a>
+{% load static %}
+<!-- APRIL FOOLS JUMPSCARE -->
+<img src="{% static 'images/AprilFools2024/ConspiracyUshi.png' %}" alt="..."
+    style="position: fixed; top: -15vh; left: -8vw; scale: 60%; z-Index: -100; opacity: 50%; pointer-events: none;">
+</div>
+
+<h1 class="mt-5 mb-3">News</h1>
+
+<ul class="nav nav-pills mb-3">
+    <li class="nav-item">
+        <a class="nav-link {% if category == 'all' %}active{% endif %}"
+            href="{% url 'news:listing' category='all' page=1 %}">All</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if category == 'news' %}active{% endif %}"
+            href="{% url 'news:listing' category='news' page=1 %}">News</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if category == 'minutes' %}active{% endif %}"
+            href="{% url 'news:listing' category='minutes' page=1 %}">Minutes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {% if category == 'other' %}active{% endif %}"
+            href="{% url 'news:listing' category='other' page=1 %}">Other</a>
+    </li>
+</ul>
+
+{% for article in articles_page %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ article.title }}</h5>
+        <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
+        <p class="card-text">{% load martortags %}{{ article.content|safe_markdown|truncatewords:20 }}</p>
+        <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
+            class="card-link">Read</a>
+    </div>
+</div>
+{% endfor %}
+
+{% if articles_page %}
+<nav class="mt-3">
+    <ul class="pagination justify-content-center">
+        {% if not articles_page.has_previous %}
+        <li class="page-item disabled" tabindex="-1">
+            <a class="page-link" href="#">&laquo;</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link {% if category == 'news' %}active{% endif %}"
-               href="{% url 'news:listing' category='news' page=1 %}">News</a>
+        <li class="page-item disabled" tabindex="-1">
+            <a class="page-link" href="#">&lt;</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link {% if category == 'minutes' %}active{% endif %}"
-               href="{% url 'news:listing' category='minutes' page=1 %}">Minutes</a>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="{% url 'news:listing' category=category page=1 %}">
+                &laquo;
+            </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link {% if category == 'other' %}active{% endif %}"
-               href="{% url 'news:listing' category='other' page=1 %}">Other</a>
+        <li class="page-item">
+            <a class="page-link"
+                href="{% url 'news:listing' category=category page=articles_page.previous_page_number %}">
+                &lt;
+            </a>
         </li>
+        {% endif %}
+
+        {% comment %}
+        Only display up to 3 page entries in the navbar
+        {% endcomment %}
+
+        {% if articles_page.paginator.num_pages > 3 %}
+        {% if articles_page.has_previous %}
+        <li class="page-item">
+            <a class="page-link"
+                href="{% url 'news:listing' category=category page=articles_page.previous_page_number %}">
+                {{ articles_page.previous_page_number }}
+            </a>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+            <a class="page-link" href="{% url 'news:listing' category=category page=articles_page.number %}">
+                {{ articles_page.number }}
+            </a>
+        </li>
+
+        {% if articles_page.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{% url 'news:listing' category=category page=articles_page.next_page_number %}">
+                {{ articles_page.next_page_number }}
+            </a>
+        </li>
+        {% endif %}
+        {% else %}
+        {% for page in articles_page.paginator.page_range %}
+        <li class="page-item {% if forloop.counter == articles_page.number %}active{% endif %}">
+            <a class="page-link" href="{% url 'news:listing' category=category page=forloop.counter %}">
+                {{ forloop.counter }}
+            </a>
+        </li>
+        {% endfor %}
+        {% endif %}
+
+        {% if not articles_page.has_next %}
+        <li class="page-item disabled" tabindex="-1">
+            <a class="page-link" href="#">&gt;</a>
+        </li>
+        <li class="page-item disabled" tabindex="-1">
+            <a class="page-link" href="#">&raquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="{% url 'news:listing' category=category page=articles_page.next_page_number %}">
+                &gt;
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link"
+                href="{% url 'news:listing' category=category page=articles_page.paginator.num_pages %}">
+                &raquo;
+            </a>
+        </li>
+        {% endif %}
     </ul>
-
-    {% for article in articles_page %}
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ article.title }}</h5>
-                <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
-                <p class="card-text">{% load martortags %}{{ article.content|safe_markdown|truncatewords:20 }}</p>
-                <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
-                   class="card-link">Read</a>
-            </div>
-        </div>
-    {% endfor %}
-
-    {% if articles_page %}
-        <nav class="mt-3">
-            <ul class="pagination justify-content-center">
-                {% if not articles_page.has_previous %}
-                    <li class="page-item disabled" tabindex="-1">
-                        <a class="page-link" href="#">&laquo;</a>
-                    </li>
-                    <li class="page-item disabled" tabindex="-1">
-                        <a class="page-link" href="#">&lt;</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link"
-                           href="{% url 'news:listing' category=category page=1 %}">
-                            &laquo;
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link"
-                           href="{% url 'news:listing' category=category page=articles_page.previous_page_number %}">
-                            &lt;
-                        </a>
-                    </li>
-                {% endif %}
-
-                {% comment %}
-                Only display up to 3 page entries in the navbar
-                {% endcomment %}
-
-                {% if articles_page.paginator.num_pages > 3 %}
-                    {% if articles_page.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link"
-                               href="{% url 'news:listing' category=category page=articles_page.previous_page_number %}">
-                                {{ articles_page.previous_page_number }}
-                            </a>
-                        </li>
-                    {% endif %}
-
-                    <li class="page-item active">
-                        <a class="page-link"
-                           href="{% url 'news:listing' category=category page=articles_page.number %}">
-                            {{ articles_page.number }}
-                        </a>
-                    </li>
-
-                    {% if articles_page.has_next %}
-                        <li class="page-item">
-                            <a class="page-link"
-                               href="{% url 'news:listing' category=category page=articles_page.next_page_number %}">
-                                {{ articles_page.next_page_number }}
-                            </a>
-                        </li>
-                    {% endif %}
-                {% else %}
-                    {% for page in articles_page.paginator.page_range %}
-                        <li class="page-item {% if forloop.counter == articles_page.number %}active{% endif %}">
-                            <a class="page-link" href="{% url 'news:listing' category=category page=forloop.counter %}">
-                                {{ forloop.counter }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
-
-                {% if not articles_page.has_next %}
-                    <li class="page-item disabled" tabindex="-1">
-                        <a class="page-link" href="#">&gt;</a>
-                    </li>
-                    <li class="page-item disabled" tabindex="-1">
-                        <a class="page-link" href="#">&raquo;</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link"
-                           href="{% url 'news:listing' category=category page=articles_page.next_page_number %}">
-                            &gt;
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link"
-                           href="{% url 'news:listing' category=category page=articles_page.paginator.num_pages %}">
-                            &raquo;
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    {% else %}
-        <h5 class="mt-3 text-muted">Nothing here</h5>
-    {% endif %}
+</nav>
+{% else %}
+<h5 class="mt-3 text-muted">Nothing here</h5>
+{% endif %}
 
 {% endblock %}

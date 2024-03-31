@@ -1,108 +1,109 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Home
+Home
 {% endblock %}
 
 {% block content %}
-    <div class="row mt-5">
-        <div class="col">
-            <h1>Warwick Anime and Manga Society</h1>
-            <br>
-            <p>The Anime and Manga Society is Warwick's student-run society for anyone with an interest in Anime and
-                Manga. The society is for anyone who would like to meet others who share these interests, or who just
-                want to join us for one of the many events we run each academic year.</p>
-            <br>
-            <p>Our regular viewings take place in <a
-                    href="https://campus-cms.warwick.ac.uk/share/02d51d21033acb64bb06542c136b1a3b">MS.02 (on the ground
-                floor of the Maths Building)</a> , starting at 19:00 every Tuesday during term time.
-                These events incorporate time for socialising as well as watching anime, so they're an excellent
-                opportunity to meet others and have fun. In addition to this, we also hold many
-                socials and other <a href="{% url 'events:upcoming' page=1 %}">events</a> across the year!
-            </p>
-            <br>
-            <p>Most of our society communications are made through our discord server, this is also a good place to meet
-                and discuss anime with other members of the society, you can join <a
-                        href="{% url 'miscellaneous:discord' %}">here</a>.</p>
-            <br>
-        </div>
-        <div class="col-10 col-lg-5 p-5">
-            {% load static %}
-            <img class="img-fluid align-self-center" src="{% static 'images/logo/logo-filled-black.svg' %}"
-                 alt="Society Logo">
-        </div>
-    </div>
+<div class="row mt-5">
 
-    {% comment %}
-    This hanging closing tag is used to close the <main> from the base template. This is needed so that the row
+    <div class="col">
+        <h1>Warwick Anime and Manga Society</h1>
+        <br>
+        <p>The Anime and Manga Society is Warwick's student-run society for anyone with an interest in Anime and
+            Manga. The society is for anyone who would like to meet others who share these interests, or who just
+            want to join us for one of the many events we run each academic year.</p>
+        <br>
+        <p>Our regular viewings take place in <a
+                href="https://campus-cms.warwick.ac.uk/share/02d51d21033acb64bb06542c136b1a3b">MS.02 (on the ground
+                floor of the Maths Building)</a> , starting at 19:00 every Tuesday during term time.
+            These events incorporate time for socialising as well as watching anime, so they're an excellent
+            opportunity to meet others and have fun. In addition to this, we also hold many
+            socials and other <a href="{% url 'events:upcoming' page=1 %}">events</a> across the year!
+        </p>
+        <br>
+        <p>Most of our society communications are made through our discord server, this is also a good place to meet
+            and discuss anime with other members of the society, you can join <a
+                href="{% url 'miscellaneous:discord' %}">here</a>.</p>
+        <br>
+    </div>
+    <div class="col-10 col-lg-5 p-5">
+        {% load static %}
+        <img class="img-fluid align-self-center" src="{% static 'images/logo/logo-filled-black.svg' %}"
+            alt="Society Logo">
+    </div>
+</div>
+
+{% comment %}
+This hanging closing tag is used to close the <main> from the base template. This is needed so that the row
     container with the events carousel can be full width.
     {% endcomment %}
-    </main>
+</main>
 
-    <div class="container-fluid">
-        <div class="row expanded-row text-center bg-primary text-white">
-            <div class="col-1 multi-carousel-button" onclick="multiCarouselPrev()">
-                <span class="carousel-control-prev-icon align-self-center"></span>
-            </div>
-            <div class="col-12 col-md-10 pt-5 pb-5">
-                <div id="multiCarousel" class="row">
-                    <div class="col-12 col-md-4 multi-carousel-item">
-                        <h5>Weekly Showings</h5>
-                        <p>Our regular viewings take place in <a style="color: #c0c0c0;"
-                                                                 href="https://campus-cms.warwick.ac.uk/share/02d51d21033acb64bb06542c136b1a3b">MS.02
+<div class="container-fluid">
+    <div class="row expanded-row text-center bg-primary text-white">
+        <div class="col-1 multi-carousel-button" onclick="multiCarouselPrev()">
+            <span class="carousel-control-prev-icon align-self-center"></span>
+        </div>
+        <div class="col-12 col-md-10 pt-5 pb-5">
+            <div id="multiCarousel" class="row">
+                <div class="col-12 col-md-4 multi-carousel-item">
+                    <h5>Weekly Showings</h5>
+                    <p>Our regular viewings take place in <a style="color: #c0c0c0;"
+                            href="https://campus-cms.warwick.ac.uk/share/02d51d21033acb64bb06542c136b1a3b">MS.02
                             (on the ground floor of the Maths Building)</a> ,
-                            starting at 19:00 every Tuesday during term time.
-                        </p>
+                        starting at 19:00 every Tuesday during term time.
+                    </p>
 
-                    </div>
-                    <div class="col-12 col-md-4 multi-carousel-item">
-                        <h5>Meal Socials</h5>
-                        <p>Come join us for our meal socials. We usually go to Japanese style restaurants in the
-                            Coventry area.</p>
-                    </div>
-                    <div class="col-12 col-md-4 multi-carousel-item">
-                        <h5>Karaoke</h5>
-                        <p>Join us for an evening Karaoke session featuring all types of music from Anime openings to
-                            Western classics!</p>
-                    </div>
-                    <div class="col-12 col-md-4 multi-carousel-item" style="display: none;">
-                        <h5>Movie Nights</h5>
-                        <p>Come along to our Movie Nights to watch a range of anime films.</p>
-                    </div>
-                    <div class="col-12 col-md-4 multi-carousel-item" style="display: none;">
-                        <h5>All-Nighters</h5>
-                        <p>Join us from 8pm to 8am for our All-Nighter events where we watch a collection of movies or
-                            shows throughout the entire night.</p>
-                    </div>
-                    <div class="col-12 col-md-4 multi-carousel-item" style="display: none;">
-                        <h5>Manga/LN Socials</h5>
-                        <p>Come along to socialise whilst reading Manga and Light Novels.</p>
-                    </div>
+                </div>
+                <div class="col-12 col-md-4 multi-carousel-item">
+                    <h5>Meal Socials</h5>
+                    <p>Come join us for our meal socials. We usually go to Japanese style restaurants in the
+                        Coventry area.</p>
+                </div>
+                <div class="col-12 col-md-4 multi-carousel-item">
+                    <h5>Karaoke</h5>
+                    <p>Join us for an evening Karaoke session featuring all types of music from Anime openings to
+                        Western classics!</p>
+                </div>
+                <div class="col-12 col-md-4 multi-carousel-item" style="display: none;">
+                    <h5>Movie Nights</h5>
+                    <p>Come along to our Movie Nights to watch a range of anime films.</p>
+                </div>
+                <div class="col-12 col-md-4 multi-carousel-item" style="display: none;">
+                    <h5>All-Nighters</h5>
+                    <p>Join us from 8pm to 8am for our All-Nighter events where we watch a collection of movies or
+                        shows throughout the entire night.</p>
+                </div>
+                <div class="col-12 col-md-4 multi-carousel-item" style="display: none;">
+                    <h5>Manga/LN Socials</h5>
+                    <p>Come along to socialise whilst reading Manga and Light Novels.</p>
                 </div>
             </div>
-            <div class="col-1 multi-carousel-button flex-row-reverse text-right" onclick="multiCarouselNext()">
-                <span class="carousel-control-next-icon align-self-center"></span>
-            </div>
+        </div>
+        <div class="col-1 multi-carousel-button flex-row-reverse text-right" onclick="multiCarouselNext()">
+            <span class="carousel-control-next-icon align-self-center"></span>
         </div>
     </div>
+</div>
 
-    <main class="container flex-grow-1">
+<main class="container flex-grow-1">
     <div class="row mt-5">
         <div class="col-12 col-sm-8">
             <h2>News and Announcements</h2>
             {% for article in recent_articles %}
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ article.title }}</h5>
-                        <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
-                        <p class="card-text">
-                            {% load martortags %}{{ article.content|safe_markdown|truncatewords:20 }}</p>
-                        <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
-                           class="card-link">Read</a>
-                    </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
+                    <p class="card-text">
+                        {% load martortags %}{{ article.content|safe_markdown|truncatewords:20 }}</p>
+                    <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
+                        class="card-link">Read</a>
                 </div>
+            </div>
             {% empty %}
-                <h4 class="text-muted">No recent news.</h4>
+            <h4 class="text-muted">No recent news.</h4>
             {% endfor %}
         </div>
         {% if user.is_authenticated %}
@@ -111,49 +112,47 @@
                 <div class="col">
                     <h2>Upcoming Events</h2>
                     {% for event in upcoming_events %}
-                        <div class="card mb-3">
-                            <div class="card-body overflow-hidden">
-                                <h5 class="card-title">{{ event.title }}</h5>
-                                <a href="{% url 'events:event_detail' event_id=event.id %}"
-                                   class="card-link">Details</a>
-                            </div>
+                    <div class="card mb-3">
+                        <div class="card-body overflow-hidden">
+                            <h5 class="card-title">{{ event.title }}</h5>
+                            <a href="{% url 'events:event_detail' event_id=event.id %}" class="card-link">Details</a>
                         </div>
+                    </div>
                     {% empty %}
-                        <h4 class="text-muted">No upcoming events.</h4>
+                    <h4 class="text-muted">No upcoming events.</h4>
                     {% endfor %}
                 </div>
             </div>
             {% if ongoing_events %}
-                <div class="row">
-                    <div class="col">
-                        <h2>Ongoing Events</h2>
-                        {% for event in ongoing_events %}
-                            <div class="card mb-3">
-                                <div class="card-body overflow-hidden">
-                                    <h5 class="card-title">{{ event.title }}</h5>
-                                    <a href="{% url 'events:event_detail' event_id=event.id %}"
-                                       class="card-link">Details</a>
-                                </div>
-                            </div>
-                        {% endfor %}
+            <div class="row">
+                <div class="col">
+                    <h2>Ongoing Events</h2>
+                    {% for event in ongoing_events %}
+                    <div class="card mb-3">
+                        <div class="card-body overflow-hidden">
+                            <h5 class="card-title">{{ event.title }}</h5>
+                            <a href="{% url 'events:event_detail' event_id=event.id %}" class="card-link">Details</a>
+                        </div>
                     </div>
+                    {% endfor %}
                 </div>
+            </div>
             {% endif %}
         </div>
         {% endif %}
     </div>
-{% endblock %}
+    {% endblock %}
 
-{% block javascript %}
+    {% block javascript %}
     {% if alert %}
-        {% load martortags %}
-        <script>
-            let messagesDiv = document.getElementById('messagesDiv');
-            let alertMessage = document.createElement('div');
-            let messageText = '{{ alert.content|safe_markdown }}'
-            alertMessage.className = 'alert alert-info';
-            alertMessage.innerHTML = messageText;
-            messagesDiv.appendChild(alertMessage);
-        </script>
+    {% load martortags %}
+    <script>
+        let messagesDiv = document.getElementById('messagesDiv');
+        let alertMessage = document.createElement('div');
+        let messageText = '{{ alert.content|safe_markdown }}'
+        alertMessage.className = 'alert alert-info';
+        alertMessage.innerHTML = messageText;
+        messagesDiv.appendChild(alertMessage);
+    </script>
     {% endif %}
-{% endblock %}
+    {% endblock %}
