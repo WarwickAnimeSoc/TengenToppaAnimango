@@ -10,14 +10,6 @@
 
 {% block content %}
 
-{% load static %}
-<!-- APRIL FOOLS JUMPSCARE -->
-<img src="{% static 'images/AprilFools2024/edajimaManly.png' %}" alt="..."
-    style="position: fixed; top: 15vh; left: 40vw; scale: 180%; z-Index: 100; opacity: 30%;  pointer-events: none;">
-</div> 
-
-
-
     <h1 class="mt-5">Showings</h1>
 
     <form action="{% url "showings:showings" page=1 %}" method="GET" class="mt-3 mb-3">
