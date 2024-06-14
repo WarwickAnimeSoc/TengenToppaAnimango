@@ -1,0 +1,442 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+   The Anisoc Awards!!
+{% endblock %}
+
+{% block content %}
+{% load static %}
+    <style>
+        .awards-container {
+            background-color: #f5f5f5; /* Light gray background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns layout */
+            gap: 30px; 
+        }
+        .award {
+            background: linear-gradient(to right, #ffffff, #d9dfea);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .award-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+            text-transform: uppercase;
+            border-bottom: 2px solid #007bff; 
+            padding-bottom: 5px;
+        }
+        .nominees {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .winner {
+            font-size: 20px;
+            font-weight: bold;
+            color: #007bff; 
+        }
+        .images-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); 
+            gap: 10px; /* Gap between images */
+            margin-top: 20px;
+            justify-items: center;
+            align-items: center; 
+        }
+        .image {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .image {
+            transition: transform 0.2s ease;
+        }
+        .image:hover {
+            transform: scale(1.03);
+        }
+        .nominee {
+            color: #004080; /* Dark blue color */
+            text-decoration: none; /* Remove underline */
+        }
+        .nominee:hover {
+            color: #0059b3; /* Highlight color on hover */
+            text-decoration: underline; /* Underline on hover */
+        }
+        .title {
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: -6px;
+            color: #2c3e50;
+            text-transform: uppercase;
+        }
+        .subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 5px;
+            color: #34495e;
+        }
+    </style>
+
+    <div class="title">Welcome to the Anisoc Awards!</div>
+    <!--<div class="subtitle">Cast your votes here!</div> -->
+
+
+    <div class="awards-container">
+
+        <div class="award">
+            <div class="award-title"><b>Anime of the Year</b></div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">Future Boy Conan</a> |
+                <a class="nominee">Sonny Boy</a> |
+                <a class="nominee">Heike Monogatari</a>
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+                
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/futureboyconan.jpg' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/sonnyboy.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/HeikeMono.jpg' %}"
+                >
+            </div>
+        </div>
+
+
+
+
+        <div class="award">
+            <div class="award-title">Movie of the Year</div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">Akira</a> |
+                <a class="nominee">On-Gaku: Our Sound</a> |
+                <a class=nominee>Penguin's Memory: Shiawase Monogatari</a> |
+                <a class=nominee>Shin Ultraman</a> |
+                <a class="nominee">Interstellar 5555</a>
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+    
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/akira.jpg' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/ongaku.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/penguins_memory.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/shinultraman.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/interstellar_5555.jpg' %}"
+                >
+            </div>
+        </div>
+
+
+
+
+        <div class="award">
+            <div class="award-title">Best Main Character</div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">Conan (Future Boy Conan)</a> |
+                <a class="nominee">Nagara (Sonny Body)</a> |
+                <a class="nominee">Biwa (Heike Monogatari) </a> |
+                <a class="nominee"> Mike (Penguin's Memory : Shiawase Monogatari) </a>
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+                
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/conan.jpg' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/nagara.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/biwa.jpg' %}"
+                 >
+                 <img class="image" alt="Image 1"
+                 src="{% static 'images/mike.jpg' %}"
+                 >
+            </div>
+        </div>
+
+
+
+
+        <div class="award">
+            <div class="award-title">Best Supporting Character</div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">Jimsy (Future Boy Conan)</a> |
+                <a class="nominee">Lana (Future Boy Conan) </a> |
+                <a class="nominee">Mizuho (Sonny Boy) </a> |
+                <a class="nominee"> Rajdhani (Sonny Boy) </a> |
+                <a class="nominee">Taira no Shigemori (Heike Monogatari) </a> |
+                <a class="nominee">Tairo no Tokuko (Heike Monogatari) </a>
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+                
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/jimsy.jpg' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/lana.png' %}"
+                >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/mizuho.jpg' %}"
+                >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/rajdhani.jpg' %}"
+                >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/taira.jpg' %}"
+                >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/tairo.jpg' %}"
+                >
+            </div>
+        </div>
+
+
+        <div class="award">
+            <div class="award-title">Best Opening / Ending Sequence</div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">Let There Be Light Again (Sonny Boy)</a> |
+                <a class="nominee">Ima Chikyuu ga Mezameru (Future Boy Conan)</a> |
+                <a class="nominee">Hikaru Toki (Heike Monogatari)</a> |
+                <a class="nominee">Ride on Shooting Star (FLCL)</a> |
+                <a class="nominee">Sweet Memories (Penguin's Memory : Shiawase Monogatari)</a> |
+                <a class="nominee">Twilight (DAICON IV)</a>
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+                
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/sonnyboy.jpg' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/futureboyconan.jpg' %}"
+                >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/HeikeMono.jpg' %}"
+                >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/FLCL.png' %}"
+                >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/penguins_memory.jpg' %}"
+                >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/DAICON4.jpg' %}"
+                >
+            </div>
+        </div>
+
+
+
+        <div class="award">
+            <div class="award-title">Best Exec Choice Show</div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">Memories : Magnetic Rose</a> |
+                <a class="nominee">Revolutionary Girl Utena</a> |
+                <a class="nominee">Land of the Lustrous</a> |
+                <a class="nominee">Mushi-shi</a> | 
+                <a class="nominee">Gurren Lagann</a> |
+                <a class="nominee">Kemonozume</a> 
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+                
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/magneticrose.png' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/utena.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/landofthelustrous.png' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/mushishi.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/gurrenlagann.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/kemonozume.jpg' %}"
+                >
+            </div>
+        </div>
+
+
+
+        <div class="award">
+            <div class="award-title">Best Member's Choice/ All-Nighter Show</div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">Panty and Stocking with Garterbelt
+                </a> |
+                <a class="nominee">Saigake!! Otokojuku</a> |
+                <a class="nominee">The Tatami Galaxy</a>|
+                <a class="nominee">Great Teacher Onizuka</a> |
+                <a class="nominee">Otaku no Video</a> |
+                <a class="nominee">Sarazanmai
+                </a> 
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+                
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/pantyandstocking.jpg' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/otokojuku.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/tatamigalaxy.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/gto.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/otakunovideo.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/sarazanmai.jpg' %}"
+                >
+            </div>
+        </div>
+
+        <div class="award">
+            <div class="award-title">Best "Bad" Show</div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">High School of the Dead
+                </a> |
+                <a class="nominee">Ao Oni the Animation</a> |
+                <a class="nominee">Dracula : Sovereign of the Damned </a> |
+                <a class="nominee">Scum's Wish</a> |
+                <a class="nominee">Hetalia Axis Powers</a> 
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+                
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/highschoolofthedead.jpg' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/aooni.png' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/dracula.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/scumswish.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/hetalia.jpg' %}"
+                >
+            </div>
+        </div>
+
+        <div class="award">
+            <div class="award-title">Best Art Direction and Character Design</div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">Heike Monogatari
+                </a> |
+                <a class="nominee">Future Boy Conan</a> |
+                <a class="nominee">ON-GAKU : Our Sound</a> |
+                <a class="nominee">Memories : Magnetic Rose</a> |
+                <a class="nominee">Casshern Sins</a> |
+                <a class="nominee">Puella Magi Madoka Magica
+                </a> 
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+                
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/HeikeMono.jpg' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/futureboyconan.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/ongaku.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/magneticrose.png' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/casshern.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/madoka.jpg' %}"
+                >
+            </div>
+        </div>
+
+        <div class="award">
+            <div class="award-title">Best Animation and Cinematography</div>
+            <div class="nominees">
+                <b>Nominees:</b>
+                <a class="nominee">FLCL </a> |
+                <a class="nominee">Ghost in the Shell</a> |
+                <a class="nominee">Denno Coil </a> |
+                <a class="nominee">Perfect Blue</a> |
+                <a class="nominee">Akira</a> 
+            </div>
+            <!--<div class="winner">Winner: _____ </div> -->
+            <div class="images-container">
+                
+                <img class="image" alt="Image 1"
+                 src="{% static 'images/FLCL.png' %}"
+                 >
+                <img class="image" alt="Image 2"
+                src="{% static 'images/ghostintheshell.png' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/dennocoil.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/perfectblue.jpg' %}"
+                >
+                <img class="image" alt="Image 1"
+                src="{% static 'images/akira.jpg' %}"
+                >
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
