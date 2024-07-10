@@ -30,7 +30,6 @@ urlpatterns = [
     path('history/', include('apps.history.urls')),
     path('archive/', include('apps.archive.urls')),
     path('library/', include('apps.library.urls')),
-    path('anisoc_awards/', include('apps.anisoc_awards.urls')),
     # API Urls
     path('api/library/', include('apps.library.api.urls')),
     path('api/events/', include('apps.events.api.urls')),
