@@ -34,7 +34,7 @@ def home(request):
         'alert': alert
     }
 
-    return render(request, 'miscellaneous/home.html', context=context) # remember to change back to original
+    return render(request, 'miscellaneous/welcome_week_landing.html', context=context) # remember to change back to original
 
 
 def privacy(request):
@@ -71,3 +71,7 @@ def github(request):
 def karaoke_list(request):
     # Redirects to the karaoke list, used as a short link for writing on the board at events
     return redirect(reverse('karaoke:karaoke_list', args=[1]))
+
+def welcomeweek(request):
+    # Temporary Welcome Week landing page
+    return render(request, 'miscellaneous/welcome_week_landing.html')

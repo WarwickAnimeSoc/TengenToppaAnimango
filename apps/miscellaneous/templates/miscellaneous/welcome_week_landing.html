@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon/favicon.ico' %}"/>
+
+    <!-- Import Boostrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ttam-bootstrap.css' %}">
+
+    <!-- Import custom site CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ttam.css' %}">
+
+    <title> Welcome Week 2024 | Warwick Anime and Manga Society</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fullpage.css' %}">
+    <script src="{% static 'js/fullpage.js' %}"></script>
+
+    <style>
+        .section {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        #section0 {
+            background: -webkit-gradient(linear, top left, bottom left, from(#674d7d), to(#2b2f6e));
+		    background: -webkit-linear-gradient(#834cb0, #2b2f6e);
+		    background: linear-gradient(#834cb0,#2b2f6e);
+        }
+
+        #section1 {
+            background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url("{% static 'images/millAct.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #section2 {
+            background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url("{% static 'images/eveningClassroom.jpg' %}");
+            /*background: -webkit-gradient(linear, top left, bottom left, from(#007991), to(#78ffd6));
+		    background: -webkit-linear-gradient(#60bd50, #78ffd6);
+		    background: linear-gradient(#60bd50,#78ffd6); */
+            z-index: 0;
+        }
+        #section2 .img-fluid {
+            transform: scale(   0.5) rotate(-20deg); /* Scale down the image to 10% of its original size */
+            position: absolute; /* Allows free movement of the image */
+            top: -10vh; /* Adjust as needed */
+            left: 5vw; /* Adjust as needed */
+            z-index: -1;
+        }
+        #section3 {
+            background: -webkit-gradient(linear, top left, bottom left, from(#007991), to(#78ffd6));
+		    background: -webkit-linear-gradient(#007991, #78ffd6);
+		    background: linear-gradient(#007991,#78ffd6);
+        }
+
+        .responsive-header {
+            font-size: calc(40px + (70 - 40) * ((100vw - 375px) / (1920 - 375)));
+        }
+
+        .responsive-header-2 {
+            font-size: calc(20px + (32 - 20) * ((100vw - 375px) / (1920 - 375)));
+        }
+
+        .responsive-header-3 {
+            font-size: calc(18px + (28 - 18) * ((100vw - 375px) / (1920 - 375)));
+        }
+
+        .responsive-text {
+            font-size: calc(14px + (26 - 14) * ((100vw - 375px) / (1920 - 375)));
+        }
+
+        .bg-fade {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+        }
+
+        .fp-tableCell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #fp-nav ul li span {
+            background: #FFFFFF !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+
+
+<div id="fullpage">
+    <div class="section justify-content-center" id="section0">
+		<div class="p-4 d-flex flex-column w-75 justify-content-center bg-fade">
+            {% load static %}
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-4 justify-content-center">
+                <img class="img-fluid" src="{% static 'images/logo/logo-filled-black.svg' %}"
+                     alt="Society Logo">
+                </div>
+            </div>
+			<h1 class="responsive-header"> <div> <strong>Anisoc</strong></div>Welcome Week 2024</h1>
+                <p class="mt-5 responsive-text">Scroll down to find out what events we're running!</p>
+		</div>
+	</div>
+	<div class="section justify-content-center" id="section1">
+		<div class="p-4 d-flex flex-column w-75 justify-content-center bg-fade">
+			<h1 class="responsive-header">Wednesday</h1>
+            <h2 class="responsive-header-2">Movie Showing - Millenium Actress</h2>
+            <h3 class="responsive-header-3"><i>18:00 in <a style="color: #c0c0c0;" href="https://campus.warwick.ac.uk//search/623c88fa421e6f5928c0e67e">MS.02</a></i></h3>
+
+            <p class="mt-5 responsive-text">In 2001, decades after her sudden disappearance at the height of her fame, the legendary actress Chiyoko Fujiwara is sought out by a filmmaker and his cameraman, eager to unravel the mystery of her past. As they listen to her story, they are drawn into a vivid blend of reality and cinema, where memories become epic adventures. Chiyoko’s pursuit of a lost love transcends time, sweeping them through eras of Japanese cinema and into her innermost dreams and regrets. As her memories resurface, a new chapter unfolds, changing their lives and reigniting her long-buried passions.</p>
+            <p class="mt-5 responsive-text">CW:</p>
+		</div>
+	</div>
+	<div class="section justify-content-center" id="section2">
+		<div class="p-4 d-flex flex-column w-75 justify-content-center bg-fade">
+            <img class="img-fluid" src="{% static 'images/questionKonataa.png' %}">
+            <h1 class="responsive-header">Thursday</h1>
+            <h2 class="responsive-header-2">Anisoc Quiz Night</h2>
+            <h3 class="responsive-header-3"><i>18:00 in <a style="color: #c0c0c0;" href="https://campus.warwick.ac.uk/search/656f3666d8dbf518cbed0c50">RIL.G.03</a></i></h3>
+
+            <p class="mt-5 responsive-text">Join us for an anime (& manga) themed quiz night and test your mettle to see if you really know your stuff! Team up with friends or find a group to participate in a range of rounds, from trivia, AMQs' and more! There are prizes at stake for winners and runners-up so you don't want to miss out!</p>
+        </div>
+	</div>
+	<div class="section justify-content-center" id="section3">
+		<div class="p-4 d-flex flex-column w-75 justify-content-center bg-fade">
+            <h1 class="responsive-header">Saturday</h1>
+            <h2 class="responsive-header-2">Social</h2>
+            <h3 class="responsive-header-3"><i>14:00 - 22:00(Drop in) in <a style="color: #c0c0c0;" href="https://campus.warwick.ac.uk/search/623c8943421e6f5928c0f50c">OC1.01</a></i></h3>
+
+            <p class="mt-5 responsive-text">Come along to this laid-back event dedicated to getting to know new people, meeting the exec, and talking about anime and manga! We'll be bringing part of our extensive library, so that you can come and quietly read an old favourite or something new that catches your eye. Besides that, you can also take part in our drawing competition where prizes will be awarded to participants with valid entries, as well as the best drawings as voted by you! Artists of all abilities and levels of experience are welcome to use our society's drawing materials We'll see you over there!</p> 
+        </div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<!-- Import jQuery, Popper.js and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<!-- Import custom site javascript -->
+<script src="{% static 'js/ttam.js' %}"></script>
+
+<script type="text/javascript">
+    var myFullpage = new fullpage('#fullpage', {
+        anchors: ['landing', 'wednesday', 'thursday', 'saturday'],
+        scrollBar: true,
+        navigation: true,
+        navigationPosition: 'right',
+        //navigationTooltips: ['First page', 'Second page', 'Third and last page']
+    });
+</script>
+
+</body>
+</html>
