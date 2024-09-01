@@ -34,7 +34,7 @@ def home(request):
         'alert': alert
     }
 
-    return render(request, 'miscellaneous/welcome_week_landing.html', context=context) # remember to change back to original
+    return render(request, 'miscellaneous/home.html', context=context) # remember to change back to original
 
 
 def privacy(request):
