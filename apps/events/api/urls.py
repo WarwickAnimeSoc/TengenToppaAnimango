@@ -1,8 +1,7 @@
-from django.conf.urls import url
-
+from django.urls import re_path
 from .views import EventsListView
 
-
 urlpatterns = [
-    url(r'^$', EventsListView.as_view(), name='events_api_list'),
+    re_path(r'^$', EventsListView.as_view(), name='events_api_list'),
 ]
+

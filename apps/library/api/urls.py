@@ -1,8 +1,8 @@
-from django.urls import path
+from django.urls import re_path
 
 from .views import LibraryListView
 
 
 urlpatterns = [
-    path('', LibraryListView.as_view(), name='library_list_api'),
+    re_path(r'^$', LibraryListView.as_view(), name='library_list_api'),
 ]
