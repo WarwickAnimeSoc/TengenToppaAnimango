@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon/favicon.ico' %}"/>
+
+    <!-- Import Boostrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ttam-bootstrap.css' %}">
+
+    <!-- Import custom site CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ttam.css' %}">
+
+    <title> Welcome Week 2025 | Warwick Anime and Manga Society</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fullpage.css' %}">
+    <script src="{% static 'js/fullpage.js' %}"></script>
+
+    <style>
+        .section {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        #section0 {
+            background: linear-gradient(#834cb0,#2b2f6e);
+        }
+
+        #section1 {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("{% static 'images/redline.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #section2 {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("{% static 'images/eveningClassroom.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 0;
+        }
+
+        #section2 .img-fluid {
+            width: 30%;         /* Responsive width based on viewport */
+            height: auto;        /* Maintain aspect ratio */
+            position: absolute;
+            bottom: -10vh;
+            left: 5vw;
+            transform: rotate(-20deg);  /* Keep your rotation */
+            z-index: -1;
+        }
+
+        #section3 {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("{% static 'images/hereApeopleSows.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        #section3 .img-fluids {
+            width: 30%;                 /* Responsive width, roughly "half size" */
+            height: auto;                /* Maintain aspect ratio */
+            position: absolute;
+            bottom: -10vh;
+            right: 5vw;
+            transform: scaleX(-1) rotate(-20deg);
+            z-index: -1;
+        }
+
+        .responsive-header {
+            font-size: calc(40px + (70 - 40) * ((100vw - 375px) / (1920 - 375)));
+        }
+
+        .responsive-header-2 {
+            font-size: calc(20px + (32 - 20) * ((100vw - 375px) / (1920 - 375)));
+        }
+
+        .responsive-header-3 {
+            font-size: calc(18px + (28 - 18) * ((100vw - 375px) / (1920 - 375)));
+        }
+
+        .responsive-text {
+            font-size: calc(14px + (26 - 14) * ((100vw - 375px) / (1920 - 375)));
+        }
+
+        .bg-fade {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+        }
+
+        .fp-tableCell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #fp-nav ul li span {
+            background: #FFFFFF !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+
+
+
+<div id="fullpage">
+    <div class="section justify-content-center" id="section0">
+		<div class="p-4 d-flex flex-column w-75 justify-content-center bg-fade">
+            {% load static %}
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-4 justify-content-center">
+                <img class="img-fluid" src="{% static 'images/logo/logo-filled-black.svg' %}"
+                     alt="Society Logo">
+                </div>
+            </div>
+			<h1 class="responsive-header"> <div> <strong>Anisoc</strong></div>Welcome Week 2025</h1>
+                <p class="mt-5 responsive-text">Scroll down to find out what events we're running!</p>
+
+                <a class="nav-link" href="{% url 'miscellaneous:home' %}" style="background-color: #2a2e6327; color: rgba(237, 237, 237, 0.847); padding: 0px; border-radius: 5px; scale:0.6;">
+                    <b><i style="color: rgba(237, 237, 237, 0.8);">Click here to navigate to the home page</i></b>
+                </a>
+
+		</div>
+	</div>
+	<div class="section justify-content-center" id="section1">
+		<div class="p-4 d-flex flex-column w-75 justify-content-center bg-fade">    
+			<h1 class="responsive-header">Wednesday 1st October</h1>
+            <h2 class="responsive-header-2">Movie Showing - Redline</h2>
+            <h3 class="responsive-header-3"><i>18:00 in <a style="color: #c0c0c0;" href="https://link.mazemap.com/CFB96mt4">MS.02</a></i></h3>
+
+            <p class="mt-5 responsive-text">Redline is about the biggest and most deadly racing tournament in the universe. Only held once every five years, everyone wants to stake their claim to fame, including JP, a reckless dare-devil driver oblivious to speed limits with his ultra-customized car - all the while, organized crime and militaristic governments want to leverage the race to their own ends. Amongst the other elite rival drivers in the tournament, JP falls for the alluring Sonoshee - but will she prove his undoing, or can a high speed romance survive a mass destruction race?</p>
+
+            <h3 class="responsive-header-3"><a style="color: #c0c0c0;" href="https://www.youtube.com/watch?v=2t26m_Q6ENo">Click here for the trailer</a></h3>
+            
+		</div>
+	</div>
+	
+    <div class="section justify-content-center" id="section2">
+		<div class="p-4 d-flex flex-column w-75 justify-content-center bg-fade">
+            <img class="img-fluid" src="{% static 'images/questionKonataa.png' %}">
+            <h1 class="responsive-header">Thursday 2nd October</h1>
+            <h2 class="responsive-header-2">Anisoc Quiz Night</h2>
+            <h3 class="responsive-header-3"><i>18:00 in <a style="color: #c0c0c0;" href="https://link.mazemap.com/P2KGSUap">LIB2</a></i></h3>
+
+            <p class="mt-5 responsive-text">Join us for a fun filled quiz and be ready to test your knowledge of anime and manga through a gauntlet of various quiz rounds! Prizes will be up for grabs for the best performers! This will also be a great opportunity to meet other members and get to know each other!</p>
+        </div>
+	</div>
+	
+    <div class="section justify-content-center" id="section3">
+		<div class="p-4 d-flex flex-column w-75 justify-content-center bg-fade">
+            <h1 class="responsive-header">Saturday 4th October</h1>
+            <h2 class="responsive-header-2">Games Social</h2>
+            <h3 class="responsive-header-3"><i>13:00 - 22:00(Drop in) in <a style="color: #c0c0c0;" href="https://link.mazemap.com/Nd9CnCWB">OC0.04</a></i></h3>
+            <img class="img-fluids" src="{% static 'images/shuFish.png'%}">
+
+            <p class="mt-0 responsive-text">Join us in a relaxed and informal setting to meet new people, while we host a wide variety of physical and digital games for you to enjoy! You can also take part in our mini drawing activity - bring your own art materials or use provided ones to draw your favourite characters. No experience required - veterans and novices alike can participate, with prizes up for grabs!
+            <p class="mt-0 responsive-text" style="color:greenyellow";><br>Feel free to just drop in for an opportunity to meet new people at the society and chat in a social environment!</p>
+            </p> 
+        </div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<!-- Import jQuery, Popper.js and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+<!-- Import custom site javascript -->
+<script src="{% static 'js/ttam.js' %}"></script>
+
+<script type="text/javascript">
+    var myFullpage = new fullpage('#fullpage', {
+        anchors: ['landing', 'wednesday', 'thursday', 'saturday'],
+        scrollBar: true,
+        navigation: true,
+        navigationPosition: 'right',
+        //navigationTooltips: ['First page', 'Second page', 'Third and last page']
+    });
+</script>
+
+</body>
+</html>
