@@ -15,6 +15,8 @@ format as the one on the server.
 This repository contains all the files needed to run the site, except for the config files, which future webmasters will
 need to copy to their machine from the server.
 
+NOTE: THE FOLLOWING IS DEPRECIATED! `pysassc` is provided by libsass, which lost the command long time ago, and repository is now archived.
+
 To build bootstrap with the overwrites used by the site, you will need to copy the bootstrap source files into 
 `.\static_files\scss` and use `pysassc` to build `ttam-bootstrap.scss`.
 

@@ -1,5 +1,6 @@
 # Virtual Env
 venv/
+.venv/
 
 # IDE Files
 .idea/
@@ -21,3 +22,4 @@ static_files/scss/bootstrap*
 config/settings.py
 apps/karaoke/management/commands/authdetails.json
 apps/library/management/commands/authdetails.json
+

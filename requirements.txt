@@ -1,12 +1,13 @@
-django>=4.2,<4.3
-mysqlclient==1.4.6
-bleach==3.3.0
-pillow==10.3.0
-martor==1.6.45
-gspread==3.6.0
-oauth2client==4.1.3
-requests==2.32.0
-djangorestframework==3.15.2
-libsass==0.20.1
-gunicorn==22.0.0
-markdown==3.0
+django>=4.2,<4.3 # need migration
+mysqlclient==1.4.6 # migration need additional software on server
+bleach==3.3.0 # depreciated, need migration, impact members, karaoke
+pillow==10.3.0 # need migration, very old, impact members
+martor==1.7.15
+gspread==3.6.0 # crazy old, need migration, impact library, karaoke
+oauth2client==4.1.3 # depreciated, archived, need migration, impact library, karaoke
+requests==2.32.5
+djangorestframework==3.16.1
+# previously provided pysassc command, no longer true.
+# libsass==0.20.1 # not sure if needed, upstream is dead
+gunicorn==25.1.0
+markdown==3.10.2
