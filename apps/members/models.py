@@ -1,4 +1,4 @@
-import bleach
+import nh3
 
 from random import randint
 from PIL import Image
@@ -93,8 +93,8 @@ class Member(models.Model):
 
     def save(self, *args, **kwargs):
         # Strip all HTML from nickname and discord_tag.
-        self.nickname = bleach.clean(self.nickname, tags=[], attributes={}, styles=[], strip=True)
-        self.discord_tag = bleach.clean(self.discord_tag, tags=[], attributes={}, styles=[], strip=True)
+        self.nickname = nh3.clean_text(self.nickname)
+        self.discord_tag = nh3.clean_text(self.discord_tag)
 
         super(Member, self).save(*args, **kwargs)
 

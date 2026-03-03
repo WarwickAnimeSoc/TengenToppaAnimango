@@ -1,4 +1,4 @@
-import bleach
+import nh3
 
 from django import forms
 from django.core.validators import RegexValidator
@@ -20,11 +20,11 @@ class KaraokeRequestForm(forms.Form):
     # Clean HTML from title and artist fields
     def clean_title(self):
         title = self.cleaned_data['title']
-        return bleach.clean(title, tags=[], attributes={}, styles=[], strip=True)
+        return nh3.clean_text(title)
 
     def clean_artist(self):
         artist = self.cleaned_data['artist']
-        return bleach.clean(artist, tags=[], attributes={}, styles=[], strip=True)
+        return nh3.clean_text(artist)
 
     def clean(self):
         cleaned_data = super(KaraokeRequestForm, self).clean()

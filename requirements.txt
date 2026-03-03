@@ -1,6 +1,6 @@
 django>=4.2,<4.3 # need migration
 mysqlclient==1.4.6 # migration need additional software on server
-bleach==3.3.0 # depreciated, need migration, impact members, karaoke
+nh3==0.3.3 # html sanitation
 pillow==10.3.0 # image processor # need migration, very old, impact members
 martor==1.7.15 # markdown editor + previews
 gspread==3.6.0 # crazy old, need migration, impact library, karaoke
