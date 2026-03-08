@@ -109,14 +109,14 @@ class Member(models.Model):
                 avatar_width, avatar_height = new_avatar.size
                 if avatar_width != image_dimensions[0] or avatar_height != image_dimensions[1]:
                     # Crop the largest square possible.
-                    smallest_side_by_half = min((avatar_width, avatar_height)) / 2
-                    avatar_width_by_half = avatar_width / 2
-                    avatar_height_by_half = avatar_height / 2
+                    smallest_side_by_half = min((avatar_width, avatar_height)) // 2
+                    avatar_width_by_half = avatar_width // 2
+                    avatar_height_by_half = avatar_height // 2
                     new_avatar = new_avatar.crop((avatar_width_by_half - smallest_side_by_half,
                                                   avatar_height_by_half - smallest_side_by_half,
                                                   avatar_width_by_half + smallest_side_by_half,
                                                   avatar_height_by_half + smallest_side_by_half)
-                                                 ).resize(image_dimensions, Image.ANTIALIAS)
+                                                 ).resize(image_dimensions, Image.Resampling.LANCZOS)
                     new_avatar.save(self.avatar_image.path, quality=90, format='PNG')
                     super(Member, self).save(*args, **kwargs)
             except Exception as e:
