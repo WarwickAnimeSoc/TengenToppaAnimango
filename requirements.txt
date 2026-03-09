@@ -1,5 +1,5 @@
-django>=4.2,<4.3 # need migration
-mysqlclient==1.4.6 # migration need additional software on server
+django>=5.2,<5.3 # migration to 6.0 requires python 3.12
+mysqlclient==2.2.8
 nh3==0.3.3 # html sanitation
 pillow==12.1.1 # image processor, resize member photos
 martor==1.7.15 # markdown editor + previews
