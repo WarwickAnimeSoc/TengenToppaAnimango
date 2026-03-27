@@ -3,7 +3,7 @@ mysqlclient==2.2.8
 nh3==0.3.3 # html sanitation
 pillow==12.1.1 # image processor, resize member photos
 martor==1.7.15 # markdown editor + previews
-requests==2.32.5
+requests==2.33.0
 djangorestframework==3.16.1 # json models
 # previously provided pysassc command, no longer true.
 # libsass==0.20.1 # not sure if needed, upstream is dead
