@@ -20,11 +20,11 @@ class KaraokeRequestForm(forms.Form):
     # Clean HTML from title and artist fields
     def clean_title(self):
         title = self.cleaned_data['title']
-        return nh3.clean_text(title)
+        return nh3.clean(title, tags=set())
 
     def clean_artist(self):
         artist = self.cleaned_data['artist']
-        return nh3.clean_text(artist)
+        return nh3.clean(artist, tags=set())
 
     def clean(self):
         cleaned_data = super(KaraokeRequestForm, self).clean()

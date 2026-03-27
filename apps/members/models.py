@@ -93,8 +93,8 @@ class Member(models.Model):
 
     def save(self, *args, **kwargs):
         # Strip all HTML from nickname and discord_tag.
-        self.nickname = nh3.clean_text(self.nickname)
-        self.discord_tag = nh3.clean_text(self.discord_tag)
+        self.nickname = nh3.clean(self.nickname, tags=set())
+        self.discord_tag = nh3.clean(self.discord_tag, tags=set())
 
         super(Member, self).save(*args, **kwargs)
 
