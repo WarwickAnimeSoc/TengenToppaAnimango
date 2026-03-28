@@ -8,11 +8,16 @@
     {{ article.title }}
 {% endblock %}
 
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/jumbotron.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class="jumbotron mt-5">
         <h1 class="display-4">{{ article.title }}</h1>
         <p class="lead">{{ article.get_article_type_display }}</p>
-        <hr class="my-4">
+        <hr>
         <p class="lead">Posted on {{ article.created|date:'d/m/Y' }} by {{ article.created_by.member }}</p>
     </div>
     <div id="article-content">{% load martortags %}{{ article.content|safe_markdown }}</div>

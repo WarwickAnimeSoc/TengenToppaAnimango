@@ -4,11 +4,16 @@
     {{ event.title }}
 {% endblock %}
 
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/jumbotron.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class="jumbotron mt-5">
         <h1 class="display-4">{{ event.title }}</h1>
         <p class="lead">{{ event.subtitle }}</p>
-        <hr class="my-4">
+        <hr>
         <p><b>When:</b> {{ event.nice_when_descriptor }}</p>
         {% if event.event_location != "" %}
             <p><b>Where:</b> {{ event.event_location }}</p>
