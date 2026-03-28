@@ -12,6 +12,6 @@
 
 {% block javascript %}
     <script>
-        $(window).on('load', writeDivergenceMeter())
+        window.onload = (event) => writeDivergenceMeter();
     </script>
 {% endblock %}

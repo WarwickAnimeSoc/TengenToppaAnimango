@@ -29,34 +29,30 @@ function writeDivergenceMeter() {
 /* Multi element carousel next */
 /* Used to move items left on a multi element carousel */
 function multiCarouselNext() {
-    /* Move first child to end and hide */
-    let multiCarouselDiv = $('#multiCarousel')
-    let firstChild = multiCarouselDiv.children(':first-child')
-    firstChild.css({display: 'none'});
-    multiCarouselDiv.append(firstChild)
-
-    /* Un-hide first hidden element */
-    multiCarouselDiv.children(':hidden').first().css({display: 'block'})
+    let carousel = document.getElementById('multi-carousel');
+    carousel.appendChild(carousel.firstElementChild);
 }
 
 /* Multi element carousel prev */
 /* Used to move items right on a multi element carousel */
 function multiCarouselPrev() {
-    /* Move first child to end and hide */
-    let multiCarouselDiv = $('#multiCarousel')
-    let lastChild = multiCarouselDiv.children(':last-child')
-    lastChild.css({display: 'block'})
-    multiCarouselDiv.prepend(lastChild)
-
-    /* Un-hide first hidden element */
-    multiCarouselDiv.children(':visible').last().css({display: 'none'})
+    let carousel = document.getElementById('multi-carousel');
+    carousel.insertBefore(
+        carousel.firstElementChild,
+        carousel.lastElementChild,
+    )
+    carousel.appendChild(carousel.firstElementChild);
 }
 
 /* Article image scaling setup */
 /* Adds the scaleImage function to the onclick attribute of each image in the page */
 function addScaleImageOnClick() {
-    let article = $('#article-content')
-    article.find('img').attr('onClick', 'scaleImage(this);').css({'max-width': '20%', 'cursor': 'pointer'});
+    let article = document.getElementById('article-content');
+    article.querySelectorAll('img').forEach((img) => {
+        img.setAttribute('onClick', 'scaleImage(this);');
+        img.style.maxWidth = '20%';
+        img.style.cursor = 'pointer';
+    });
 }
 
 /* Article view image scaling */

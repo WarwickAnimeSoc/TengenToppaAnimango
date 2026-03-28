@@ -49,7 +49,7 @@
 
 {% block javascript %}
     <script>
-        $(window).on('load', archiveSizeCheck())
+        window.onload = (event) => archiveSizeCheck();
     </script>
 {% endblock %}
 

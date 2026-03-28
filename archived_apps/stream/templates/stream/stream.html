@@ -59,11 +59,17 @@
             videoPlayer.fluid(true);
         }
 
-        /* Initialise the loop */
-        $(document).ready(function () {
+        function onReady() {
             videoPlayerSetup();
             generateStreamToken();
             timerLoop();
-        })
+        }
+
+        /* Initialise the loop */
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', onReady);
+        } else {
+            onReady();
+        }
     </script>
 {% endblock %}

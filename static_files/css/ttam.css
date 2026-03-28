@@ -38,6 +38,16 @@ body .container {
     padding-left: 2rem;
 }
 
+@media (min-width: 576px) {
+    #multi-carousel > * {
+        display: none;
+    }
+
+    #multi-carousel > :nth-child(-n+3) {
+        display: block;
+    }
+}
+
 /* Multi Carousel button centering */
 .multi-carousel-button {
     display: flex !important;
@@ -46,10 +56,6 @@ body .container {
 
 /* Multi Carousels should only show 1 item on mobile */
 @media (max-width: 576px) {
-    .multi-carousel-item {
-        display: block !important;
-    }
-
     .multi-carousel-button {
         display: none !important;
     }

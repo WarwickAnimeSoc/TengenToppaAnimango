@@ -563,6 +563,6 @@ Karaoke Guide
 
 {% block javascript %}
 <script>
-  $(window).on('load', addScaleImageOnClick())
+  window.onload = (event) => addScaleImageOnClick();
 </script>
 {% endblock %}
