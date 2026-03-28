@@ -1,0 +1,568 @@
+{% extends "base.html" %}
+
+{% block title %}
+Karaoke Guide
+{% endblock %}
+
+{% block head %}
+<style>
+  td {
+    padding: 0px 12px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<h1>Karaoke Mapping Guide 3</h1>
+<div id="article-content">
+  <p>
+  <a href="https://pastebin.com/WfZTmEnC">Original guide </a>by Zoggoth.
+  <br>
+  <a href="{% url 'karaoke:guide2' %}">Karaoke Mapping Guide 2</a> last updated in 2023.
+  <br>
+  Current guide last updated in 2026.
+  </p>
+  <p>
+  <hr>
+  <small>Note: You can click on images to enlarge them.</small>
+  <hr>
+  </p>
+  <p>
+  To start mapping, it's a good idea to check how far along the process you should begin:
+  <ol>
+    <li>
+      <strong>Check Our Karaoke Map System:</strong>
+      <br>
+      We have our own system for karaoke maps, so start by checking
+      <a href="{% url 'karaoke:karaoke_list' 1 %}">there</a>.
+      These will display whether they are TV length or not,
+      so check to make sure we have the correct version you'd like.
+    </li>
+    <li><strong>Community of Ultrastar Mappers:</strong>
+      <br>
+      There is a 
+      <a href="https://ultrastar-es.org/en/canciones">community of Ultrastar mappers</a> 
+      from which you can get maps.
+      If the song you want is there, you can use the 
+      <a href="{% url 'karaoke:request' %}">request page</a>
+      on our website,
+      and the AV will get it from the aforementioned site.
+    </li>
+  </ol>
+  <p>
+  These are the only ways we have to avoid you doing any work. Now, let's move on to the actual mapping section - but there’s one more thing to check.
+  </p>
+
+  <ol start="3">
+    <li><strong>Kara.moe Database:</strong>
+      <br>
+      There's another database of songs on <a href="https://kara.moe">kara.moe</a>.
+      These are in the wrong format, but they can be reformatted with 
+      <a href="https://github.com/WarwickAnimeSoc/Karaluxer">Karaluxer</a>.
+      This will greatly reduce the work you'll need to put in, but there is editing required in this process.
+    </li>
+
+    <li><strong>Not in Any Database?</strong>
+      <br>
+      If the song you wish to map isn't in this database, then you will need to do everything yourself - this will be fully explained later.
+    </li>
+  </ol>
+
+  <hr>
+
+  <h2>Required Programs:</h2>
+
+  <p>
+  Begin with creating a folder to store all of these programs to ensure nothing is misplaced.
+  </p>
+
+  <p>
+  To convert songs from <a href="https://kara.moe">kara.moe</a> you will need
+  <a href="https://github.com/WarwickAnimeSoc/Karaluxer">Karaluxer</a>.
+  <br>
+  - Go through the <a href="https://github.com/WarwickAnimeSoc/KaraLuxer/blob/main/README.md"><code>README.md</code></a> - it outlines some additional programs you’ll need to install.
+  </p>
+
+  <p>
+  To actually map songs install either 
+  <a href="https://yass-along.com/">Yass</a>
+  or
+  <a href="https://karedi.gitbook.io/karedi">Karedi</a>,
+  these are discussed in detail later.
+  </p>
+
+  <p>
+  For assistance in pitching your maps,
+  use <a href="https://github.com/paradigmn/ultrastar_pitch">Ultrastar-Pitch</a>.
+  </p>
+
+  <p>
+  To test your maps for any errors, use <a href="https://github.com/UltraStar-Deluxe/USDX">UltraStar Deluxe</a>
+  </p>
+
+  <p>
+  If you ever have difficulty with acquiring these programs, feel free to ask for advice on our <a href="{% url 'miscellaneous:discord' %}">Discord channel</a> under <code>#karaoke-discussion.</code>
+  </p>
+
+  <hr>
+
+  <h2>Using Karaluxer:</h2>
+
+  <img src="{% static 'karaoke/karaluxer-example.png' %}" alt="Karaluxer example image">
+
+  <p>
+  There are two required dialogue boxes for Karaluxer: 
+  <ul>
+    <li>the Kara.moe URL</li>
+    <li>a cover image (must be square and in standard format like JPEG or PNG).</li>
+  </ul>
+  </p>
+
+  <p>
+  To note, if the Kara.moe URL doesn’t work, you can input the specific files yourself (or if you want to improve/replace them).
+  </p>
+
+  <h3>Additional Understanding:</h3>
+
+  <p>
+  To have better comprehension to what Karaluxer is doing,
+  you can go to the Kara.moe page click the download icon,
+  and look at the pop-up that has a <code>.json</code>, <code>.ass</code>, and two <code>.mp4</code> files (or any other video files).
+  Karaluxer uses these files to generate files that are compatible with Ultrastar.
+  These would be the files you need for inputting the files yourself.
+  </p>
+
+  <p>
+  Now that you have the Kara.moe URL and a cover image, you might notice a lot of other options. Most of these can be ignored, but some should be considered:
+  </p>
+
+  <ul>
+    <li><strong>TV Sized:</strong>
+      <br>
+      Obviously, click this if it’s a TV-sized song, normally ~1.5 minutes,
+      but openings and endings up to 2.5 minutes are allowed if they are the standard op or ed.
+    </li>
+
+    <li><strong>BPM:</strong>
+      <br>
+      To make a high-quality map and save you time,
+      you want the BPM to be correct;
+      As seen in the dialogue, this is defaulted to <code>1500</code>.
+      There are multiple ways of checking a song's BPM.
+      The main two are using the song's sheet music or using a BPM checker.
+      The BPM from an analyser will likely be <strong>wrong</strong> by a factor of 2 or 4 so multiply by whichever to land between <code>300-400</code>.
+      (You may need to run the Karaluxer <strong>twice</strong> in order to obtain a <code>.mp3</code> for analysing).
+    </li>
+
+    <li>
+      I do not recommend using any of the other dialogue options.
+      The only one to consider would be to generate pitches,
+      but it’s much easier to space the characters before pitching them.
+    </li>
+  </ul>
+
+  <p>
+  <strong>Note for those mapping songs for Anisoc:</strong>
+  <br>
+  The output of Karaluxer without edits is not considered up to par for a submission.
+  It won’t be added by the AV or will be deleted once we see it unless you improve the quality of the map.
+  </p>
+
+  <p>
+  Once Karaluxer completes the process,
+  there will be a new file in output within the Karaluxer-main folder.
+  The files will be named <code>[artist] - [song name] [(TV)]</code>.
+  These files consist of:
+  </p>
+
+  <ul>
+    <li>A cover image</li>
+    <li>An audio file (<code>MP3</code>)</li>
+    <li>A video file (normally <code>MP4</code>)</li>
+    <li>A text file that contains the 'notes'</li>
+  </ul>
+
+  <img src="{% static 'karaoke/text-file-example.png' %}" alt="Text file example image">
+
+  <p>
+  This is the only file that will be changed by any further editing.
+  If you want, you can open it up and have a look.
+  You can even manually change it, this is sometimes faster than using other applications.
+  </p>
+
+  <p>
+  Inside you will see a set of metadata for the song.
+  Some of these can be changed and may need to be:
+  </p>
+
+  <ul>
+    <li>
+      If the <code>#TITLE</code>, <code>#ARTIST</code> or the file names have any special characters,
+      they will need to be changed.
+      (If the file names are changed they will have to be done so everywhere to ensure everything is read correctly)
+    </li>
+
+    <li>
+      Add your name under <code>#CREATOR</code> if you’d like credit.
+    </li>
+
+    <li>
+      You will also see <code>#MP3</code>, <code>#COVER</code>, and <code>#VIDEO</code> tags.
+      These must correspond to the other files, if they don’t, the map will not work.
+    </li>
+
+    <li>
+      The <code>#BPM</code> and <code>#GAP</code> are auto-set by Karaluxer, so they can be ignored.
+    </li>
+
+    <li>
+      The last one would be <code>#TAGS</code>.
+      These are not used on our system, but they can be cleared up if they look messy.
+      Just make sure to keep the show name and the type of song (OP, ED, etc.).
+    </li>
+  </ul>
+
+  <h2>The Map Content:</h2>
+
+  <p>
+  <strong>Note format:</strong>
+  <br>
+<code>:</code> = Sung (regular note)<br>
+<code>*</code> = Gold note (worth 2x points)<br>
+<code>F</code> = Spoken (not worth points, use for dialogue)<br>
+<code>-</code> = Line break<br>
+<code>E</code> = End of song
+  </p>
+
+  <p>
+  The sung, gold and spoken notes are written as;
+  <br>
+  <pre>[format type] [note_start] [note_length] [pitch] [character]</pre>
+  </p>
+
+  <p>
+  And line breaks as;
+  <br>
+  <pre>- [note_start]</pre>
+  </p>
+
+  <p>
+  In addition to this, you need spaces within the characters to split up words. For instance:
+  <code><pre>
+: 303 5 1 One
+: 309 7 3 piece
+    </pre></code>
+
+    Would produce "Onepiece", whereas:
+
+  <code><pre>
+: 303 5 1 One
+: 309 7 3  piece
+    </pre></code>
+
+  Would produce "One piece" (the space could also be at the end of the first word but is much easier as shown above when editing).
+  </p>
+
+  <img src="{% static 'karaoke/notes-example.png' %}" alt="Notes example">
+
+  <hr>
+
+  <h2>Making Your Own Map:</h2>
+
+  <p>
+  Please skip this section if you do not plan to make your own map,
+  as it may be confusing especially if you have no experience.
+  It is recommended to use the Karaluxer method before this to gain experience.
+  </p>
+
+  <p>
+  There are a few options that you can start from to make your own map,
+  but this section will briefly explain where to start if you plan to only use the programs listed above. 
+  </p>
+
+  <p>
+  To make a map you will need to acquire a cover image, audio file and video file yourself,
+  they will have to meet the same conditions as previously discussed.
+  </p>
+
+  <p>
+  Next, create a <code>.txt</code> file containing the map.
+  Normally this is done by Karaluxer, but you can make your own file manually using this metadata:
+  </p>
+
+  <code><pre>
+#TITLE:Song Title
+#ARTIST:Song Artist
+#LANGUAGE:Japanese
+#YEAR:
+#CREATOR:
+#MP3:Title.mp3
+#COVER:Title [CO].jpg
+#VIDEO:Title.mp4
+#BPM: (use double or quadruple bpm for more precision)
+#GAP:0
+#TAGS: (can just be anime title and opening or ending e.g. Bleach, Opening)
+    </pre></code>
+
+  <p>
+  Make sure all filenames exactly match the metadata in the <code>.txt</code> file
+  otherwise the map will not load,
+  also add "<code>(TV)</code>" at the end if needed (e.g., <code>Aimer - Torches (TV).mp3</code>).
+  If you are having trouble, look at another map's <code>.txt</code> file and copy the format.
+  </p>
+
+  <p>
+  Lastly, you'll need to write in all the lyrics yourself 
+  and then position them the same way you would a normal map.
+  </p>
+
+  <hr>
+
+  <h2>Editing a Map:</h2>
+
+  <p>
+  There are two main editors we use:
+  <a href="https://yass-along.com/">Yass</a>
+  and
+  <a href="https://karedi.gitbook.io/karedi">Karedi</a>.
+  Both do the same thing but have positives and negatives.
+  Have a go with both and see which one you prefer.
+  The key binds of both programs are extremely similar but some might not work for Karedi:
+  </p>
+
+  <table>
+    <tr>
+      <td><code>Left and Right Arrow Keys</code></td>
+      <td>select nodes</td>
+    </tr>
+    <tr>
+      <td><code>Up and Down Arrow Keys</code></td>
+      <td>navigate through pages/lines</td>
+    </tr>
+    <tr>
+      <td><code>Ctrl + A</code></td>
+      <td>Select all notes (good for moving multiple notes or changing multiple pitches at once)</td>
+    </tr>
+    <tr>
+      <td><code>Alt + Left/Right</code></td>
+      <td>moves end of note(s)</td>
+    </tr>
+    <tr>
+      <td><code>Ctrl + Left/Right</code></td>
+      <td>moves start of note(s)</td>
+    </tr>
+    <tr>
+      <td><code>Shift + arrow keys</code></td>
+      <td>moves note(s) (pitch and timing)</td>
+    </tr>
+    <tr>
+      <td><code>Spacebar</code></td>
+      <td>plays selected note(s)</td>
+    </tr>
+    <tr>
+      <td><code>P</code></td>
+      <td>plays the whole page/line</td>
+    </tr>
+    <tr>
+      <td><code>Minus Sign</code></td>
+      <td>adds syllables to a pre existing note</td>
+    </tr>
+    <tr>
+      <td><code>F4</code></td>
+      <td>enables access to edit lyrics</td>
+    </tr>
+    <tr>
+      <td>(After using <code>F4</code>) <code>Enter</code> at end of note</td>
+      <td>Puts following notes onto a new line</td>
+    </tr>
+    <tr>
+      <td>(After using <code>F4</code>) <code>Minus Sign</code> at end of a note which is not a syllable of the next word</td>
+      <td>Merges notes into a single word as separate syllables.</td>
+    </tr>
+  </table>
+
+  <br>
+
+  <p>
+  In Yass, you will need to set the library to read from.
+  I recommend creating a separate folder for the songs you are editing.
+  They will then appear on the main page, which you can select to edit. 
+  </p>
+
+  <p>
+  Whereas in Karedi, you need to open the desired song file each time.
+  This can be done by selecting File and then Open.
+  </p>
+
+  <p>
+  In either case, you will now see a set of notes like this:
+  </p>
+
+  <img src="{% static 'karaoke/karedi-step-1.png' %}" alt="Karedi step 1 image">
+
+  <p>
+  These should be in the rough locations of where the words are, but they will need to be edited.
+  </p>
+
+  <strong>Editing Tips:</strong>
+
+  <p>
+  Start with the first character in the line and move it to the left,
+  so that at the end of the note you hear the beginning of said note.
+  Then, move it to the other side of that position to get it in the correct place.
+  </p>
+
+  <p>
+  Next, make the note length too long (so you can hear the start of the next character)
+  and then shorten it until you can no longer hear the next character
+  (you can slow the song down in the top right).
+  </p>
+
+  <p>
+  The next note will likely start one beat after the previous one.
+  Repeat these steps for the whole line and song.
+  You’ll get better with practice, so don’t worry if this takes a while at first.
+  </p>
+
+  <p>
+  <em>
+    Additionally, if you have the correct BPM,
+    then these notes will always start on an odd beat and be of odd length (1, 3, 5, etc.).
+    Doing this will make your job much easier,
+    and you’ll always have a one-space gap between notes at a minimum.
+    This is important for producing a good map.
+  </em>
+  </p>
+
+  <p>
+  This process requires practice and you'll learn your own process to do it,
+  this is advice and not rules for making a successful map.
+  </p>
+
+  <img src="{% static 'karaoke/karedi-step-2.png' %}" alt="Karedi step 2 image">
+
+  <p>
+  The next step to a good map is pitching.
+  This can be difficult, especially if you're tone-deaf, but there are ways to help.
+  The easiest method is using <a href="https://github.com/paradigmn/ultrastar_pitch">Ultrastar-pitch</a>.
+  </p>
+
+  <p>
+  This automatically pitches a song and produces a new file called <code>notes_new</code>.
+  Rename this to the <code>.txt</code> file name in use and delete the old one.
+  </p>
+
+  <p>
+  This is not perfect as it pitches across the same octave.
+  Very high pitches (C, D) can often end up at the bottom while they should be at the top,
+  and very low pitches (A, B) can end up at the top.
+  The main solution is to move blocks of notes that are obviously in the wrong place to the correct location.
+  </p>
+
+  <img src="{% static 'karaoke/karedi-step-3.png' %}" alt="Karedi step 3 image">
+
+  <p>
+  This will still need to be checked as some notes can still be placed in the wrong locations.
+  In both Yass and Karedi, there are ways to play the song alongside a piano to check if it’s correct.
+  In Yass, press <code>Shift + P</code>, and in Karedi, press <code>Ctrl + Space</code>.
+  </p>
+
+  <p>
+  There are multiple strategies for pitching aside from the auto-pitcher:
+  humming into a mic, using a MIDI, referencing sheet music, or checking YouTube piano covers.
+  But this is completely up to you, as long as the pitching is very close they will be accepted 
+  (enough to where no one can tell during a karaoke).
+  </p>
+
+  <img src="{% static 'karaoke/karedi-step-4.png' %}" alt="Karedi step 4 image">
+
+  <hr>
+
+  <h2>Completing a Map and Testing:</h2>
+
+  <p>
+  The last step of the actual mapping is the lyrics.
+  It's a good idea to check them for errors.
+  The best way to do this is to open any online song lyric page.
+  The easiest way to change them is to open the text file in Notepad and manually edit them.
+  </p>
+
+  <p>
+  <em>
+    Furthermore, there are issues with apostrophes in both the lyrics and filename that can cause issues in our system.
+    Please remove them before submitting the map.
+  </em>
+  </p>
+
+  <p>
+  The last part of this is when the lines break.
+  There aren’t specific rules, but think about how it would feel to sing them
+  (a lot of times, online lyrics will be broken up appropriately).
+  </p>
+
+  <p>
+  Before submitting a map, test it by running it on your own system.
+  Ultrastar or <a href="https://github.com/Vocaluxe/Vocaluxe">Vocaluxe</a>
+  can be used to check the lyrics, line breaks, and ensure the map works properly.
+  </p>
+
+  <p>
+  A convenient tool to make sure all maps run correctly is <a href="https://github.com/UltraStar-Deluxe/UltraStar-Manager">Ultrastar-Manager</a>.
+  It will show any issues with maps that may cause it to not run.
+  </p>
+
+  <p>
+  If you ever need help, you can ask on our <a href="{% url 'miscellaneous:discord' %}">Discord</a> in <code>#karaoke-discussion</code>,
+  and someone will help you out.
+  </p>
+
+  <hr>
+
+  <h2>Anisoc Specific Submission Guide:</h2>
+
+  <p>
+  Once you have a map, you’ll need to submit it to the AV through <a href="{% url 'miscellaneous:discord' %}">discord</a> so they can add it to the Karaoke system.
+  Here are a few things you can do to help the AV out and ensure your song is working when you go to pick it:
+  </p>
+
+  <ol>
+    <li><strong>Anime Source:</strong>
+      <br>
+      If the song comes from an anime,
+      provide the AV with the <a href="https://anilist.co/">Anilist</a> link for the anime along with your submission.
+      This makes it easier to add the song to the website
+      as it saves the AV from having to search for which anime the song is from.
+    </li>
+
+    <li><strong>Google Drive Upload:</strong>
+      <br>
+      If you're uploading the song to Google Drive,
+      make sure there aren’t any apostrophes in the filenames.
+      Apostrophes will be replaced with underscores 
+      (e.g., <code>MINMI - Who's Theme.mp3</code> becomes <code>MINMI - Who_s Theme.mp3</code>).
+      This will break the map, as Vocaluxe won’t be able to find the files for the map.
+      You can avoid this by removing apostrophes
+      (make sure to update the Ultrastar file to point to the new filenames)
+      or by placing the song inside a zip and uploading that.
+    </li>
+
+    <li><strong>Video File Size:</strong>
+      <br>
+      Lastly, if the video file for your map is very large (&gt;100-200MB),
+      it’s worth encoding it to a lower quality to reduce its size (some very large videos can also lag).
+      You’ll need to find out how to do this yourself,
+      but <a href="https://handbrake.fr/">Handbrake</a>
+      and <a href="https://ffmpeg.org/about.html">FFMPEG</a>
+      are free tools with plenty of documentation that will help you do this easily.
+    </li>
+  </ol>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(window).on('load', addScaleImageOnClick())
+</script>
+{% endblock %}

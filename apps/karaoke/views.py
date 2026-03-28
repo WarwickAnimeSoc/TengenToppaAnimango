@@ -75,6 +75,8 @@ def request_song(request):
             messages.add_message(request, messages.ERROR, 'You need to login to request songs.')
     return render(request, 'karaoke/request.html', context=context)
 
+def mapping_guide3(request):
+    return render(request, 'karaoke/guide3.html')
 
-def mapping_guide(request):
-    return render(request, 'karaoke/guide.html')
+def mapping_guide2(request):
+    return render(request, 'karaoke/guide2.html')
