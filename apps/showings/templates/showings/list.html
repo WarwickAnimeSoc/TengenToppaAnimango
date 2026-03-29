@@ -42,7 +42,7 @@
                     <h5 class="card-title">{{ showing.get_showing_type_display }}</h5>
                 {% endif %}
                 <h6 class="card-subtitle text-muted mb-2">{{ showing.date|date:'d/m/Y' }}</h6>
-                <ul class="pl-0">
+                <ul class="ps-0">
                     {% for show in showing.show_set.all %}
                         <li class="row align-items-center">
                             <div class="col">
@@ -56,7 +56,7 @@
                                         {{ show.series.title_romaji }}
                                     {% endif %}
                                 </p>
-                                <p class="ml-2">{{ show.details }}</p>
+                                <p class="ms-2">{{ show.details }}</p>
                             </div>
                             <div class="col-auto">
                                 {% load static %}

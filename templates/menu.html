@@ -1,13 +1,13 @@
 <header>
-    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary ps-3">
         <a class="navbar-brand" href="{% url 'miscellaneous:home' %}">
             Warwick Anime and Manga Society
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav me-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'events:upcoming' page=1 %}">Events</a>
@@ -23,7 +23,7 @@
                     <a class="nav-link" href="{% url 'library:library_list' page=1 %}?category=all">Library</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarKaraokeDropdown" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarKaraokeDropdown" data-bs-toggle="dropdown">
                         Karaoke
                     </a>
                     <div class="dropdown-menu">
@@ -33,7 +33,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarSocietyDropdown" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarSocietyDropdown" data-bs-toggle="dropdown">
                         Society
                     </a>
                     <div class="dropdown-menu">
@@ -49,7 +49,7 @@
 
                 {% if user.is_staff %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarSocietyDropdown" data-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarSocietyDropdown" data-bs-toggle="dropdown">
                             Exec Tools
                         </a>
                         <div class="dropdown-menu">
@@ -60,11 +60,11 @@
             </ul>
             <ul class="navbar-nav flex-row">
                 {% if user.is_authenticated %}
-                    <li class="nav-item dropdown mr-n3">
+                    <li class="nav-item dropdown">
                         {% load static %}
-                        <a class="nav-link pb-0 pt-0" href="#" id="navbarMemberDropdown" data-toggle="dropdown">
+                        <a class="nav-link pb-0 pt-0" href="#" id="navbarMemberDropdown" data-bs-toggle="dropdown">
                             {{ user.member }}
-                            <img alt="Avatar" class="ml-1 image-navbar-avatar rounded"
+                            <img alt="Avatar" class="ms-1 image-navbar-avatar rounded"
                                     {% if user.member.avatar_image %}
                                  src="{{ user.member.avatar_image.url }}"
                                     {% else %}
