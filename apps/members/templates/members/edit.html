@@ -4,6 +4,11 @@
     Edit Profile
 {% endblock %}
 
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock %}
+
 {% block content %}
     <h1 class="mt-5 mb-3">Edit your profile</h1>
     <form action="{% url "members:edit" %}" method="POST" enctype="multipart/form-data">

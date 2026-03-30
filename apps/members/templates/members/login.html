@@ -4,6 +4,11 @@
     Login
 {% endblock %}
 
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock %}
+
 {% block content %}
     <h1 class="mt-5 mb-3">Login</h1>
     <p>If you've just joined the society, check your Warwick Email for an email containing your password</p>

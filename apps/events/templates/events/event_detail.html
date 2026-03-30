@@ -36,12 +36,9 @@
             <form action="{% url "events:event_detail" event_id=event.id %}" method="POST" class="mt-3">
                 {% csrf_token %}
                 <div class="input-group">
-                    <label for="signupComment"></label>
                     <input type="text" class="form-control {% if form.signup_comment.errors %}is-invalid{% endif %}"
-                           id="signupComment" name="signup_comment" placeholder="Signup Comment">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit">Signup!</button>
-                    </div>
+                           name="signup_comment" placeholder="Signup Comment">
+                    <button class="btn btn-outline-primary" type="submit">Signup!</button>
                     {% for error in form.signup_comment.errors %}
                         <div class="invalid-feedback">{{ error }}</div>
                     {% endfor %}
@@ -53,15 +50,17 @@
         <ul class="list-unstyled">
             {% load static %}
             {% for signup in signups %}
-                <li class="media mt-3 mb-3">
-                    <img alt="Avatar" class="me-3 image-signup-avatar rounded"
-                            {% if signup.member.avatar_image %}
-                         src="{{ signup.member.avatar_image.url }}"
-                            {% else %}
-                         src="{% static "images/default_avatar.png" %}"
-                            {% endif %}
-                    >
-                    <div class="media-body">
+                <li class="d-flex mt-3 mb-3">
+                    <div class="flex-shrink-0">
+                        <img alt="Avatar" class="me-3 image-signup-avatar rounded"
+                                {% if signup.member.avatar_image %}
+                             src="{{ signup.member.avatar_image.url }}"
+                                {% else %}
+                             src="{% static "images/default_avatar.png" %}"
+                                {% endif %}
+                        >
+                    </div>
+                    <div class="flex-grow-1">
                         <h5 class="mt-0 mb-1 {% if signup.verified %} text-success {% else %} text-warning {% endif %}">{{ signup.member }}</h5>
                         {% if user.is_staff %}
                             <p class="small text-muted mb-0">{{ signup.member.user.get_full_name }} - {{ signup.member.discord_tag }} - {{ signup.member.user.email }}</p>
