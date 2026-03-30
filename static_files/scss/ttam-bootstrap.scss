@@ -1,3 +1,7 @@
+@import "bootstrap-5.2.3/scss/functions";
+$enable-negative-margins: true;
+@import "bootstrap-5.2.3/scss/variables";
+
 // Overrides
 $theme-colors: (
     "primary": #328CC1,
@@ -5,9 +9,10 @@ $theme-colors: (
     "success": #81F495,
     "danger": #ED6A5A,
     "warning": #FDE74C,
+    "jumbotron": #E9ECEF,
+    "light": $light,
+    "dark": $dark,
 );
 
-$enable-negative-margins: true;
-
-// Boostrap
-@import "bootstrap-5.1.3/scss/bootstrap";
+@import "bootstrap-5.2.3/scss/maps";
+@import "bootstrap-5.2.3/scss/bootstrap";
