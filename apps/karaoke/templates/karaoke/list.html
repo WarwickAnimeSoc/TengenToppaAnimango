@@ -14,7 +14,7 @@
     <form action="{% url "karaoke:karaoke_list" page=1 %}" method="GET" class="mt-3 mb-3">
         <div class="input-group">
             <div class="d-flex">
-            <select name="query_sort" class="form-control rounded-0 rounded-start">
+            <select name="query_sort" class="form-select rounded-0 rounded-start">
                 <option disabled selected>Sort By</option>
                 <option {% if query_sort == 'title' %}selected {% endif %}value="title">Title</option>
                 <option {% if query_sort == 'artist' %}selected {% endif %}value="artist">Artist</option>

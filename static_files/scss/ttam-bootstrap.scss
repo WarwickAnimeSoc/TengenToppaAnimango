@@ -73,6 +73,10 @@ $theme-colors: (
     .list-group {
         --bs-list-group-color: #ddd;
         --bs-list-group-bg: #000;
+        --bs-list-group-action-hover-color: #ddd;
+        --bs-list-group-action-hover-bg: #222;
+        --bs-list-group-action-active-color: #ddd;
+        --bs-list-group-action-active-bg: #222;
         --bs-list-group-border-color: #444;
     }
 
@@ -85,6 +89,13 @@ $theme-colors: (
     }
 
     .pagination {
+        --bs-pagination-color: #aaa;
+        --bs-pagination-bg: #222;
+        --bs-pagination-border-color: #444;
+        --bs-pagination-hover-color: #aaa;
+        --bs-pagination-hover-bg: #333;
+        --bs-pagination-hover-border-color: #444;
+        --bs-pagination-focus-bg: #333;
         --bs-pagination-disabled-color: #aaa;
         --bs-pagination-disabled-bg: #222;
         --bs-pagination-disabled-border-color: #444;
