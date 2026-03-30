@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 
-{% block head %}
-    <meta name="robots" content="noindex">
-{% endblock %}
-
 {% block title %}
     {{ article.title }}
 {% endblock %}
 
 {% block head %}
 {% load static %}
+<meta name="robots" content="noindex">
 <link rel="stylesheet" type="text/css" href="{% static 'css/jumbotron.css' %}">
 {% endblock %}
 
