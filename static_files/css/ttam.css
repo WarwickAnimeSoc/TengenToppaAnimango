@@ -20,11 +20,6 @@ body .container {
     width: 32px;
 }
 
-/* Tint card backgrounds */
-.card {
-    background-color: #fafafa;
-}
-
 /* More padding on cards */
 .card-body {
     padding-left: 2rem;

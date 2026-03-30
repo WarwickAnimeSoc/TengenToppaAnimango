@@ -26,3 +26,68 @@ $theme-colors: (
 @import "bootstrap-5.2.3/scss/maps";
 @import "bootstrap-5.2.3/scss/bootstrap";
 
+.card {
+    --bs-card-bg: #fafafa;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bs-body-bg: #000;
+        --bs-body-color: #ddd;
+        --bs-jumbotron: #222;
+        --bs-light-rgb: 32,32,32;
+        --bs-dark-rgb: 180,180,180;
+        --bs-border-color: #444;
+    }
+
+    .card {
+        --bs-card-cap-color: #222;
+        --bs-card-bg: #222;
+    }
+
+    .dropdown-menu {
+        --bs-dropdown-bg: #222;
+        --bs-dropdown-color: #ddd;
+        --bs-dropdown-link-color: #ddd;
+        --bs-dropdown-link-hover-bg: #333;
+        --bs-dropdown-link-hover-color: #ddd;
+    }
+
+    .form-select {
+        color: #ddd;
+        background-color: #222;
+        border-color: #444;
+    }
+    
+    .form-check-input {
+        background-color: #222;
+        border-color: #444;
+    }
+
+    .form-control, .form-control:focus {
+        color: #ddd;
+        background-color: #222;
+        border-color: #444;
+    }
+    
+    .list-group {
+        --bs-list-group-color: #ddd;
+        --bs-list-group-bg: #000;
+        --bs-list-group-border-color: #444;
+    }
+
+    .nav-tabs {
+        --bs-nav-tabs-border-color: #444;
+        --bs-nav-tabs-link-hover-border-color: #555 #555 #555;
+        --bs-nav-tabs-link-active-color: #ddd;
+        --bs-nav-tabs-link-active-bg: #0000;
+        --bs-nav-tabs-link-active-border-color: #444 #444 #0000;
+    }
+
+    .pagination {
+        --bs-pagination-disabled-color: #aaa;
+        --bs-pagination-disabled-bg: #222;
+        --bs-pagination-disabled-border-color: #444;
+    }
+}
+
