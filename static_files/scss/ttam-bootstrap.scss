@@ -1,15 +1,24 @@
 @import "bootstrap-5.2.3/scss/functions";
 $enable-negative-margins: true;
+$min-contrast-ratio: 3;
+
+$primary: #328CC1;
+$secondary: #0B3C5D;
+$success: #81F495;
+$danger: #ED6A5A;
+$warning: #FDE74C;
+$jumbotron: #E9ECEF;
+
 @import "bootstrap-5.2.3/scss/variables";
 
 // Overrides
 $theme-colors: (
-    "primary": #328CC1,
-    "secondary": #0B3C5D,
-    "success": #81F495,
-    "danger": #ED6A5A,
-    "warning": #FDE74C,
-    "jumbotron": #E9ECEF,
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "danger": $danger,
+    "warning": $warning,
+    "jumbotron": $jumbotron,
     "light": $light,
     "dark": $dark,
 );
