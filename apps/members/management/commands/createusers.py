@@ -13,6 +13,7 @@ from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.template.defaultfilters import title
 from django.contrib.auth.models import User
+from django.utils.crypto import get_random_string
 from django.core.mail import send_mail
 
 
@@ -82,7 +83,7 @@ def send_signup_mail(user, password):
 def create_new_members(members_list, logger):
     # Every member in members_list should be valid at this point.
     for member in members_list:
-        temporary_password = User.objects.make_random_password()
+        temporary_password = get_random_string(12)
 
         # Try to create the new User object.
         try:
