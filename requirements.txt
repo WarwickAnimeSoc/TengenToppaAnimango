@@ -1,11 +1,9 @@
-django>=5.2,<5.3 # migration to 6.0 requires python 3.12
+django>=6.0,<6.1
 mysqlclient==2.2.8
-nh3==0.3.3 # html sanitation
-pillow==12.1.1 # image processor, resize member photos
-martor==1.7.15 # markdown editor + previews
-requests==2.33.0
-djangorestframework==3.16.1 # json models
-# previously provided pysassc command, no longer true.
-# libsass==0.20.1 # not sure if needed, upstream is dead
-gunicorn==25.1.0
+nh3==0.3.6 # html sanitation
+pillow==12.3.0 # image processor, resize member photos
+martor==1.8.2 # markdown editor + previews
+requests==2.34.2
+djangorestframework==3.17.1 # json models
+gunicorn==26.0.0
 markdown==3.10.2 # render markdown
