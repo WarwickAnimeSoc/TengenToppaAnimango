@@ -1,9 +1,0 @@
-django>=6.0,<6.1
-mysqlclient==2.2.8
-nh3==0.3.6 # html sanitation
-pillow==12.3.0 # image processor, resize member photos
-martor==1.8.2 # markdown editor + previews
-requests==2.34.2
-djangorestframework==3.17.1 # json models
-gunicorn==26.0.0
-markdown==3.10.2 # render markdown

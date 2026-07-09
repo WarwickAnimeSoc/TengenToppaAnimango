@@ -11,6 +11,8 @@ media/
 
 # Generated Files
 *.pyc
+*.egg-info
+uv.lock
 
 # Logging Files
 logs/

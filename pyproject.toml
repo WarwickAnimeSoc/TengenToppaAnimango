@@ -1,0 +1,28 @@
+[project]
+name = "tengentoppaanimango"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=6.0,<6.1",
+    "djangorestframework==3.17.1",
+    "gunicorn==26.0.0",
+    "markdown==3.10.2",
+    "martor==1.8.2",
+    "mysqlclient==2.2.8",
+    "nh3==0.3.6",
+    "pillow==12.3.0",
+    "requests==2.34.2",
+]
+
+[project.scripts]
+manage = "manage:main"
+tengentoppaanimango = "manage:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["config", "apps"]
+py-modules = ["manage"]
+

@@ -8,12 +8,15 @@ Built on Django and Bootstrap using a large amount of code from the old site.
 
 ## Running the Project
 
-To run the site locally for development, you should set up a virtual environment running Python 3.8.5 and install all
-the necessary dependencies from `requirements.txt` . Additionally, you will need a MySQL server running in the same 
-format as the one on the server.
+To run the site locally for development,
+setup a virtual environment running Python 3.14,
+and run `pip install -e .` to install the necessary dependencies.
 
-This repository contains all the files needed to run the site, except for the config files, which future webmasters will
-need to copy to their machine from the server.
+In addition, you need:
+- the config file, which future webmaster needs to copy from the production server (CHANGE CONFIG MODE TO DEBUG!)
+- a local test MySQL server with the same format structure as the production server
+
+The repository contains all other files needed to run the site.
 
 To build bootstrap with the overwrites used by the site, you will need to copy the bootstrap source files into 
 `.\static_files\scss` and use `sass` from `dart-sass` to build `ttam-bootstrap.scss`.
