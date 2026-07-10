@@ -1,3 +1,5 @@
+from httplib2 import Http
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.db.models import Q
 from django.core.paginator import Paginator, InvalidPage
@@ -8,7 +10,7 @@ from .models import Song, Request
 from .forms import KaraokeRequestForm
 
 
-def karaoke_list(request, page):
+def karaoke_list(request: HttpRequest, page: int) -> HttpResponse:
     query = request.GET.get('query')
     try:
         sort = request.GET.get('query_sort', 'title')
@@ -47,7 +49,7 @@ def karaoke_list(request, page):
     return render(request, 'karaoke/list.html', context=context)
 
 @login_required
-def request_song(request):
+def request_song(request: HttpRequest) -> HttpResponse:
 
     requests_list = Request.objects.filter().distinct().order_by('id')
     context = {'requests': requests_list}
@@ -65,7 +67,7 @@ def request_song(request):
                 if form_errors:
                     # Either the request is a duplicate or the song is already in the list
                     for error in form_errors:
-                        messages.add_message(request, messages.ERROR, error)
+                        messages.add_message(request, messages.ERROR, str(error))
                 else:
                     messages.add_message(request, messages.ERROR, 'Please correct the errors below')
                 context['form'] = form
@@ -75,8 +77,8 @@ def request_song(request):
             messages.add_message(request, messages.ERROR, 'You need to login to request songs.')
     return render(request, 'karaoke/request.html', context=context)
 
-def mapping_guide3(request):
+def mapping_guide3(request: HttpRequest) -> HttpResponse:
     return render(request, 'karaoke/guide3.html')
 
-def mapping_guide2(request):
+def mapping_guide2(request: HttpRequest) -> HttpResponse:
     return render(request, 'karaoke/guide2.html')

@@ -1,14 +1,15 @@
+from django.http import HttpRequest, HttpResponse
 from datetime import date
 
 from django.shortcuts import render
 from django.core.paginator import Paginator, InvalidPage
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.utils import timezone
 
 from .models import Showing, Series
 
 
-def showings(request, page):
+def showings(request: HttpRequest, page: int) -> HttpResponse:
     query = request.GET.get('query')
     try:
         academic_year = int(request.GET.get('academic_year'))
@@ -33,7 +34,7 @@ def showings(request, page):
     return render(request, 'showings/list.html', context=context)
 
 
-def get_showings(query, academic_year):
+def get_showings(query: str | None, academic_year: int | None) -> QuerySet[Showing]:
     showing_objects = Showing.objects
 
     if query:
@@ -48,7 +49,7 @@ def get_showings(query, academic_year):
     return showing_objects.order_by('-date')
 
 
-def cooldown_dashboard(request):
+def cooldown_dashboard(request: HttpRequest) -> HttpResponse:
     # Anyone can see this view with the URL as it doesn't contain anything sensitive, but only exec will have it
     # linked in their navbar.
     series_objects = Series.objects

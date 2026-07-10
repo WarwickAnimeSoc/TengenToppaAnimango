@@ -11,9 +11,7 @@ class MemberInline(admin.StackedInline):
 
 
 class OverwriteUserAdmin(UserAdmin):
-    inlines = (
-        MemberInline,
-    )
+    inlines = [MemberInline]
 
 
 admin.site.unregister(User)

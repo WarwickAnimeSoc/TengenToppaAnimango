@@ -1,3 +1,5 @@
+from apps.members.models import Member
+from typing import Any
 import nh3
 
 from django import forms
@@ -18,16 +20,19 @@ class KaraokeRequestForm(forms.Form):
     anilist_url = forms.URLField(label="Anilist url", validators=[anilist_validator], required=False)
 
     # Clean HTML from title and artist fields
-    def clean_title(self):
+    def clean_title(self) -> str:
         title = self.cleaned_data['title']
         return nh3.clean(title, tags=set())
 
-    def clean_artist(self):
+    def clean_artist(self) -> str:
         artist = self.cleaned_data['artist']
         return nh3.clean(artist, tags=set())
 
-    def clean(self):
-        cleaned_data = super(KaraokeRequestForm, self).clean()
+    def clean(self) -> dict[str, Any]:
+        cleaned_data = super().clean()
+
+        # type linting workaround
+        assert cleaned_data is not None, "super().clean() returned None unexpectedly"
 
         # For the form to be valid we need to check that the song has not already been requested or does not
         # already exist in the database. There is a rare case where two different songs might have the exact same name
@@ -44,7 +49,7 @@ class KaraokeRequestForm(forms.Form):
 
         return cleaned_data
 
-    def submit(self, member):
+    def submit(self, member: Member) -> None:
         request = Request()
         request.title = self.cleaned_data['title']
         request.artist = self.cleaned_data['artist']

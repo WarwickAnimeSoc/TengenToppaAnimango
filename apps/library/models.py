@@ -1,3 +1,4 @@
+from typing import Literal
 import datetime
 
 from django.db import models
@@ -87,7 +88,7 @@ class Request(models.Model):
             return True
         return False
 
-    def returned(self, status):
+    def returned(self, status: Literal['Denied', 'Late', 'Returned', 'Absent']):
         if 'Late' == status and not self.status() == 'Late':
             # Prevent user error when marking returned item as late when it is not late -Sorc
             return False

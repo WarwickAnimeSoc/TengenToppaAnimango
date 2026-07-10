@@ -1,3 +1,4 @@
+from django.http import HttpRequest, HttpResponse
 import re
 from math import ceil
 
@@ -8,7 +9,7 @@ from .models import Item
 
 
 @login_required
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
     # By default items are categorized by year
     items = Item.objects.all()
 
@@ -28,7 +29,7 @@ def index(request):
 
 
 @login_required
-def year_view(request, year):
+def year_view(request: HttpRequest, year: int) -> HttpResponse:
     # Display all the items for the given year. aniMango has items further split into months within a year, but this
     # wasn't really useful as the archive doesn't have more than 1 item per year.
     items = Item.objects.filter(date__year=year)
@@ -36,7 +37,7 @@ def year_view(request, year):
 
 
 @login_required
-def item_view(request, item_id):
+def item_view(request: HttpRequest, item_id: int) -> HttpResponse:
     item = get_object_or_404(Item, id=item_id)
     filesize = ceil(item.file.size / 1024)
     filename = re.sub(r'^(.*?)/', '', str(item.file.name))

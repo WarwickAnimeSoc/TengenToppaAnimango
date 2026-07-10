@@ -1,3 +1,4 @@
+from typing import Literal
 import re
 
 from django.db import models
@@ -10,7 +11,7 @@ class Song(models.Model):
     artist = models.CharField(max_length=200, blank=False)
     related_series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, blank=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{0!s} - {1!s}'.format(self.artist, self.title)
 
     class Meta:
@@ -24,10 +25,10 @@ class Request(models.Model):
     ultrastar_url = models.URLField(blank=False, unique=True)
     requester = models.ForeignKey(Member, on_delete=models.PROTECT, null=True, default=None)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{0!s} - {1!s}'.format(self.artist, self.title)
 
-    def complete(self):
+    def complete(self) -> None:
         song = Song()
         # The song/request title and artist fields are user submitted. However, they should be validated by the
         # submission form and any unwanted text (such as html) removed at that point.
@@ -54,10 +55,10 @@ class Request(models.Model):
         song.save()
         self.archive('completed', song)
 
-    def remove(self):
+    def remove(self) -> None:
         self.archive('cancelled')
 
-    def archive(self, status, song=None):
+    def archive(self, status: Literal['completed', 'cancelled'], song=None) -> None:
         request = ArchivedRequest()
         request.ultrastar_url = self.ultrastar_url
         request.status = status
@@ -78,5 +79,5 @@ class ArchivedRequest(models.Model):
 
     status = models.CharField(max_length=16, choices=STATUS_CHOICES, blank=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{0!s} - {1!s}'.format(self.ultrastar_url, self.status)

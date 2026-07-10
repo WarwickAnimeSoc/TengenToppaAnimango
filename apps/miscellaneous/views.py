@@ -1,4 +1,6 @@
-from django.shortcuts import render, redirect, reverse
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib import messages
 
@@ -7,7 +9,7 @@ from apps.news.models import Article
 from .models import HomeAlert
 
 
-def home(request):
+def home(request: HttpRequest) -> HttpResponse:
     # Homepage should display a certain amount of upcoming event, ongoing events and articles
     ongoing_events = Event.objects.filter(event_start_date__lte=timezone.now(),
                                           event_end_date__gte=timezone.now()).order_by('event_end_date')
@@ -37,37 +39,37 @@ def home(request):
     return render(request, 'miscellaneous/home.html', context=context) # remember to change back to original
 
 
-def privacy(request):
+def privacy(request: HttpRequest) -> HttpResponse:
     return render(request, 'miscellaneous/privacy.html')
 
 # Redirect views, used to provide short links for other society pages
 
 
-def discord(request):
+def discord(request: HttpRequest) -> HttpResponse:
     # Redirects to the society Discord server
     return redirect('https://discord.gg/JaYTGfu')
 
 
-def instagram(request):
+def instagram(request: HttpRequest) -> HttpResponse:
     # Redirects to the society Instagram Page
     return redirect('https://www.instagram.com/warwickanimesociety/')
 
 
-def warwicksu(request):
+def warwicksu(request: HttpRequest) -> HttpResponse:
     # Redirects to the Warwick Students Union page for the society
     return redirect('https://warwicksu.com/societies-sports/societies/animeandmanga')
 
 
-def malclub(request):
+def malclub(request: HttpRequest) -> HttpResponse:
     # Redirects to the MyAnimeList Club for the society
     return redirect('https://myanimelist.net/clubs.php?cid=78196')
 
 
-def github(request):
+def github(request: HttpRequest) -> HttpResponse:
     # Redirects to the Github repo for the site
     return redirect('https://github.com/WarwickAnimeSoc/TengenToppaAnimango')
 
 
-def karaoke_list(request):
+def karaoke_list(request: HttpRequest) -> HttpResponse:
     # Redirects to the karaoke list, used as a short link for writing on the board at events
     return redirect(reverse('karaoke:karaoke_list', args=[1]))

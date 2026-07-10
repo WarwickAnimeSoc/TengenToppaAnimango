@@ -6,6 +6,6 @@ app_name = 'archive'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<year>/', views.year_view, name='year'),
-    path('item/<item_id>/', views.item_view, name='item'),
+    path('<int:year>/', views.year_view, name='year'),
+    path('item/<int:item_id>/', views.item_view, name='item'),
 ]

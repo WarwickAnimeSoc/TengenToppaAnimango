@@ -21,9 +21,9 @@ class Article(models.Model):
     article_type = models.CharField(max_length=8, choices=ARTICLE_CHOICES, default='news')
     created_by = models.ForeignKey(User, on_delete=models.PROTECT, null=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.title
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         self.slug = slugify(self.title)
         super(Article, self).save()

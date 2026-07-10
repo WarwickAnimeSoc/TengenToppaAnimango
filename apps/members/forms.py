@@ -1,3 +1,4 @@
+from django.core.files.uploadedfile import UploadedFile
 from django import forms
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
@@ -14,7 +15,7 @@ class ProfileEditForm(forms.Form):
                                   required=False)
     avatar_image = forms.ImageField(label="Avatar image", required=False)
 
-    def clean_avatar_image(self):
+    def clean_avatar_image(self) -> UploadedFile | None:
         image = self.cleaned_data['avatar_image']
         # Images should less than 2Mb or 2097152 bytes
         if image is not None:

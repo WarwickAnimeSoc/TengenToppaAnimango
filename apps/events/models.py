@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.conf import settings
 from django.template.defaultfilters import date as django_date
@@ -7,7 +8,7 @@ from django.core.mail import send_mail
 from apps.members.models import Member
 
 
-def nice_date(date, long=True):
+def nice_date(date: datetime, long=True) -> str:
     date_formatter = dateformat.DateFormat(date)
     if date.date() == timezone.now().date():
         return 'today'
@@ -19,7 +20,7 @@ def nice_date(date, long=True):
             return 'on the {0!s} of {1!s}'.format(date_formatter.format('jS'), date_formatter.format('F Y'))
 
 
-def nice_time(date):
+def nice_time(date: datetime) -> str:
     date_formatter = dateformat.DateFormat(date)
     return date_formatter.format('H:i')
 
@@ -35,20 +36,20 @@ class Event(models.Model):
     signups_open_date = models.DateTimeField(blank=True, null=True)
     signups_close_date = models.DateTimeField(blank=True, null=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{0!s}, {1!s}, {2!s}'.format(self.title, django_date(self.event_start_date, 'D jS F Y, H:i'),
                                             self.event_location)
 
-    def signup_required(self):
+    def signup_required(self) -> bool:
         return self.maximum_signups > 0
 
-    def is_full(self):
+    def is_full(self) -> bool:
         return self.signup_required() and self.signup_set.count() >= self.maximum_signups
 
-    def already_signed_up(self, member):
+    def already_signed_up(self, member: Member) -> bool:
         return self.signup_set.filter(member=member).exists()
 
-    def user_is_verified(self, member):
+    def user_is_verified(self, member: Member) -> bool:
         signups = self.signup_set.filter(member=member)
         if signups:
             signup = signups[0]
@@ -56,27 +57,27 @@ class Event(models.Model):
         else:
             return False
 
-    def signup_count(self):
+    def signup_count(self) -> str:
         return str(self.signup_set.count()) + '/' + str(self.maximum_signups)
 
-    def signups_open(self):
+    def signups_open(self) -> bool:
         # This method returns True if it is past the event signups open date. However, this does not mean that it will
         # be possible to sign up, as signups may have closed. To check if signups are possible, signups_closed() must
         # also be used.
         return self.signups_open_date < timezone.now()
 
-    def signups_closed(self):
+    def signups_closed(self) -> bool:
         return self.signups_close_date < timezone.now()
 
-    def one_day_event(self):
+    def one_day_event(self) -> bool:
         return self.event_start_date.date() == self.event_end_date.date()
 
-    def nice_signups_date(self):
+    def nice_signups_date(self) -> str:
         # Used when displaying the event's details
         # Prefix in template: "Signups for this event will open "
         return '{0!s} at {1!s}'.format(nice_date(self.signups_open_date), nice_time(self.signups_open_date))
 
-    def nice_when_descriptor(self):
+    def nice_when_descriptor(self) -> str:
         # Used when displaying the event's details
         # Prefix in template: "When: "
         if self.one_day_event():
@@ -88,7 +89,7 @@ class Event(models.Model):
                                                                        nice_time(self.event_end_date))
         return when_string[0].upper() + when_string[1:]
 
-    def nice_eta_descriptor(self):
+    def nice_eta_descriptor(self) -> str:
         # Used when displaying the event on the events page
         # Prefix in template: None
         if self.event_start_date > timezone.now():
@@ -110,10 +111,10 @@ class Signup(models.Model):
     verified = models.BooleanField(default=False)
     notified = models.BooleanField(default=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str(self.member) + ' signup for ' + str(self.event)
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         if self.verified and not self.notified:
             when_string = self.event.nice_when_descriptor()
             when_string = when_string[0].lower() + when_string[1:]
@@ -127,4 +128,4 @@ class Signup(models.Model):
             send_mail(subject, message, settings.EMAIL_HOST_USER, [self.member.user.email], fail_silently=False)
             self.notified = True
 
-        super(Signup, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)

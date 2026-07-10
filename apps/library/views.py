@@ -1,5 +1,6 @@
+from django.views.decorators.http import require_http_methods
 from django.contrib import messages
-from django.http import Http404
+from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.core.paginator import InvalidPage, Paginator
@@ -9,7 +10,7 @@ from apps.showings.models import Series
 from .models import Item
 
 
-def library_list(request, page):
+def library_list(request: HttpRequest, page: int) -> HttpResponse:
     query = request.GET.get('query')
     category = request.GET.get('category')
 
@@ -47,7 +48,7 @@ def library_list(request, page):
     )
 
 
-def series_view(request, series_id):
+def series_view(request: HttpRequest, series_id: int) -> HttpResponse:
     series = get_object_or_404(Series, id=series_id)
     if not series.item_set.all():
         # If the series doesn't have any items, then 404
@@ -57,16 +58,13 @@ def series_view(request, series_id):
 
 
 @login_required
-def request_confirmation(request, item_id):
+def request_confirmation(request: HttpRequest, item_id: int) -> HttpResponse:
     item = get_object_or_404(Item, id=item_id)
-    if request.method == 'POST':
-        pass
-    else:
-        return render(request, 'library/request.html', context={'item': item})
+    return render(request, 'library/request.html', context={'item': item})
 
 
 @login_required
-def request_post(request, item_id):
+def request_post(request: HttpRequest, item_id: int) -> HttpResponse:
     item = get_object_or_404(Item, id=item_id)
 
     # Create request

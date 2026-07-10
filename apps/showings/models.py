@@ -30,7 +30,7 @@ class Series(models.Model):
     last_shown_instance = models.ForeignKey('showings.Show', null=True, blank=True, on_delete=models.PROTECT,
                                             related_name='last_showing', editable=False)
 
-    def cooldown_academic_year(self):
+    def cooldown_academic_year(self) -> str:
         if self.cooldown_end_date.month < 8:
             # Academic year ends on year stored
             return '{0!s}/{1!s}'.format(str(self.cooldown_end_date.year - 1), str(self.cooldown_end_date.year))
@@ -38,7 +38,7 @@ class Series(models.Model):
             # Academic year starts on year stored
             return '{0!s}/{1!s}'.format(str(self.cooldown_end_date.year), str(self.cooldown_end_date.year + 1))
 
-    def is_on_cooldown(self):
+    def is_on_cooldown(self) -> bool:
         # This method only checks if a series is on cooldown, not what type of cooldown it's on. This is explained
         # further in the Show class.
         if 'anime' == self.series_type and self.cooldown_end_date:
@@ -46,7 +46,7 @@ class Series(models.Model):
             return self.cooldown_end_date > date.today()
         return False
 
-    def nice_title(self):
+    def nice_title(self) -> str:
         # Should display both the english and romaji title if possible.
         if self.title_english and self.title_romaji:
             return '{0!s} / {1!s}'.format(self.title_romaji, self.title_english)
@@ -59,7 +59,7 @@ class Series(models.Model):
         else:
             return 'ERROR TITLE NOT SET'
 
-    def __str__(self):
+    def __str__(self) -> str:
         # Should display both the english and romaji title when available. It's assumed that both the romaji title and
         # series type will always be available (which they will be if AniList is used to populate the fields).
         if self.series_type:
@@ -70,7 +70,7 @@ class Series(models.Model):
     class Meta:
         verbose_name_plural = 'series'
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         # Save method is overwritten to use the anilist API to fill fields
         if self.auto_populate_data:
             # Setting auto_populate_date to false ensures that it won't be auto-populated every time it's saved
@@ -81,7 +81,7 @@ class Series(models.Model):
                 raise ValidationError('There was an error getting the data from Anilist, check the link is valid',
                                       'anilist_api_error')
 
-        super(Series, self).save()
+        super().save()
 
 
 # A Showing is an event at which anime is shown at the society. A Showing consists of Shows, which represent an item
@@ -103,7 +103,7 @@ class Showing(models.Model):
     showing_title = models.CharField(max_length=50, blank=True, null=True,
                                      help_text='You only need to set this if the event has a unique name.')
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{0!s} - {1!s}'.format(self.get_showing_type_display(), self.date.strftime('%a %d %b %Y'))
 
     class Meta:
@@ -127,10 +127,10 @@ class Show(models.Model):
     )
     show_type = models.CharField(max_length=2, choices=TYPE_CHOICES, null=False, blank=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{0!s} - {1!s}'.format(self.series.nice_title(), self.shown_at)
 
-    def apply_cooldown(self):
+    def apply_cooldown(self) -> None:
         # Cooldown is applied to the Series object linked to this Show object in this method.
         # The cooldown rules that are followed here are the ones set by the 2020/2021 exec.
         # These rules are laid out in the flowchart found in './static/images/cooldown_flowchart_2020-2021.png'
@@ -180,10 +180,10 @@ class Show(models.Model):
             pass
         self.series.save()
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, **kwargs) -> None:
         # Overwrite save to apply cooldown
         # The super save is called twice, this was needed when importing the old showings from aniMango, as the related
         # Series object won't save if the Show is unsaved.
-        super(Show, self).save()
+        super().save()
         self.apply_cooldown()
-        super(Show, self).save()
+        super().save()

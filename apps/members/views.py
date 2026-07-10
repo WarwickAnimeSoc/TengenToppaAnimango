@@ -1,3 +1,5 @@
+from apps.members.models import Member
+from django.http import HttpRequest, HttpResponse
 from smtplib import SMTPAuthenticationError
 
 from django.shortcuts import render, redirect
@@ -9,7 +11,7 @@ from apps.library.models import Request, ArchivedRequest
 from .forms import ProfileEditForm, OverridePasswordChangeForm, OverridePasswordRestForm
 
 
-def login_view(request):
+def login_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -30,7 +32,7 @@ def login_view(request):
 
 
 @login_required
-def profile(request):
+def profile(request: HttpRequest) -> HttpResponse:
     current_requests = Request.objects.select_related().filter(user=request.user).order_by('-return_deadline')
     archived_requests = ArchivedRequest.objects.select_related().filter(user=request.user).order_by('-date_requested')
 
@@ -39,11 +41,11 @@ def profile(request):
 
 
 @login_required
-def profile_edit(request):
+def profile_edit(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = ProfileEditForm(request.POST, request.FILES)
         if form.is_valid():
-            user_member = request.user.member
+            user_member: Member = request.user.member
             user_member.nickname = form.cleaned_data['nickname']
             user_member.show_full_name = form.cleaned_data['show_full_name']
             user_member.discord_tag = form.cleaned_data['discord_tag']
@@ -60,7 +62,7 @@ def profile_edit(request):
 
 
 @login_required
-def change_password(request):
+def change_password(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = OverridePasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -76,13 +78,13 @@ def change_password(request):
 
 
 @login_required
-def logout_view(request):
+def logout_view(request: HttpRequest) -> HttpResponse:
     logout(request)
     messages.add_message(request, messages.WARNING, 'You have been logged out')
     return redirect('miscellaneous:home')
 
 
-def forgot_password(request):
+def forgot_password(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = OverridePasswordRestForm(request.POST)
         if form.is_valid():
@@ -105,7 +107,7 @@ def forgot_password(request):
         return render(request, 'members/forgot_password.html')
 
 
-def password_reset_redirect(request):
+def password_reset_redirect(request: HttpRequest) -> HttpResponse:
     messages.add_message(request, messages.SUCCESS,
                          'Your password has been reset. You can now log in using your new password.')
     return redirect('miscellaneous:home')

@@ -26,3 +26,8 @@ build-backend = "setuptools.build_meta"
 packages = ["config", "apps"]
 py-modules = ["manage"]
 
+[dependency-groups]
+dev = [
+    "django-stubs>=6.0.6",
+]
+

@@ -1,3 +1,6 @@
+from apps.members.models import Member
+from typing import Literal
+from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -9,16 +12,16 @@ from .forms import SignupForm
 
 
 @login_required
-def upcoming_events(request, page):
+def upcoming_events(request: HttpRequest, page: int) -> HttpResponse:
     return render(request, 'events/list.html', get_event_context(page, 'Upcoming'))
 
 
 @login_required
-def previous_events(request, page):
+def previous_events(request: HttpRequest, page: int) -> HttpResponse:
     return render(request, 'events/list.html', get_event_context(page, 'Previous'))
 
 
-def get_event_context(paginator_page, event_type):
+def get_event_context(paginator_page: int, event_type: Literal['Upcoming', 'Previous']):
     # Possible event_types are:
     # Upcoming - An event that has yet to start.
     # Previous - An event that has already ended.
@@ -42,7 +45,7 @@ def get_event_context(paginator_page, event_type):
 
 
 @login_required
-def event_detail(request, event_id):
+def event_detail(request: HttpRequest, event_id: int) -> HttpResponse:
     event = get_object_or_404(Event, id=event_id)
     signups = Signup.objects.filter(event=event).order_by("-created")
     # already_signed_up has to be set outside the template, as it requires a parameter to return a result.
@@ -90,7 +93,7 @@ def event_detail(request, event_id):
 
 
 @login_required
-def cancel_signup(request, event_id):
+def cancel_signup(request: HttpRequest, event_id: int) -> HttpResponse:
     event = get_object_or_404(Event, id=event_id)
     if event.signups_closed():
         messages.add_message(request, messages.ERROR, 'Signups for this event have closed')

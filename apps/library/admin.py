@@ -1,3 +1,5 @@
+from django.db.models import QuerySet
+from django.http import HttpRequest
 from django import forms
 from django.contrib import admin, messages
 from django.contrib.admin.helpers import ActionForm
@@ -11,32 +13,27 @@ class CreateLoanForm(ActionForm):
 
 
 class ItemAdmin(admin.ModelAdmin):
-    raw_id_fields = (
-        'parent_series',
-    )
+    raw_id_fields = ['parent_series']
 
-    list_display = (
+    list_display = [
         '__str__',
         'media_type',
         'parent_series',
-        'status'
-    )
+        'status',
+    ]
 
-    list_filter = (
-        'media_type',
-    )
+    list_filter = ['media_type']
 
-    search_fields = (
+    search_fields = [
         'parent_series__title_english',
-        'parent_series__title_romaji'
-    )
+        'parent_series__title_romaji',
+    ]
 
     action_form = CreateLoanForm
-    actions = (
-        'manual_request',
-    )
+    actions = ['manual_request']
 
-    def manual_request(self, request, queryset):
+    @admin.action(description="Issue loan to user manually")
+    def manual_request(self, request: HttpRequest, queryset: QuerySet[Item]) -> None:
         university_id = request.POST.get('university_id')
         if not university_id:
             self.message_user(request, 'Please provide the university ID.', messages.ERROR)
@@ -55,42 +52,37 @@ class ItemAdmin(admin.ModelAdmin):
             except User.DoesNotExist:
                 self.message_user(request, 'User {0!s} could not be found.'.format(university_id), messages.ERROR)
 
-    manual_request.short_description = "Issue loan to user manually"
-
 
 class RequestAdmin(admin.ModelAdmin):
-    readonly_fields = (
+    readonly_fields = [
         'item',
         'date_requested',
         'status_variable',
-        'user'
-    )
+        'user',
+    ]
 
-    list_display = (
+    list_display = [
         'item',
         'status_variable',
         'return_deadline',
-        'user'
-    )
+        'user',
+    ]
 
-    list_filter = (
-        'status_variable',
-    )
+    list_filter = ['status_variable']
 
-    search_fields = (
-        'item',
-    )
+    search_fields = ['item']
 
-    actions = (
+    actions = [
         'approve',
         'deny',
         'absent',
         'return_on_time',
         'return_late',
-        'renew'
-    )
+        'renew',
+    ]
 
-    def approve(self, request, queryset):
+    @admin.action(description="Approve loan request for selected item")
+    def approve(self, request: HttpRequest, queryset: QuerySet[Request]) -> None:
         for request_obj in queryset:
             if request_obj.approve():
                 msg_string = 'Successfully approved loan for {0!s}.'.format(request_obj.item)
@@ -99,9 +91,8 @@ class RequestAdmin(admin.ModelAdmin):
                 msg_string = 'Could not approve loan for {0!s}.'.format(request_obj.item)
                 self.message_user(request, msg_string, messages.ERROR)
 
-    approve.short_description = "Approve loan request for selected item"
-
-    def deny(self, request, queryset):
+    @admin.action(description="Deny loan request for selected items")
+    def deny(self, request: HttpRequest, queryset: QuerySet[Request]) -> None:
         for request_obj in queryset:
             if request_obj.deny():
                 msg_string = 'Successfully denied loan for {0!s}.'.format(request_obj.item)
@@ -110,9 +101,8 @@ class RequestAdmin(admin.ModelAdmin):
                 msg_string = 'Could not deny loan for {0!}s'.format(request_obj.item)
                 self.message_user(request, msg_string, messages.ERROR)
 
-    deny.short_description = "Deny loan request for selected items"
-
-    def absent(self, request, queryset):
+    @admin.action(description="Mark item as not taken due to user being absent")
+    def absent(self, request: HttpRequest, queryset: QuerySet[Request]) -> None:
         for request_obj in queryset:
             if request_obj.absent():
                 msg_string = 'Successfully marked {0!s} as available.'.format(request_obj.item)
@@ -121,9 +111,8 @@ class RequestAdmin(admin.ModelAdmin):
                 msg_string = 'Could not mark {0!s} as available.'.format(request_obj.item)
                 self.message_user(request, msg_string, messages.ERROR)
 
-    absent.short_description = "Mark item as not taken due to user being absent"
-
-    def return_on_time(self, request, queryset):
+    @admin.action(description="Mark items as returned on time")
+    def return_on_time(self, request: HttpRequest, queryset: QuerySet[Request]) -> None:
         for request_obj in queryset:
             if request_obj.returned('Returned'):
                 msg_string = 'Successfully marked {0!s} as returned.'.format(request_obj.item)
@@ -132,9 +121,8 @@ class RequestAdmin(admin.ModelAdmin):
                 msg_string = 'Could not mark {0!s} as returned.'.format(request_obj.item)
                 self.message_user(request, msg_string, messages.ERROR)
 
-    return_on_time.short_description = "Mark items as returned on time"
-
-    def return_late(self, request, queryset):
+    @admin.action(description="Mark items as returned late")
+    def return_late(self, request: HttpRequest, queryset: QuerySet[Request]) -> None:
         for request_obj in queryset:
             if request_obj.returned('Late'):
                 msg_string = 'Successfully marked {0!s} as returned late.'.format(
@@ -144,9 +132,8 @@ class RequestAdmin(admin.ModelAdmin):
                 msg_string = 'Could not mark {0!s} as returned late.'.format(request_obj.item)
                 self.message_user(request, msg_string, messages.ERROR)
 
-    return_late.short_description = "Mark items as returned late"
-
-    def renew(self, request, queryset):
+    @admin.action(description="Renew the selected items for one week")
+    def renew(self, request: HttpRequest, queryset: QuerySet[Request]) -> None:
         for request_obj in queryset:
             if request_obj.renew():
                 msg_string = 'Successfully renewed {0!s}.'.format(request_obj.item)
@@ -155,33 +142,28 @@ class RequestAdmin(admin.ModelAdmin):
                 msg_string = 'Could not renew {0!s}.'.format(request_obj.item)
                 self.message_user(request, msg_string, messages.ERROR)
 
-    renew.short_description = "Renew the selected items for one week"
-
 
 class ArchivedRequestAdmin(admin.ModelAdmin):
-    readonly_fields = (
+    readonly_fields = [
         'item',
         'date_requested',
         'date_finalised',
         'return_deadline',
         'status',
-        'user'
-    )
+        'user',
+    ]
 
-    list_display = (
+    list_display = [
         'item',
         'status',
         'date_requested',
         'date_finalised',
-        'user'
-    )
-    list_filter = (
-        'status',
-    )
+        'user',
+    ]
 
-    search_fields = (
-        'item',
-    )
+    list_filter = ['status']
+
+    search_fields = ['item']
 
 
 admin.site.register(Item, ItemAdmin)

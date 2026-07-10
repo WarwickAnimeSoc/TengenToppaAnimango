@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models import QuerySet
 from martor.widgets import AdminMartorWidget
 from datetime import timedelta
 
@@ -5,6 +7,7 @@ from django import forms
 from django.db import models
 from django.contrib import admin, messages
 from django.contrib.admin.helpers import ActionForm
+from django.http import HttpRequest
 
 from .models import Event, Signup
 
@@ -21,8 +24,11 @@ class SignupInline(admin.StackedInline):
 
 
 class EventForm(forms.ModelForm):
-    def clean(self):
-        cleaned_data = super(EventForm, self).clean()
+    def clean(self) -> dict[str, Any]:
+        # super().clean() should not return None unless overridden
+        # assert for type linting work around
+        cleaned_data = super().clean()
+        assert cleaned_data is not None, "ModelForm.clean() returned None unexpectedly"
 
         event_start_date = cleaned_data['event_start_date']
         event_end_date = cleaned_data['event_end_date']
@@ -43,6 +49,8 @@ class EventForm(forms.ModelForm):
         if event_start_date > event_end_date:
             raise forms.ValidationError('The event must end after it starts')
 
+        return cleaned_data
+
     class Meta:
         model = Event
         fields = '__all__'
@@ -57,24 +65,24 @@ class EventAdmin(admin.ModelAdmin):
 
     inlines = [SignupInline]
 
-    list_display = (
+    list_display = [
         'title',
         'event_start_date',
         'event_end_date',
         'event_location',
-        'signup_count'
-    )
+        'signup_count',
+    ]
 
     action_form = PropagateEventForm
-    actions = (
-        'propagate_weekly',
-    )
+    actions = ['propagate_weekly']
 
-    def propagate_weekly(self, request, queryset):
+    @admin.action(description="Create x amount copies of this event, each 1 week apart.")
+    def propagate_weekly(self, request: HttpRequest, queryset: QuerySet[Event]) -> None:
+        propagate_weeks_number = request.POST.get('propagate_weeks_number')
+        if not propagate_weeks_number:
+            raise ValueError
+
         try:
-            propagate_weeks_number = request.POST.get('propagate_weeks_number')
-            if not propagate_weeks_number:
-                raise ValueError
             propagate_weeks_number = int(propagate_weeks_number)
         except ValueError:
             self.message_user(request, 'Please enter an integer.', messages.ERROR)
@@ -84,7 +92,7 @@ class EventAdmin(admin.ModelAdmin):
         # which will be incremented by 1 week.
         # This is intended to be used to quickly list weekly events (e.g. the main series)
         for event in queryset:
-            for i in range(0, propagate_weeks_number):
+            for _ in range(0, propagate_weeks_number):
                 # Setting the primary key to none allows for cloning objects
                 # https://docs.djangoproject.com/en/3.1/topics/db/queries/#copying-model-instances
 
@@ -101,8 +109,6 @@ class EventAdmin(admin.ModelAdmin):
                     event.signups_close_date = event.signups_open_date + timedelta(weeks=1)
 
                 event.save()
-
-    propagate_weekly.short_description = "Create x amount copies of this event, each 1 week apart."
 
 
 admin.site.register(Event, EventAdmin)

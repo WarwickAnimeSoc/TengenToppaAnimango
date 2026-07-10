@@ -4,12 +4,17 @@ import json
 
 from django.core.exceptions import ValidationError
 
+# along with quoted "Series", to avoid circular dependency because of type checking
+from typing import TYPE_CHECKING, Any
+if TYPE_CHECKING:
+    from .models import Series
+
 
 # The anilist_api file is now stored in the showings app. There's no real reason for this other than that I would like
 # to keep the root directory clear of anything that isn't an app for the site.
 
 
-def populate_series_item(series_object):
+def populate_series_item(series_object: "Series"):
     # The admin form for Series should already have validated that the anilist_url field matches the correct
     # format for an anilist link. The link could still be invalid, but the format must be correct.
     url_values = re.split(r'/', re.sub(r'(https://)*(www\.)*(anilist.co/)*', '', str(series_object.anilist_link)))
@@ -44,7 +49,7 @@ def populate_series_item(series_object):
                                                                               str(api_response_json['idMal']))
 
 
-def api_get_info(api_id):
+def api_get_info(api_id: str) -> Any:
     # Uses the anilist v2 api
     # https://github.com/AniList/ApiV2-GraphQL-Docs
     query = '''

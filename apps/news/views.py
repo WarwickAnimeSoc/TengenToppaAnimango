@@ -1,10 +1,11 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, InvalidPage
 
 from .models import Article
 
 
-def news_listing(request, category, page):
+def news_listing(request: HttpRequest, category: str, page: int) -> HttpResponse:
     if category == 'all':
         articles = Article.objects.order_by('-created')
     else:
@@ -22,7 +23,8 @@ def news_listing(request, category, page):
     return render(request, 'news/list.html', context={'category': category, 'articles_page': context_articles_page})
 
 
-def article_detail(request, article_id, article_slug):
+# article_slug is intentionally unused, for better url.
+def article_detail(request: HttpRequest, article_id: int, article_slug: str) -> HttpResponse:
     article = get_object_or_404(Article, id=article_id)
     if article.members_only and not request.user.is_authenticated:
         return redirect('members:login')

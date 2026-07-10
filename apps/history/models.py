@@ -1,9 +1,10 @@
+from typing import Tuple
 import datetime
 
 from django.db import models
 
 
-def get_year_choices():
+def get_year_choices() -> list[Tuple[int, int]]:
     # Get all the years between now and 1997, when the society was founded.
     return [(r, r) for r in range(1997, datetime.date.today().year + 1)]
 
@@ -17,7 +18,7 @@ class AcademicYearEntry(models.Model):
 
     history = models.TextField()
 
-    def __str__(self):
+    def __str__(self) -> str:
         if self.title:
             return '{0} ({1}/{2})'.format(self.title, self.academic_year, self.academic_year + 1)
         else:
@@ -36,5 +37,5 @@ class ExecEntry(models.Model):
     exec_name = models.CharField(max_length=30)
     exec_role = models.CharField(max_length=30)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return '{0} - {1} - {2}'.format(self.exec_name, self.exec_role, self.related_academic_year)
