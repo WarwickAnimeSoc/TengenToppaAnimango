@@ -13,12 +13,12 @@ class Article(models.Model):
 
     # Renamed "blog" category from aniMango to "other" as that's a more accurate description of the few articles that
     # will be posted there.
-    ARTICLE_CHOICES = (
-        ('news', 'News'),
-        ('minutes', 'Minutes'),
-        ('other', 'Other')
-    )
-    article_type = models.CharField(max_length=8, choices=ARTICLE_CHOICES, default='news')
+    class Type(models.TextChoices):
+        NEWS = 'news', 'News'
+        MINUTES = 'minutes', 'Minutes'
+        OTHER = 'other', 'Other'
+
+    article_type = models.CharField(max_length=8, choices=Type, default=Type.NEWS)
     created_by = models.ForeignKey(User, on_delete=models.PROTECT, null=False)
 
     def __str__(self) -> str:

@@ -22,13 +22,13 @@ def library_list(request: HttpRequest, page: int) -> HttpResponse:
         series_list = Series.objects.filter(item__isnull=False).distinct().order_by('title_english')
 
     if category == 'manga':
-        series_list = series_list.filter(item__media_type='Manga')
+        series_list = series_list.filter(item__media_type=Item.MediaType.MANGA)
     elif category == 'ln':
-        series_list = series_list.filter(item__media_type='Light Novel')
+        series_list = series_list.filter(item__media_type=Item.MediaType.LIGHT_NOVEL)
     elif category == 'bd':
-        series_list = series_list.filter(item__media_type='BD')
+        series_list = series_list.filter(item__media_type=Item.MediaType.BD)
     elif category == 'dvd':
-        series_list = series_list.filter(item__media_type='DVD')
+        series_list = series_list.filter(item__media_type=Item.MediaType.DVD)
 
     paginator = Paginator(series_list, 24)
 

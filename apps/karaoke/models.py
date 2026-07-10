@@ -72,12 +72,11 @@ class ArchivedRequest(models.Model):
     related_song = models.ForeignKey(Song, null=True, blank=True, on_delete=models.CASCADE)
     ultrastar_url = models.URLField(blank=False)
 
-    STATUS_CHOICES = (
-        ('completed', 'Completed'),
-        ('cancelled', 'Cancelled')
-    )
+    class Status(models.TextChoices):
+        COMPLETED = 'completed', 'Completed'
+        CANCELLED = 'cancelled', 'Cancelled'
 
-    status = models.CharField(max_length=16, choices=STATUS_CHOICES, blank=False)
+    status = models.CharField(max_length=16, choices=Status, blank=False)
 
     def __str__(self) -> str:
         return '{0!s} - {1!s}'.format(self.ultrastar_url, self.status)

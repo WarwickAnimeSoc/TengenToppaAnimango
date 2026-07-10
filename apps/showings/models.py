@@ -90,13 +90,13 @@ class Showing(models.Model):
     date = models.DateField()
 
     # Cooldown is not affected by this. That is handled within the Show class.
-    SHOWING_CHOICES = (
-        ('wk', 'Weekly showing'),
-        ('an', 'All-nighter'),
-        ('mo', 'Movie Night'),
-        ('ot', 'Other')
-    )
-    showing_type = models.CharField(max_length=2, choices=SHOWING_CHOICES, blank=False, null=False, default='wk')
+    class Type(models.TextChoices):
+        WEEKLY_SHOWING = 'wk', 'Weekly showing'
+        ALL_NIGHTER = 'an', 'All-nighter'
+        MOVIE_NIGHT = 'mo', 'Movie Night'
+        OTHER = 'ot', 'Other'
+
+    showing_type = models.CharField(max_length=2, choices=Type, blank=False, null=False, default=Type.WEEKLY_SHOWING)
 
     # Replaced showing details (from aniMango) with showing title as it makes more sense. This should probably
     # only be set for special showings, like Holiday events events with a showing_type of other.
@@ -117,15 +117,15 @@ class Show(models.Model):
     shown_at = models.ForeignKey(Showing, null=False, blank=False, on_delete=models.CASCADE)
 
     # This choice will affect the cooldown of the Series in question.
-    TYPE_CHOICES = (
-        ('ms', 'Main series'),
-        ('mc', 'Main series candidate'),
-        ('ex', 'Exec choice'),
-        ('mv', 'Movie Night'),
-        ('an', 'All-nighter'),
-        ('ot', 'Other'),
-    )
-    show_type = models.CharField(max_length=2, choices=TYPE_CHOICES, null=False, blank=False)
+    class Type(models.TextChoices):
+        MAIN_SERIES = 'ms', 'Main series'
+        MAIN_SERIES_CANDIDATE = 'mc', 'Main series candidate'
+        EXEC_CHOICE = 'ex', 'Exec choice'
+        MOVIE_NIGHT = 'mv', 'Movie Night'
+        ALL_NIGHTER = 'an', 'All-nighter'
+        OTHER = 'ot', 'Other'
+    
+    show_type = models.CharField(max_length=2, choices=Type, null=False, blank=False)
 
     def __str__(self) -> str:
         return '{0!s} - {1!s}'.format(self.series.nice_title(), self.shown_at)

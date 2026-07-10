@@ -9,11 +9,11 @@ class Item(models.Model):
     # aniMango had 4 type choices for archive files: Images, Videos, Text files and Website files. Given that the
     # text files and website files types were not used and couldn't even be displayed on the site if they were (old
     # archive app could only show images and videos) they are not an option in this version of the site.
-    TYPE_CHOICES = (
-        ('im', 'Image'),
-        ('vi', 'Video'),
-    )
-    type = models.CharField(max_length=2, choices=TYPE_CHOICES, default='im')
+    class Type(models.TextChoices):
+        IMAGE = 'im', 'Image'
+        VIDEO = 'vi', 'Video'
+
+    type = models.CharField(max_length=2, choices=Type, default=Type.IMAGE)
     date = models.DateField(null=False, help_text='Date of creation or last known time.')
     file = models.FileField(null=False, blank=False, upload_to='archive/', help_text='The file that should be uploaded')
     details = models.TextField(null=True, blank=True, help_text='Any details about the item')
