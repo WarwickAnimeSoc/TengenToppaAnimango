@@ -36,7 +36,7 @@ News
     <div class="card-body">
         <h5 class="card-title">{{ article.title }}</h5>
         <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
-        <p class="card-text">{% load martortags %}{{ article.content|safe_markdown|truncatewords:20 }}</p>
+        <p class="card-text">{% load martortags %}{{ article.content|safe_markdown|truncatewords:20|striptags }}</p>
         <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
             class="card-link">Read</a>
     </div>
