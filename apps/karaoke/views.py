@@ -1,4 +1,3 @@
-from httplib2 import Http
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.db.models import Q
