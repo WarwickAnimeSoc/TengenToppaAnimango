@@ -125,7 +125,7 @@ class RequestAdmin(admin.ModelAdmin):
 
     def return_on_time(self, request, queryset):
         for request_obj in queryset:
-            if request_obj.returned():
+            if request_obj.returned('Returned'):
                 msg_string = 'Successfully marked {0!s} as returned.'.format(request_obj.item)
                 self.message_user(request, msg_string, messages.SUCCESS)
             else:
