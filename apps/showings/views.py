@@ -37,7 +37,7 @@ def get_showings(query, academic_year):
     showing_objects = Showing.objects
 
     if query:
-        showing_objects = showing_objects.filter(Q(show__series__title_romaji__icontains=query) or
+        showing_objects = showing_objects.filter(Q(show__series__title_romaji__icontains=query) |
                                                  Q(show__series__title_english__icontains=query)).distinct()
 
     if academic_year:
