@@ -52,15 +52,6 @@ def get_random_nickname() -> str:
     return 'Buster Machine #{0!s}'.format(randint(0, 1000000))
 
 
-# Member model is almost identical to the one from aniMango for compatibility, however there have been a few changes
-# which are as follows:
-#   In this version the bio field has been removed as it was unused by most users.
-#   The nick field has been renamed to nickname for clarity
-#   The img, field has been renamed to avatar_image for clarity
-#   The img_height and img_width fields have been removed as they were unused
-#   The disordTag field has been renamed to discord_tag for consistency
-# These changes mean that restoring the site DB to a backup from the old site will require reformatting the backup
-# SQL file. However this should not be an issue following the initial DB transfer.
 class Member(models.Model):
     user = models.OneToOneField(
         User,
@@ -68,11 +59,18 @@ class Member(models.Model):
         primary_key=True
     )
 
+    # discord username may contain either new unique username format, or old username#XXXX format
+    # this is because username migration occurred after user ids cannot be found from legacy usernames
+    # hence, legacy usernames will not be associated with user ids,
+    # and the existence of discord username will be determined by username, not user id.
+    # but for operational uses, use discord id, and treat legacy username as having discord linked.
+
     # Setting nickname by default prevents someone's full name or University ID from leaking.
     nickname = models.CharField(max_length=30, blank=True, default=get_random_nickname)
     show_full_name = models.BooleanField(default=False)
     avatar_image = models.ImageField(upload_to=avatar_image_path, storage=OverwriteStorage(), blank=True, null=True)
-    discord_tag = models.CharField(max_length=40, blank=True)
+    discord_username = models.CharField(max_length=40, blank=True) # may contain legacy format, see comment above
+    discord_id = models.CharField(max_length=20, blank=True) # may not exist even if discord_username exist
 
     def __str__(self) -> str:
         # Each user's Username is their University ID this is somewhat sensitive data, so it is never shown.
@@ -92,9 +90,9 @@ class Member(models.Model):
         return self.user.groups.filter(name='President').exists() or self.user.is_superuser
 
     def save(self, *args, **kwargs) -> None:
-        # Strip all HTML from nickname and discord_tag.
+        # Strip all HTML from nickname and discord_username.
         self.nickname = nh3.clean(self.nickname, tags=set())
-        self.discord_tag = nh3.clean(self.discord_tag, tags=set())
+        self.discord_username = nh3.clean(self.discord_username, tags=set())
 
         super().save(*args, **kwargs)
 

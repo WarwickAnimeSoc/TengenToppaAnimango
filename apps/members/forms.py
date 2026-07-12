@@ -6,12 +6,12 @@ from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm, Set
 
 
 class ProfileEditForm(forms.Form):
-    discord_tag_validator_message = '''Invalid format. Your discord tag should be your username, i.e LittleDemon.'''
-    discord_tag_validator = RegexValidator(r'^[a-zA-Z0-9_.]{2,32}$', message=discord_tag_validator_message)
+    discord_username_validator_message = '''Invalid format. Double check your discord username.'''
+    discord_username_validator = RegexValidator(r'^[a-zA-Z0-9_.]{2,32}$', message=discord_username_validator_message)
 
     nickname = forms.CharField(label="Nickname", max_length=30, required=False)
     show_full_name = forms.BooleanField(label="Show full name", required=False)
-    discord_tag = forms.CharField(label="Discord tag", max_length=40, validators=[discord_tag_validator],
+    discord_username = forms.CharField(label="Discord Username", max_length=40, validators=[discord_username_validator],
                                   required=False)
     avatar_image = forms.ImageField(label="Avatar image", required=False)
 

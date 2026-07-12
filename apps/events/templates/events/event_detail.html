@@ -63,7 +63,7 @@
                     <div class="flex-grow-1">
                         <h5 class="mt-0 mb-1 {% if signup.verified %} text-success {% else %} text-warning {% endif %}">{{ signup.member }}</h5>
                         {% if user.is_staff %}
-                            <p class="small text-muted mb-0">{{ signup.member.user.get_full_name }} - {{ signup.member.discord_tag }} - {{ signup.member.user.email }}</p>
+                            <p class="small text-muted mb-0">{{ signup.member.user.get_full_name }} - {{ signup.member.discord_username }} - {{ signup.member.user.email }}</p>
                         {% endif %}
                         {{ signup.comment }}
                     </div>

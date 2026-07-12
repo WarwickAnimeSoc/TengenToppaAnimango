@@ -48,7 +48,7 @@ def profile_edit(request: HttpRequest) -> HttpResponse:
             user_member: Member = request.user.member
             user_member.nickname = form.cleaned_data['nickname']
             user_member.show_full_name = form.cleaned_data['show_full_name']
-            user_member.discord_tag = form.cleaned_data['discord_tag']
+            user_member.discord_username = form.cleaned_data['discord_username']
             if form.cleaned_data['avatar_image'] is not None:
                 user_member.avatar_image = form.cleaned_data['avatar_image']
             user_member.save()
