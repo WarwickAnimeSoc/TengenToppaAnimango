@@ -1,3 +1,7 @@
+from urllib.parse import quote_plus
+import socket
+from django.conf import settings
+import requests
 from apps.members.models import Member
 from django.http import HttpRequest, HttpResponse
 from smtplib import SMTPAuthenticationError
@@ -61,6 +65,71 @@ def profile_edit(request: HttpRequest) -> HttpResponse:
         return render(request, 'members/edit.html', )
 
 
+# NOTE: not production ready
+REDIRECT_URI = "https://animesoc.co.uk/members/verify/discord"
+
+# NOTE: not production ready
+@login_required
+def link_discord(request: HttpRequest) -> HttpResponse:
+    return redirect(f"https://discord.com/oauth2/authorize?client_id={settings.DISCORD_CLIENT_ID}&response_type=code&redirect_uri={quote_plus(REDIRECT_URI)}&scope=identify&prompt=consent")
+
+
+# NOTE: not production ready
+@login_required
+def verify_discord(request: HttpRequest) -> HttpResponse:
+    code = request.GET.get("code")
+
+    # get access token
+    data = {
+        'grant_type': 'authorization_code',
+        'code': code,
+        'redirect_uri': REDIRECT_URI,
+    }
+
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    }
+
+    r = requests.post("https://discord.com/api/v10/oauth2/token", data=data, headers=headers, auth=(settings.DISCORD_CLIENT_ID, settings.DISCORD_CLIENT_SECRET))
+    r.raise_for_status()
+    token = r.json().get('access_token')
+
+    headers = {
+        'Authorization': f"Bearer {token}"
+    }
+
+    r = requests.get("https://discord.com/api/v10/users/@me", headers=headers)
+    r.raise_for_status()
+    json = r.json()
+    discord_id = json.get('id')
+    discord_username = json.get('username')
+
+
+    member: Member = request.user.member
+    member.discord_id = discord_id
+    member.discord_username = discord_username
+    member.save()
+    
+    # revoke token
+    data = {
+        'token': token,
+        'token_type_hint': 'access_token',
+    }
+
+    headers = {
+         'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+    r = requests.post("https://discord.com/api/v10/oauth2/token/revoke", data=data, headers=headers, auth=(settings.DISCORD_CLIENT_ID, settings.DISCORD_CLIENT_SECRET))
+
+    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
+        sock.settimeout(2)
+        sock.connect(settings.ANIMADEUS_SOCK)
+        sock.sendall(f"memberfy {discord_id}".encode())
+
+    return redirect('members:edit')
+
+    
 @login_required
 def change_password(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
