@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Discord Linked Successfully
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    {% if status == "success" %}
+    <h1 class="mt-5 mb-3">Success</h1>
+    <p>Your discord account have been linked successful,
+    and your discord account is/will be granted member role 
+    in our <a href="{% url 'miscellaneous:discord' %}">discord server</a>.</p>
+    {% elif status == "token-expired" %}
+    <h1 class="mt-5 mb-3">Token Expired</h1>
+    <p>We have failed to link your discord account,
+    as the authorization token we receive has likely expired.
+    Please linking your discord account or contact our webmaster if you suspect another issue.</p>
+    {% elif status == "rate-limit" %}
+    <h1 class="mt-5 mb-3">Too Busy</h1>
+    <p>We have failed to link your discord account,
+    as there are currently too many linkage requests.
+    Please try again later (approx. 10 secs to 5 minutes) or contact our webmaster.</p>
+    {% endif %}
+    <p>Click <a href="{% url 'members:edit' %}">here</a> to return to the profile edit page.
+{% endblock %}

@@ -41,16 +41,31 @@
             <label class="form-check-label" for="fullnameCheckbox">Show full name instead of nickname</label>
         </div>
         <div class="form-group">
-            <label for="discordInput">Discord Username</label>
-            <input type="text" class="form-control {% if form.discord_username.errors %}is-invalid{% endif %}"
-                   id="discordInput" name="discord_username" placeholder="Discord Username"
-                   value="{% if form %}{{ form.discord_username.value }}{% else %}{{ user.member.discord_username }}{% endif %}">
-            {% for error in form.discord_username.errors %}
-                <div class="invalid-feedback">{{ error }}</div>
-            {% endfor %}
-            <small id="discordHelp" class="form-text text-muted">Your discord username (e.g <code>Chiyoko</code>), this is used to give you the member
-                role on the society discord server.</small>
+        <label>Discord Username</label>
+        <div class="d-flex align-items-center justify-content-between border rounded p-1 ps-3 mb-2">
+            <div>
+                {% if user.member.discord_username %}
+                <strong>{{ user.member.discord_username }}</strong>
+                {% else %}
+                <span class="text-muted">Currently Unregistered</span>
+                {% endif %}
+            </div>
+            <div class="ml-3">
+                <a class="btn btn-primary btn-sm" href="{% url "members:link_discord" %}">
+                    Link New Account
+                </a>
+                {% if user.member.discord_id or user.member.discord_username %}
+                <a class="btn btn-danger btn-sm" href="{% url "members:unlink_discord" %}">
+                    Unlink Account
+                </a>
+                {% endif %}
+            </div>
         </div>
+        <small id="discordHelp" class="form-text text-muted">
+            Your (last registered) Discord username (e.g. <code>Chiyoko</code>). 
+            This is used to give you the member role on the society Discord server.
+        </small>
+    </div>
         <div class="form-group">
             <label for="avatarInput">Profile picture</label>
             <input type="file" class="form-control-file {% if form.avatar_image.errors %}is-invalid{% endif %}"

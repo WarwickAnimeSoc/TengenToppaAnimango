@@ -21,7 +21,7 @@ urlpatterns = [
                                                      ),
          name='password_reset_confirm'),
     path('reset_password/done/', views.password_reset_redirect, name='password_reset_redirect'),
-    # NOTE: not production ready
-    # path('link/discord', views.link_discord, name="link_discord"),
-    # path('verify/discord', views.verify_discord, name="verify_discord"),
+    path('discord/link/', views.link_discord, name="link_discord"),
+    path('discord/unlink/', views.unlink_discord, name="unlink_discord"),
+    path('discord/verify/', views.verify_discord, name="verify_discord"),
 ]

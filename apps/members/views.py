@@ -1,9 +1,14 @@
+from asgiref.sync import sync_to_async
+import asyncio
+import nh3
+import httpx
+from django.urls import reverse
 from urllib.parse import quote_plus
 import socket
 from django.conf import settings
 import requests
 from apps.members.models import Member
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest
 from smtplib import SMTPAuthenticationError
 
 from django.shortcuts import render, redirect
@@ -52,7 +57,6 @@ def profile_edit(request: HttpRequest) -> HttpResponse:
             user_member: Member = request.user.member
             user_member.nickname = form.cleaned_data['nickname']
             user_member.show_full_name = form.cleaned_data['show_full_name']
-            user_member.discord_username = form.cleaned_data['discord_username']
             if form.cleaned_data['avatar_image'] is not None:
                 user_member.avatar_image = form.cleaned_data['avatar_image']
             user_member.save()
@@ -65,69 +69,95 @@ def profile_edit(request: HttpRequest) -> HttpResponse:
         return render(request, 'members/edit.html', )
 
 
-# NOTE: not production ready
-REDIRECT_URI = "https://animesoc.co.uk/members/verify/discord"
-
-# NOTE: not production ready
 @login_required
 def link_discord(request: HttpRequest) -> HttpResponse:
-    return redirect(f"https://discord.com/oauth2/authorize?client_id={settings.DISCORD_CLIENT_ID}&response_type=code&redirect_uri={quote_plus(REDIRECT_URI)}&scope=identify&prompt=consent")
+    # send user to discord oauth2
+    redirect_uri = f"https://animesoc.co.uk{reverse('members:verify_discord')}"
+    return redirect(f"https://discord.com/oauth2/authorize?client_id={settings.DISCORD_CLIENT_ID}&response_type=code&redirect_uri={quote_plus(redirect_uri)}&scope=identify&prompt=consent")
 
 
-# NOTE: not production ready
 @login_required
-def verify_discord(request: HttpRequest) -> HttpResponse:
-    code = request.GET.get("code")
-
-    # get access token
-    data = {
-        'grant_type': 'authorization_code',
-        'code': code,
-        'redirect_uri': REDIRECT_URI,
-    }
-
-    headers = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-    }
-
-    r = requests.post("https://discord.com/api/v10/oauth2/token", data=data, headers=headers, auth=(settings.DISCORD_CLIENT_ID, settings.DISCORD_CLIENT_SECRET))
-    r.raise_for_status()
-    token = r.json().get('access_token')
-
-    headers = {
-        'Authorization': f"Bearer {token}"
-    }
-
-    r = requests.get("https://discord.com/api/v10/users/@me", headers=headers)
-    r.raise_for_status()
-    json = r.json()
-    discord_id = json.get('id')
-    discord_username = json.get('username')
-
-
+def unlink_discord(request: HttpRequest) -> HttpResponse:
+    # remove all discord information
     member: Member = request.user.member
-    member.discord_id = discord_id
-    member.discord_username = discord_username
+    member.discord_id = ""
+    member.discord_username = ""
     member.save()
-    
-    # revoke token
-    data = {
-        'token': token,
-        'token_type_hint': 'access_token',
-    }
-
-    headers = {
-         'Content-Type': 'application/x-www-form-urlencoded'
-    }
-
-    r = requests.post("https://discord.com/api/v10/oauth2/token/revoke", data=data, headers=headers, auth=(settings.DISCORD_CLIENT_ID, settings.DISCORD_CLIENT_SECRET))
-
-    with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as sock:
-        sock.settimeout(2)
-        sock.connect(settings.ANIMADEUS_SOCK)
-        sock.sendall(f"memberfy {discord_id}".encode())
-
     return redirect('members:edit')
+
+
+@login_required
+async def verify_discord(request: HttpRequest) -> HttpResponse:
+    code = request.GET.get("code")
+    if code is None:
+        return HttpResponseBadRequest()
+
+    async with httpx.AsyncClient() as client:
+        # get access token
+        data = {
+            'grant_type': 'authorization_code',
+            'code': code,
+            'redirect_uri': f"https://animesoc.co.uk{reverse('members:verify_discord')}",
+        }
+
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        }
+
+        r = await client.post("https://discord.com/api/v10/oauth2/token", data=data, headers=headers, auth=(settings.DISCORD_CLIENT_ID, settings.DISCORD_CLIENT_SECRET))
+
+        if r.status_code == 400:
+            return await sync_to_async(render)(request, 'members/verify_discord.html', context={'status': 'token-expired'}, status=400)
+        if r.status_code == 429:
+            return await sync_to_async(render)(request, 'members/verify_discord.html', context={'status': 'rate-limit'}, status=503)
+
+        assert r.status_code == 200, 'discord oauth2 have unexpected return code'
+
+        token = r.json().get('access_token')
+        assert token is not None, "discord oauth2 did not provide access token"
+
+        headers = {
+            'Authorization': f"Bearer {token}"
+        }
+
+        r = await client.get("https://discord.com/api/v10/users/@me", headers=headers)
+        r.raise_for_status()
+        json = r.json()
+        discord_id = json.get('id')
+        discord_username = json.get('username')
+
+        assert isinstance(discord_id, str), "discord oauth2 did not provide user id"
+        assert isinstance(discord_username, str), "discord oauth2 did not provide username"
+        
+        member: Member = await Member.objects.aget(user=request.user)
+        member.discord_id = discord_id
+        member.discord_username = nh3.clean(discord_username, tags=set())
+        await member.asave()
+
+        # revoke token
+        data = {
+            'token': token,
+            'token_type_hint': 'access_token',
+        }
+
+        headers = {
+             'Content-Type': 'application/x-www-form-urlencoded'
+        }
+
+        r = client.post("https://discord.com/api/v10/oauth2/token/revoke", data=data, headers=headers, auth=(settings.DISCORD_CLIENT_ID, settings.DISCORD_CLIENT_SECRET))
+
+        animadeus = await asyncio.create_subprocess_exec(
+            settings.ANIMADEUS_PATH, 'set-member', discord_id,
+        )
+
+        _, ret = await asyncio.gather(r, animadeus.wait(), return_exceptions=True)
+        if ret != 0:
+            member.discord_id = ""
+            member.discord_username = ""
+            await member.asave()           
+            raise Exception("unexpected return code from animadeus when register new member discord account")
+
+        return await sync_to_async(render)(request, 'members/verify_discord.html', context={'status': 'success'})
 
     
 @login_required
