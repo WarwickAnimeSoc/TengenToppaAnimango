@@ -1,3 +1,5 @@
+from datetime import timedelta
+import services.rate_limit.utils as rate_limit
 from asgiref.sync import sync_to_async
 import asyncio
 import nh3
@@ -19,12 +21,21 @@ from django.contrib.auth.decorators import login_required
 from apps.library.models import Request, ArchivedRequest
 from .forms import ProfileEditForm, OverridePasswordChangeForm, OverridePasswordRestForm
 
-
 def login_view(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
+        if rate_limit.reject_ip(request, 10, timedelta(seconds=10)):
+            messages.add_message(request, messages.ERROR, 'Too many requests, please try again after 10 seconds.')
+            return render(request, 'members/login.html', status=429)
+
         username = request.POST.get('username')
         password = request.POST.get('password')
+
+        if username is None or rate_limit.reject_window(request, 'username', username, 5, timedelta(minutes=1)):
+            messages.add_message(request, messages.ERROR, 'Too many login attempts, please try again after 1 minute.')
+            return render(request, 'members/login.html', context={'username': username}, status=429)
+
         user = authenticate(username=username, password=password)
+
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -32,10 +43,10 @@ def login_view(request: HttpRequest) -> HttpResponse:
                 return redirect('miscellaneous:home')
             else:
                 messages.add_message(request, messages.ERROR, 'Your account has been disabled')
-                return render(request, 'members/login.html')
+                return render(request, 'members/login.html', context={'username': username}, status=403)
         else:
             messages.add_message(request, messages.ERROR, 'Incorrect username or password')
-            return render(request, 'members/login.html', context={'username': username})
+            return render(request, 'members/login.html', context={'username': username}, status=401)
     else:
         return render(request, 'members/login.html')
 
@@ -182,10 +193,16 @@ def logout_view(request: HttpRequest) -> HttpResponse:
     messages.add_message(request, messages.WARNING, 'You have been logged out')
     return redirect('miscellaneous:home')
 
-
 def forgot_password(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
+
         form = OverridePasswordRestForm(request.POST)
+
+        if rate_limit.reject_ip(request, 3, timedelta(minutes=1)):
+            messages.add_message(request, messages.ERROR, 
+                        'Too many password reset request, please try again after 1 minute.')
+            return render(request, 'members/forgot_password.html', context={'form': form}, status=429)
+
         if form.is_valid():
             # We use Gmail to send emails from the website. Google recognizes django as a "less secure app" meaning
             # that it will block login attempts from django causing an SMTPAuthenticationError. Enabling less secure
@@ -195,11 +212,14 @@ def forgot_password(request: HttpRequest) -> HttpResponse:
                 form.save(request=request, email_template_name='reset_password_email/reset_password_email.html',
                           subject_template_name='reset_password_email/reset_password_email_subject.txt',)
                 messages.add_message(request, messages.SUCCESS,
-                                     'You have been sent an email with instructions to reset your password')
+                             'You have been sent an email with instructions to reset your password')
+                return redirect('miscellaneous:home')
+
             except SMTPAuthenticationError:
                 messages.add_message(request, messages.ERROR,
-                                     'There has been an error sending the email. Please contact the webmaster.')
-            return redirect('miscellaneous:home')
+                             'There has been an error sending the email. Please contact the webmaster.')
+                return render(request, 'members/forgot_password.html', context={'form': form}, status=503)
+
         else:
             return render(request, 'members/forgot_password.html', context={'form': form})
     else:
@@ -208,5 +228,5 @@ def forgot_password(request: HttpRequest) -> HttpResponse:
 
 def password_reset_redirect(request: HttpRequest) -> HttpResponse:
     messages.add_message(request, messages.SUCCESS,
-                         'Your password has been reset. You can now log in using your new password.')
+                 'Your password has been reset. You can now log in using your new password.')
     return redirect('miscellaneous:home')
