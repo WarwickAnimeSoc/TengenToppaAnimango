@@ -1,5 +1,83 @@
 /* Custom CSS for the site */
 
+/* for normal + italic english */
+@font-face {
+    font-family: "Nunito";
+    src: url("/static/fonts/Nunito/Nunito-VariableFont_wght.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("/static/fonts/Nunito/Nunito-Italic-VariableFont_wght.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: italic;
+}
+
+/* for japanese */
+@font-face {
+    font-family: "ZenMaruGothic";
+    src: url("/static/fonts/Zen_Maru_Gothic/ZenMaruGothic-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ZenMaruGothic";
+    src: url("/static/fonts/Zen_Maru_Gothic/ZenMaruGothic-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ZenMaruGothic";
+    src: url("/static/fonts/Zen_Maru_Gothic/ZenMaruGothic-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ZenMaruGothic";
+    src: url("/static/fonts/Zen_Maru_Gothic/ZenMaruGothic-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "ZenMaruGothic";
+    src: url("/static/fonts/Zen_Maru_Gothic/ZenMaruGothic-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+}
+
+/* for code formats */
+@font-face {
+    font-family: "GoogleSansCode";
+    src: url("/static/fonts/Google_Sans_Code/GoogleSansCode-VariableFont_MONO,wght.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-variation-settings: "MONO" 1;
+}
+
+@font-face {
+    font-family: "GoogleSansCode";
+    src: url("/static/fonts/Google_Sans_Code/GoogleSansCode-Italic-VariableFont_MONO,wght.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: italic;
+    font-variation-settings: "MONO" 1;
+}
+
+/* Font setting */
+html {
+  --font-default: "Nunito", "ZenMaruGothic", sans-serif;
+  --font-mono: "GoogleSansCode", monospace;
+  font-family: var(--font-default);
+}
+code, pre {
+    font-family: var(--font-mono);
+}
+
 /* Padding Overrides */
 body .container {
     padding-top: 60px;
