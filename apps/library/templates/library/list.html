@@ -54,7 +54,7 @@
                                 {% else %}
                                     <h5 class="card-title">{{ series.title_romaji }}</h5>
                                 {% endif %}
-                                <h6 class="card-subtitle text-muted">{{ series.item_set.all.0.media_type }}</h6>
+                                <h6 class="card-subtitle text-body-secondary">{{ series.item_set.all.0.media_type }}</h6>
                                 <div class="flex-grow-1"></div>
                                 <a class="card-link"
                                    href="{% url 'library:series_view' series_id=series.id %}"><h5>Details</h5>
@@ -153,7 +153,7 @@
             </ul>
         </nav>
     {% else %}
-        <h5 class="mt-3 text-muted">Nothing here</h5>
+        <h5 class="mt-3 text-body-secondary">Nothing here</h5>
     {% endif %}
 
 {% endblock %}

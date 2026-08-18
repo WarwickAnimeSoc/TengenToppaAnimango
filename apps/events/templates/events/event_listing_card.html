@@ -20,11 +20,11 @@
     {% endif %}
     <div class="card-body overflow-hidden">
         <h5 class="card-title">{{ event.title }}</h5>
-        <h6 class="card-subtitle text-muted">{{ event.subtitle }}</h6>
+        <h6 class="card-subtitle text-body-secondary">{{ event.subtitle }}</h6>
         <p class="card-text">{% load martortags %}{{ event.details|safe_markdown|truncatewords:20|striptags }}</p>
         <a href="{% url 'events:event_detail' event_id=event.id %}" class="card-link">Details</a>
     </div>
-    <div class="card-footer text-muted">
+    <div class="card-footer text-body-secondary">
         {{ event.nice_eta_descriptor }}
     </div>
 </div>

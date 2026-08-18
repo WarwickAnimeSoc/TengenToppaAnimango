@@ -97,7 +97,7 @@ Home
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{ article.title }}</h5>
-                <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
+                <h6 class="card-subtitle text-body-secondary mb-2">{{ article.get_article_type_display }}</h6>
                 <p class="card-text">
                     {% load martortags %}{{ article.content|safe_markdown|truncatewords:20|striptags }}</p>
                 <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
@@ -105,7 +105,7 @@ Home
             </div>
         </div>
         {% empty %}
-        <h4 class="text-muted">No recent news.</h4>
+        <h4 class="text-body-secondary">No recent news.</h4>
         {% endfor %}
     </div>
     {% if user.is_authenticated %}
@@ -121,7 +121,7 @@ Home
                     </div>
                 </div>
                 {% empty %}
-                <h4 class="text-muted">No upcoming events.</h4>
+                <h4 class="text-body-secondary">No upcoming events.</h4>
                 {% endfor %}
             </div>
         </div>

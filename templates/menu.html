@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary ps-3">
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-primary ps-3 pe-3">
         <a class="navbar-brand" href="{% url 'miscellaneous:home' %}">
             Warwick Anime and Manga Society
         </a>
@@ -58,11 +58,23 @@
                     </li>
                 {% endif %}
             </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarThemeDropdown" data-bs-toggle="dropdown">
+                        Theme
+                    </a>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" data-theme="light">Light</button>
+                        <button class="dropdown-item" data-theme="dark">Dark</button>
+                        <button class="dropdown-item" data-theme="auto">System</button>
+                    </div>
+                </li>
+            </ul>
             <ul class="navbar-nav flex-row">
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         {% load static %}
-                        <a class="nav-link pb-0 pt-0" href="#" id="navbarMemberDropdown" data-bs-toggle="dropdown">
+                        <a class="nav-link pt-0 pe-0 pb-0" href="#" id="navbarMemberDropdown" data-bs-toggle="dropdown">
                             {{ user.member }}
                             <img alt="Avatar" class="ms-1 image-navbar-avatar rounded"
                                     {% if user.member.avatar_image %}
@@ -88,4 +100,27 @@
             </ul>
         </div>
     </nav>
+    <script>
+/* Used for theme selection */
+function setTheme(theme) {
+    localStorage.setItem("theme", theme);
+    if (theme === "auto") {
+        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.documentElement.dataset.bsTheme = theme;
+}
+/* listen to system theme change */
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (_) => {
+    console.log("theme");
+    if ((localStorage.getItem("theme") || "auto") === "auto") {
+        setTheme("auto");
+    }
+});
+/* register theme selector buttons */
+document.querySelectorAll("[data-theme]").forEach(button => {
+    button.addEventListener("click", () => setTheme(button.dataset.theme));
+});
+// auto load saved theme
+setTheme(localStorage.getItem("theme") || "auto");
+    </script>
 </header>

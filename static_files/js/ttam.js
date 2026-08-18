@@ -66,3 +66,4 @@ function scaleImage(image) {
         image.style.maxWidth = '20%';
     }
 }
+

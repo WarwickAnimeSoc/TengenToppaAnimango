@@ -26,7 +26,7 @@
             {% for error in form.nickname.errors %}
                 <div class="invalid-feedback">{{ error }}</div>
             {% endfor %}
-            <small id="nicknameHelp" class="form-text text-muted">Your nickname is what's visible to others on the site,
+            <small id="nicknameHelp" class="form-text text-body-secondary">Your nickname is what's visible to others on the site,
                 unless you have chosen to show your full name instead.</small>
         </div>
         <div class="form-check mb-3">
@@ -47,7 +47,7 @@
                 {% if user.member.discord_username %}
                 <strong>{{ user.member.discord_username }}</strong>
                 {% else %}
-                <span class="text-muted">Currently Unregistered</span>
+                <span class="text-body-secondary">Currently Unregistered</span>
                 {% endif %}
             </div>
             <div class="ml-3">
@@ -61,7 +61,7 @@
                 {% endif %}
             </div>
         </div>
-        <small id="discordHelp" class="form-text text-muted">
+        <small id="discordHelp" class="form-text text-body-secondary">
             Your (last registered) Discord username (e.g. <code>Chiyoko</code>). 
             This is used to give you the member role on the society Discord server.
         </small>
@@ -73,7 +73,7 @@
             {% for error in form.avatar_image.errors %}
                 <div class="invalid-feedback">{{ error }}</div>
             {% endfor %}
-            <small id="avatarHelp" class="form-text text-muted">Must be a jpg, jpeg or png smaller than 2Mb</small>
+            <small id="avatarHelp" class="form-text text-body-secondary">Must be a jpg, jpeg or png smaller than 2Mb</small>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
         <a class="btn btn-danger" href="{% url "members:profile" %}">Cancel</a>

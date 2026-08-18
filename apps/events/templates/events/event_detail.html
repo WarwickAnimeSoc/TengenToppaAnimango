@@ -22,7 +22,7 @@
     <p>{% load martortags %}{{ event.details|safe_markdown }}</p>
     {% if event.signup_required %}
         <h2 class="mt-3 mb-n1">Event Signups</h2>
-        <small class="text-muted mb-5">{{ event.signup_count }} places filled</small>
+        <small class="text-body-secondary mb-5">{{ event.signup_count }} places filled</small>
         {% if event.signups_closed %}
             <h4>Signups for this event have closed</h4>
         {% elif not event.signups_open and not user.is_staff %}
@@ -63,13 +63,13 @@
                     <div class="flex-grow-1">
                         <h5 class="mt-0 mb-1 {% if signup.verified %} text-success {% else %} text-warning {% endif %}">{{ signup.member }}</h5>
                         {% if user.is_staff %}
-                            <p class="small text-muted mb-0">{{ signup.member.user.get_full_name }} - {{ signup.member.discord_username }} - {{ signup.member.user.email }}</p>
+                            <p class="small text-body-secondary mb-0">{{ signup.member.user.get_full_name }} - {{ signup.member.discord_username }} - {{ signup.member.user.email }}</p>
                         {% endif %}
                         {{ signup.comment }}
                     </div>
                 </li>
             {% empty %}
-                <h3 class="mt-3 text-muted">No signups yet.</h3>
+                <h3 class="mt-3 text-body-secondary">No signups yet.</h3>
             {% endfor %}
         </ul>
     {% endif %}
