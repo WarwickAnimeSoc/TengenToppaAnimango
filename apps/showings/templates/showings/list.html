@@ -42,9 +42,7 @@
                     {% for show in showing.show_set.all %}
                         <li class="row align-items-center">
                             <div class="col">
-                                {% comment %}
-                                English title is prefered as it's probably more recognizable
-                                {% endcomment %}
+                                {# English title is prefered as it's probably more recognizable #}
                                 <p class="mb-0">
                                     {% if show.series.title_english %}
                                         {{ show.series.title_english }}
@@ -101,9 +99,7 @@
                     </li>
                 {% endif %}
 
-                {% comment %}
-                Only display up to 3 page entries in the navbar
-                {% endcomment %}
+                {# Only display up to 3 page entries in the navbar #}
 
                 {% if showings_page.paginator.num_pages > 3 %}
                     {% if showings_page.has_previous %}

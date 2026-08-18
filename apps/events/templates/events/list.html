@@ -57,9 +57,7 @@
                     </li>
                 {% endif %}
 
-                {% comment %}
-                Only display up to 3 page entries in the navbar
-                {% endcomment %}
+                {# Only display up to 3 page entries in the navbar #}
 
                 {% if events_page.paginator.num_pages > 3 %}
                     {% if events_page.has_previous %}
