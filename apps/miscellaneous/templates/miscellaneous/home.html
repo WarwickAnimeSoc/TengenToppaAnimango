@@ -1,12 +1,23 @@
 {% extends "base.html" %}
 
+{% block head %}
+<style>
+{% comment %}
+make events carousel full width
+{% endcomment %}
+#carousel-container {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+</style>
+{% endblock %}
+
 {% block title %}
 Home
 {% endblock %}
 
 {% block content %}
 <div class="row mt-5">
-
     <div class="col">
         <h1>Warwick Anime and Manga Society</h1>
         <br>
@@ -34,13 +45,7 @@ Home
     </div>
 </div>
 
-{% comment %}
-This hanging closing tag is used to close the <main> from the base template. This is needed so that the row
-    container with the events carousel can be full width.
-    {% endcomment %}
-</main>
-
-<div class="container-fluid">
+<div id="carousel-container" class="container-fluid">
     <div class="row expanded-row text-center bg-primary text-white">
         <div class="col-1 multi-carousel-button" onclick="multiCarouselPrev()">
             <span class="carousel-control-prev-icon align-self-center"></span>
@@ -87,72 +92,71 @@ This hanging closing tag is used to close the <main> from the base template. Thi
     </div>
 </div>
 
-<main class="container flex-grow-1">
-    <div class="row mt-5">
-        <div class="col-12 col-sm-8">
-            <h2>News and Announcements</h2>
-            {% for article in recent_articles %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ article.title }}</h5>
-                    <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
-                    <p class="card-text">
-                        {% load martortags %}{{ article.content|safe_markdown|truncatewords:20|striptags }}</p>
-                    <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
-                        class="card-link">Read</a>
-                </div>
+<div class="row mt-5">
+    <div class="col-12 col-sm-8">
+        <h2>News and Announcements</h2>
+        {% for article in recent_articles %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ article.title }}</h5>
+                <h6 class="card-subtitle text-muted mb-2">{{ article.get_article_type_display }}</h6>
+                <p class="card-text">
+                    {% load martortags %}{{ article.content|safe_markdown|truncatewords:20|striptags }}</p>
+                <a href="{% url 'news:article_detail' article_id=article.id article_slug=article.slug %}"
+                    class="card-link">Read</a>
             </div>
-            {% empty %}
-            <h4 class="text-muted">No recent news.</h4>
-            {% endfor %}
         </div>
-        {% if user.is_authenticated %}
-        <div class="col">
-            <div class="row">
-                <div class="col">
-                    <h2>Upcoming Events</h2>
-                    {% for event in upcoming_events %}
-                    <div class="card mb-3">
-                        <div class="card-body overflow-hidden">
-                            <h5 class="card-title">{{ event.title }}</h5>
-                            <a href="{% url 'events:event_detail' event_id=event.id %}" class="card-link">Details</a>
-                        </div>
+        {% empty %}
+        <h4 class="text-muted">No recent news.</h4>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <h2>Upcoming Events</h2>
+                {% for event in upcoming_events %}
+                <div class="card mb-3">
+                    <div class="card-body overflow-hidden">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <a href="{% url 'events:event_detail' event_id=event.id %}" class="card-link">Details</a>
                     </div>
-                    {% empty %}
-                    <h4 class="text-muted">No upcoming events.</h4>
-                    {% endfor %}
                 </div>
+                {% empty %}
+                <h4 class="text-muted">No upcoming events.</h4>
+                {% endfor %}
             </div>
-            {% if ongoing_events %}
-            <div class="row">
-                <div class="col">
-                    <h2>Ongoing Events</h2>
-                    {% for event in ongoing_events %}
-                    <div class="card mb-3">
-                        <div class="card-body overflow-hidden">
-                            <h5 class="card-title">{{ event.title }}</h5>
-                            <a href="{% url 'events:event_detail' event_id=event.id %}" class="card-link">Details</a>
-                        </div>
+        </div>
+        {% if ongoing_events %}
+        <div class="row">
+            <div class="col">
+                <h2>Ongoing Events</h2>
+                {% for event in ongoing_events %}
+                <div class="card mb-3">
+                    <div class="card-body overflow-hidden">
+                        <h5 class="card-title">{{ event.title }}</h5>
+                        <a href="{% url 'events:event_detail' event_id=event.id %}" class="card-link">Details</a>
                     </div>
-                    {% endfor %}
                 </div>
+                {% endfor %}
             </div>
-            {% endif %}
         </div>
         {% endif %}
     </div>
-    {% endblock %}
-
-    {% block javascript %}
-    {% if alert %}
-    {% load martortags %}
-    <script>
-        let messagesDiv = document.getElementById('messagesDiv');
-        let alertMessage = document.createElement('div');
-        let messageText = '{{ alert.content|safe_markdown }}'
-        alertMessage.className = 'alert alert-info';
-        alertMessage.innerHTML = messageText;
-        messagesDiv.appendChild(alertMessage);
-    </script>
     {% endif %}
-    {% endblock %}
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% if alert %}
+{% load martortags %}
+<script>
+    let messagesDiv = document.getElementById('messagesDiv');
+    let alertMessage = document.createElement('div');
+    let messageText = '{{ alert.content|safe_markdown }}'
+    alertMessage.className = 'alert alert-info';
+    alertMessage.innerHTML = messageText;
+    messagesDiv.appendChild(alertMessage);
+</script>
+{% endif %}
+{% endblock %}
