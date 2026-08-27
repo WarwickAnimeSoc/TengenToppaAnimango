@@ -1,6 +1,6 @@
 /* Custom CSS for the site */
 
-/* for normal + italic english */
+/* For normal + italic English */
 @font-face {
     font-family: "Nunito";
     src: url("/static/fonts/Nunito/Nunito-VariableFont_wght.woff2") format("woff2");
@@ -15,7 +15,7 @@
     font-style: italic;
 }
 
-/* for japanese */
+/* For Japanese */
 @font-face {
     font-family: "ZenMaruGothic";
     src: url("/static/fonts/Zen_Maru_Gothic/ZenMaruGothic-Light.woff2") format("woff2");
@@ -116,24 +116,7 @@ body .container {
     margin-bottom: 0;
 }
 
-/* Bootstrap breakpoint overrides */
-
-/* sm prefix */
-@media (min-width: 576px) {
-
-}
-
-/* md prefix */
-@media (min-width: 768px) {
-
-}
-
-/* lg prefix */
-@media (min-width: 992px) {
-
-}
-
-/* xl prefix */
+/* Bootstrap xl prefix overrides */
 @media (min-width: 1200px) {
     /* Container size override. By default the max-width of a container in at this viewport size is 1140px, this results
     in a lot of wasted space in the margins on large monitors. This is of particular concern in the archive app,
