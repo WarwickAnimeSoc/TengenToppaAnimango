@@ -59,7 +59,8 @@ class SUMember:
 def get_members() -> list[SUMember]:
     # Get#'s a list of all the current members from the SU API.
     try:
-        request = httpx.get('https://www.warwicksu.com/membershipapi/listmembers/' + settings.SU_API_KEY)
+        # SU returns redirect
+        request = httpx.get('https://www.warwicksu.com/membershipapi/listmembers/' + settings.SU_API_KEY, follow_redirects=True)
     except Exception as e:
         raise e
 
