@@ -8,7 +8,6 @@ from django.urls import reverse
 from urllib.parse import quote_plus
 import socket
 from django.conf import settings
-import requests
 from apps.members.models import Member
 from django.http import HttpRequest, HttpResponse, HttpResponseBadRequest
 from smtplib import SMTPAuthenticationError

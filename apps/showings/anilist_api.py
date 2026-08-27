@@ -1,5 +1,5 @@
 import re
-import requests
+import httpx
 import json
 
 from django.core.exceptions import ValidationError
@@ -72,7 +72,7 @@ def api_get_info(api_id: str) -> Any:
     query_variables = {'id': api_id}
     api_url = 'https://graphql.anilist.co'
 
-    api_response = requests.post(api_url, json={'query': query, 'variables': query_variables})
+    api_response = httpx.post(api_url, json={'query': query, 'variables': query_variables})
 
     # If the link was invalid, the next line will raise an error as Media will not be a key in the response
     return json.loads(api_response.content.decode("utf-8"))['data']['Media']

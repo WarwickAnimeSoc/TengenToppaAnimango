@@ -1,5 +1,5 @@
 import logging
-import requests
+import httpx
 from smtplib import SMTPAuthenticationError
 
 # Attempt to use cElementTree instead of ElementTree if possible, as it's faster and uses less memory.
@@ -59,7 +59,7 @@ class SUMember:
 def get_members() -> list[SUMember]:
     # Get#'s a list of all the current members from the SU API.
     try:
-        request = requests.get('https://www.warwicksu.com/membershipapi/listmembers/' + settings.SU_API_KEY)
+        request = httpx.get('https://www.warwicksu.com/membershipapi/listmembers/' + settings.SU_API_KEY)
     except Exception as e:
         raise e
 
