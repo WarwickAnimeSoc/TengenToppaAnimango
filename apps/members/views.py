@@ -3,7 +3,7 @@ import services.rate_limit.utils as rate_limit
 from asgiref.sync import sync_to_async
 import asyncio
 import nh3
-import httpx
+import httpx2
 from django.urls import reverse
 from urllib.parse import quote_plus
 import socket
@@ -102,7 +102,7 @@ async def verify_discord(request: HttpRequest) -> HttpResponse:
     if code is None:
         return HttpResponseBadRequest()
 
-    async with httpx.AsyncClient() as client:
+    async with httpx2.AsyncClient() as client:
         # get access token
         data = {
             'grant_type': 'authorization_code',
