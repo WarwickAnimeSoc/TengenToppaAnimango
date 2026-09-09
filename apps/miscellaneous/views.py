@@ -73,3 +73,6 @@ def github(request: HttpRequest) -> HttpResponse:
 def karaoke_list(request: HttpRequest) -> HttpResponse:
     # Redirects to the karaoke list, used as a short link for writing on the board at events
     return redirect(reverse('karaoke:karaoke_list', args=[1]))
+
+def favicon(request: HttpRequest) -> HttpResponse:
+    return redirect('static/images/favicon/favicon.ico')

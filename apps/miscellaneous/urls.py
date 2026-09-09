@@ -13,5 +13,6 @@ urlpatterns = [
     path('malclub', views.malclub, name='malclub'),
     path('github', views.github, name='github'),
     path('klist', views.karaoke_list, name='karaoke_list'),
+    path('favicon.ico', views.favicon, name='favicon'),
 ]
 
