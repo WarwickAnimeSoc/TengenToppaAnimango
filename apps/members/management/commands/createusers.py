@@ -94,7 +94,7 @@ def send_signup_mail(user: User, password: str) -> None:
               'and then selecting profile. Don\'t forget to change your nickname, too!\n\n' \
               'Regards,\n' \
               'Warwick Anime and Manga Society\n\n'.format(username=user.username, password=password)
-    send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
+    send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email], fail_silently=False)
 
 
 def create_new_members(members_list: list[SUMember], logger: logging.Logger) -> None:
