@@ -66,10 +66,10 @@ class Member(models.Model):
     # but for operational uses, use discord id, and treat legacy username as having discord linked.
 
     # Setting nickname by default prevents someone's full name or University ID from leaking.
-    nickname = models.CharField(max_length=30, blank=True, default=get_random_nickname)
+    nickname = models.CharField(max_length=50, blank=True, default=get_random_nickname)
     show_full_name = models.BooleanField(default=False)
     avatar_image = models.ImageField(upload_to=avatar_image_path, storage=OverwriteStorage(), blank=True, null=True)
-    discord_username = models.CharField(max_length=40, blank=True) # may contain legacy format, see comment above
+    discord_username = models.CharField(max_length=50, blank=True) # may contain legacy format, see comment above
     discord_id = models.CharField(max_length=20, blank=True) # may not exist even if discord_username exist
 
     def __str__(self) -> str:

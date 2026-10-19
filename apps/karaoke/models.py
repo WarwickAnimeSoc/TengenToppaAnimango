@@ -7,8 +7,8 @@ from apps.showings.models import Series
 from apps.members.models import Member
 
 class Song(models.Model):
-    title = models.CharField(max_length=200, blank=False)
-    artist = models.CharField(max_length=200, blank=False)
+    title = models.CharField(max_length=400, blank=False)
+    artist = models.CharField(max_length=300, blank=False)
     related_series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self) -> str:
@@ -19,8 +19,8 @@ class Song(models.Model):
 
 
 class Request(models.Model):
-    title = models.CharField(max_length=200, blank=False)
-    artist = models.CharField(max_length=200, blank=False)
+    title = models.CharField(max_length=400, blank=False)
+    artist = models.CharField(max_length=300, blank=False)
     anilist_url = models.URLField(blank=True)
     ultrastar_url = models.URLField(blank=False, unique=True)
     requester = models.ForeignKey(Member, on_delete=models.PROTECT, null=True, default=None)
