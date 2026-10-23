@@ -10,7 +10,7 @@ dependencies = [
     "martor==1.8.2",
     "mysqlclient==2.2.8",
     "nh3==0.3.7",
-    "pillow==12.3.0",
+    "pillow==13.0.0",
     "uvicorn==0.52.4",
 ]
 
